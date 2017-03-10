@@ -23,6 +23,22 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
+  def update
+    @application = Application.find(params[:id])
+    if current_user.update(user_params)
+      if @application.update(application_params)
+        flash[:success] = "Application updated."
+        redirect_to edit_application_path(@application.id)
+      else
+        flash[:danger] = @application.errors.full_messages
+        render :edit
+      end
+    else
+      flash[:danger] = current_user.errors.full_messages
+      render :edit
+    end  
+  end
+
   private
 
   def user_params
