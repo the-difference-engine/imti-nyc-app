@@ -1,5 +1,5 @@
 class EducationsController < ApplicationController
-	def new
+  def new
     @application = Application.find(params[:application_id])
     @education = Education.new
   end
