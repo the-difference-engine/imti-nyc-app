@@ -8,5 +8,6 @@ class Application < ApplicationRecord
   has_many :educations
   has_many :montessori_trainings
   has_many :documents
+  has_many :work_experiences
   belongs_to :user
 end

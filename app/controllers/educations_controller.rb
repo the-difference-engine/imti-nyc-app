@@ -1,7 +1,9 @@
 class EducationsController < ApplicationController
   def index
     @application = Application.find(params[:application_id])
+    
     @educations = @application.educations
+
   end
 
   def new
@@ -12,6 +14,7 @@ class EducationsController < ApplicationController
   def create
     @application = Application.find(params[:application_id])
     @education = Education.new(education_params)
+    
     if @education.save
       flash[:success] = "Education saved."
       redirect_to new_application_montessori_training_path(@application.id)
