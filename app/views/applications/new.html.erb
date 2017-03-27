@@ -1,42 +1,40 @@
 application page
 
-<p>SECTION A: PERSONAL DATA </p>
+<h3>SECTION A: PERSONAL DATA </h3>
 
 <%= form_for(@application) do |f| %>
-  <%= label_tag :last_name %>
-  <%= text_field_tag :'user[last_name]', current_user.last_name %>
-  <%= label_tag :first_name %>
-  <%= text_field_tag :'user[first_name]', current_user.first_name %>
-  <%= label_tag :middle_initial %>
-  <%= text_field_tag :'user[middle_initial]', current_user.middle_initial %>
-  <%= f.label :phone_number %>
-  <%= f.text_field :phone_number %>
-  <%= f.label :street %>
-  <%= f.text_field :street %>
-  <%= f.label :city %>
-  <%= f.text_field :city %>
-  <%= f.label :state %>
-  <%= f.text_field :state %>
-  <%= f.label :zip_code %>
-  <%= f.text_field :zip_code %>
-  <%= f.label :country %>
-  <%= f.text_field :country %>
-  <%= f.label :birth_place %>
-  <%= f.text_field :birth_place %>
-  <%= f.label :birth_date %>
-  <%= f.text_field :birth_date %>
-  <%= f.label :country_of_citizenship %>
-  <%= f.text_field :country_of_citizenship %>
-  <%= f.label :occupation %>
-  <%= f.text_field :occupation %>
-  <%= f.label :name_of_spouse %>
-  <%= f.text_field :name_of_spouse %>
-  <%= f.label :ages_of_children %>
-  <%= f.text_field :ages_of_children %>
-  <%= label_tag :email %>
-  <%= text_field_tag :'user[email]', current_user.email, disabled: true %>
-  <%= f.submit :next %>
+  <p><strong><%= label_tag :last_name %></strong></p>
+  <p><strong><%= text_field_tag :'user[last_name]', current_user.last_name %></strong></p>
+  <p><strong><%= label_tag :first_name %></strong></p>
+  <p><strong><%= text_field_tag :'user[first_name]', current_user.first_name %></strong></p>
+  <p><strong><%= label_tag :middle_initial %></strong></p>
+  <p><strong><%= text_field_tag :'user[middle_initial]', current_user.middle_initial %></strong></p>
+  <p><strong><%= f.label :phone_number %></strong></p>
+  <p><strong><%= f.text_field :phone_number %></strong></p>
+  <p><strong><%= f.label :street %></strong></p>
+  <p><strong><%= f.text_field :street %></strong></p>
+  <p><strong><%= f.label :city %></strong></p>
+  <p><strong><%= f.text_field :city %></strong></p>
+  <p><strong><%= f.label :state %></strong></p>
+  <p><strong><%= f.text_field :state %></strong></p>
+  <p><strong><%= f.label :zip_code %></strong></p>
+  <p><strong><%= f.text_field :zip_code %></strong></p>
+  <p><strong><%= f.label :country %></strong></p>
+  <p><strong><%= f.text_field :country %></strong></p>
+  <p><strong><%= f.label :birth_place %></strong></p>
+  <p><strong><%= f.text_field :birth_place %></strong></p>
+  <p><strong><%= f.label :birth_date %></p></strong>
+  <p><strong><%= f.date_field :birth_date %></strong></p>
+  <p><strong><%= f.label :country_of_citizenship %></strong></p>
+  <p><strong><%= f.text_field :country_of_citizenship %></strong></p>
+  <p><strong><%= f.label :occupation %></strong></p>
+  <p><strong><%= f.text_field :occupation %></strong></p>
+  <p><strong><%= f.label :name_of_spouse %></strong></p>
+  <p><strong><%= f.text_field :name_of_spouse %></strong></p>
+  <p><strong><%= f.label :ages_of_children %></strong></p>
+  <p><strong><%= f.text_field :ages_of_children %></strong></p>
+  <p><strong><%= label_tag :email %></strong></p>
+  <p><strong><%= text_field_tag :'user[email]', current_user.email, disabled: true %></strong></p>
+  <p><strong><%= f.submit :save %></strong></p>
 <% end %>
-
-
 

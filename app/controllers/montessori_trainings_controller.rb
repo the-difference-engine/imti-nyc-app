@@ -22,6 +22,7 @@ class MontessoriTrainingsController < ApplicationController
   end
 
   def edit
+    @application = Application.find(params[:application_id])
     @montessori_training = MontessoriTraining.find(params[:id])
   end
 

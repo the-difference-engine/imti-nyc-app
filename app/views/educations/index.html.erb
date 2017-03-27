@@ -1,18 +1,23 @@
-<p>SECTION B: SUPPORTING DATA </p>
+<h3>SECTION B: EDUCATION DATA </h3>
 
 <% @educations.each do |education| %>
-  <p>School: <%= education.school %></p>
-  <p>Location: <%= education.location %></p>
-  <p>Start Date: <%= education.start_date %></p>
-  <p>End Date: <%= education.end_date %></p>
-  <p>Degree: <%= education.degree %></p>
-  <p>Degree date: <%= education.degree_date %></p>
-  <p><%= link_to "Edit education", edit_application_education_path(@application.id,education.id) %></p>
+  <p><strong>School:</strong> <%= education.school %></p>
+  <p><strong>Location:</strong> <%= education.location %></p>
+  <p><strong>Start Date:</strong> <%= education.start_date %></p>
+  <p><strong>End Date:</strong> <%= education.end_date %></p>
+  <p><strong>Degree:</strong> <%= education.degree %></p>
+  <p><strong>Degree date:</strong> <%= education.degree_date %></p>
+  <p><strong><%= link_to "Edit education", edit_application_education_path(@application.id,education.id) %></strong></p>
+  <hr>
 <% end %>
 
-<p><%= link_to "Add New education", new_application_education_path(@application.id) %></p>
-<p><%= link_to "Go to Montessori Trainings", application_montessori_trainings_path(@application.id) %></p>
-<p><%= link_to "Go to Work Experience", application_work_experiences_path(@application.id) %></p>
-<p><%= link_to "Go to References", application_references_path(@application.id) %></p>
-<p><%= link_to "Go to Documents", application_documents_path(@application.id) %></p>
+<p><strong><%= link_to "Add New education", new_application_education_path(@application.id) %></p></strong>
+
+<hr>
+
+<h4>View Other Sections Below</h4>
+<p><strong><%= link_to "Go to Montessori Trainings", application_montessori_trainings_path(@application.id) %></p></strong>
+<p><strong><%= link_to "Go to Work Experience", application_work_experiences_path(@application.id) %></p></strong>
+<p><strong><%= link_to "Go to References", application_references_path(@application.id) %></p></strong>
+<p><strong><%= link_to "Go to Documents", application_documents_path(@application.id) %></p></strong>
 

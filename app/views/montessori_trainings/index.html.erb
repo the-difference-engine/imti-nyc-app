@@ -1,11 +1,24 @@
-<p>SECTION C: SUPPORTING DATA </p>
+<h3>SECTION C: MONTESSORI TRAINING DATA </h3>
 
 <% @montessori_trainings.each do |montessori_training| %>
-  <p>Name: <%= montessori_training.name %>
-  Location: <%= montessori_training.location %>
-  Diploma: <%= montessori_training.diploma %>
-  Degree: <%= montessori_training.degree %>
-  Degree date: <%= montessori_training.degree_date %></p>
+  <p><strong>Name:</strong> <%= montessori_training.name %></p>
+  <p><strong>Location:</strong> <%= montessori_training.location %></p>
+  <p><strong>Diploma:</strong> <%= montessori_training.diploma %></p>
+  <p><strong>Degree:</strong> <%= montessori_training.degree %></p>
+  <p><strong>Degree date:</strong> <%= montessori_training.degree_date %></p>
+  <p><strong><%= link_to "Edit montessori training", edit_application_montessori_training_path(@application.id,montessori_training.id) %></strong></p>
+  <hr>
 <% end %>
 
-<a href="/applications/<%= @application.id %>/montessori_trainings/new">Add new Montessori training</a>
+<p><strong><%= link_to "Add New montessori training", new_application_montessori_training_path(@application.id) %></p></strong>
+
+<hr>
+
+<h4>View Other Sections Below</h4>
+
+<p><strong><%= link_to "Go to Education", application_educations_path(@application.id) %></p></strong>
+<p><strong><%= link_to "Go to Work Experience", application_work_experiences_path(@application.id) %></p></strong>
+<p><strong><%= link_to "Go to References", application_references_path(@application.id) %></p></strong>
+<p><strong><%= link_to "Go to Documents", application_documents_path(@application.id) %></p></strong>
+
+

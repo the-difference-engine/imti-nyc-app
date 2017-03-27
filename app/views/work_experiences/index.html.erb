@@ -1,9 +1,22 @@
-<% @work_experience.each do |work| %>
-  <p>Name: <%= work.employer %>
-  Location: <%= work.occupation %>
-  Diploma: <%= work.start_date %>
-  Degree: <%= work.end_date %></p>
+<h3>SECTION D: WORK EXPERIENCE DATA </h3>
+<% @work_experiences.each do |work| %>
+  <p><strong>Name:</strong> <%= work.employer %></p>
+  <p><strong>Location:</strong> <%= work.occupation %></p>
+  <p><strong>Diploma:</strong> <%= work.start_date %></p>
+  <p><strong>Degree:</strong> <%= work.end_date %></p>
+  <p><strong><%= link_to "Edit work experiences", edit_application_work_experience_path(@application.id,work.id) %></strong></p>
+  <hr>
 <% end %>
 
-<a href="/applications/<%= @application.id %>/work_experiences/new">Add new Work Experience</a>
+<p><strong><%= link_to "Add Work Experience", new_application_work_experience_path(@application.id) %></strong></p>
+
+<hr>
+
+<h4>View Other Sections Below</h4>
+
+<p><strong><%= link_to "Go to Education", application_educations_path(@application.id) %></strong></p>
+<p><strong><%= link_to "Go to Montessori Trainings", application_montessori_trainings_path(@application.id) %></strong></p>
+<p><strong><%= link_to "Go to References", application_references_path(@application.id) %></strong></p>
+<p><strong><%= link_to "Go to Documents", application_documents_path(@application.id) %></strong></p>
+
 

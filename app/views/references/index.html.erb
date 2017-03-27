@@ -1,21 +1,20 @@
-<p>SECTION F: DOCUMENTS - Please attach your transcripts, recommendations and references below.</p>
-<p>Click the + button to add additional documents.</p>
-
+<h3>SECTION E: REFERENCES DATA </h3>
 
 <% @references.each do |reference| %>
-  <p>Name: <%= reference.name %></p>
-  <p>Address: <%= reference.address %></p>
-  <p>Position: <%= reference.position %></p>
-  <p><%= link_to 'Edit reference', "/applications/#{@application.id}/references/#{reference.id}/edit"%>
+  <p><strong>Name: <%= reference.name %></strong></p>
+  <p><strong>Address: <%= reference.address %></strong></p>
+  <p><strong>Position: <%= reference.position %></strong></p>
+  <p><strong><%= link_to 'Edit reference', "/applications/#{@application.id}/references/#{reference.id}/edit"%></strong></p>
   <hr>
 <% end %>
 
+<p><strong><a href="/applications/<%= @application.id %>/references/new">Add new reference</a></strong><p>
 
-<a href="/applications/<%= @application.id %>/references/new">Add new reference</a>
+<hr>
 
-<h1>Other Application Sections</h1>
-<p><a href="/applications/<%= @application.id %>/educations">Education</a></p>
-<p><a href="/applications/<%= @application.id %>/montessori_trainings">Montessori Trainings</a></p>
-<p><a href="/applications/<%= @application.id %>/work_experiences">Work Experience</a></p>
-<p><a href="/applications/<%= @application.id %>/references">References</a></p>
-<p><a href="/applications/<%= @application.id %>/documents">Documents</a></p>
+<h4>View Other Sections Below</h4>
+
+<p><strong><a href="/applications/<%= @application.id %>/educations">Education</a></strong></p>
+<p><strong><a href="/applications/<%= @application.id %>/montessori_trainings">Montessori Trainings</a></strong></p>
+<p><strong><a href="/applications/<%= @application.id %>/work_experiences">Work Experience</a></strong></p>
+<p><strong><a href="/applications/<%= @application.id %>/documents">Documents</a></strong></p>

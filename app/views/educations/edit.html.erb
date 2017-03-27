@@ -1,20 +1,23 @@
-<p>SECTION B: EDUCATION - Please add your education supporting data below.</p>
+<h3>SECTION B: EDUCATION </h3> 
+<p><strong>Please add your education supporting data below.</strong></p>
 <p>Click the + button to add additional schools.</p>
 
 <%= form_for [@application, @education], :url => {:action => "edit"} do |f| %>
-<p><%= f.label :school %></p>
-<p><%= f.text_field :school %></p>
-<p><%= f.label :location %></p>
-<p><%= f.text_field :location %></p>
-<p><%= f.label :start_date %></p>
-<p><%= f.text_field :start_date %></p>
-<p><%= f.label :end_date %></p>
-<p><%= f.text_field :end_date %></p>
-<p><%= f.label :degree %></p>
-<p><%= f.text_field :degree %></p>
-<p><%= f.label :degree_date %></p>
-<p><%= f.text_field :degree_date %></p>
-<p><%= f.submit :save %></p>
+<p><strong><%= f.label :school %></strong></p>
+<p><strong><%= f.text_field :school %></strong></p>
+<p><strong><%= f.label :location %></strong></p>
+<p><strong><%= f.text_field :location %></strong></p>
+<p><strong><%= f.label :start_date %></strong></p>
+<p><strong><%= f.date_field :start_date %></strong></p>
+<p><strong><%= f.label :end_date %></strong></p>
+<p><strong><%= f.date_field :end_date %></strong></p>
+<p><strong><%= f.label :degree %></strong></p>
+<p><strong><%= f.text_field :degree %></strong></p>
+<p><strong><%= f.label :degree_date %></strong></p>
+<p><strong><%= f.date_field :degree_date %></strong></p>
+<p><strong><%= f.submit :save %></strong></p>
 <% end %>
-<p><%= link_to "Back to education", application_education_path(@application.id) %></p>
+<hr>
+
+<strong><p><%= link_to 'View all your Education history', "/applications/#{@application.id}/educations"%></p></strong>
 

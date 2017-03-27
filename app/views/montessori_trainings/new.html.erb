@@ -1,20 +1,21 @@
-<p>SECTION C: Previous Montessori Training Experience </p>
+<h3>SECTION C: Previous Montessori Training Experience </h3>
 
 <%= form_for [@application, @montessori_training] do |f| %>
-<%= f.label :Please_check_here_if_you_had_previous_Montessori_Training_Experience %>
-<%= f.check_box :experience %>
-<!-- Moving forward with JS, if the experience check box is clicked, have the following information appear, if not allow them to move to the next section -->
-<%= f.label :name %>
-<%= f.text_field :name %>
-<%= f.label :location %>
-<%= f.text_field :location %>
-<%= f.label :diploma %>
-<%= f.text_field :diploma %>
-<%= f.label :degree %>
-<%= f.text_field :degree %>
-<%= f.label :degree_date %>
-<%= f.text_field :degree_date %>
-<%= f.submit :next %>
+<p><strong><%= f.label :Please_check_here_if_you_had_previous_Montessori_Training_Experience %>
+<%= f.check_box :experience %></strong></p>
+<p><strong><%= f.label :name %></strong></p>
+<p><strong><%= f.text_field :name %></strong></p>
+<p><strong><%= f.label :location %></strong></p>
+<p><strong><%= f.text_field :location %></strong></p>
+<p><strong><%= f.label :diploma %></strong></p>
+<p><strong><%= f.text_field :diploma %></strong></p>
+<p><strong><%= f.label :degree %></strong></p>
+<p><strong><%= f.text_field :degree %></strong></p>
+<p><strong><%= f.label :degree_date %></strong></p>
+<p><strong><%= f.date_field :degree_date %></strong></p>
+<p><strong><%= f.submit :next %></strong></p>
 <% end %>
 
-<a href="/applications/<%= @application.id %>/montessori_trainings">Back to Montessori Trainings</a>
+<hr>
+
+<p><strong><a href="/applications/<%= @application.id %>/montessori_trainings">Back to Montessori Trainings</a></strong></p>

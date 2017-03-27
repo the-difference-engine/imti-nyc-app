@@ -1,0 +1,18 @@
+<h3>SECTION D: Work Experience</h3> 
+<p>Please edit your work experience supporting data below.</p>
+
+<%= form_for [@application, @work_experience], :url => {:action => "edit"} do |f| %>
+<p><strong><%= f.label :employer %></strong></p>
+<p><strong><%= f.text_field :employer %><</strong>
+<p><strong><%= f.label :occupation %></strong></p>
+<p><strong><%= f.text_field :occupation %></strong></p>
+<p><strong><%= f.label :start_date %></strong></p>
+<p><strong><%= f.date_field :start_date %></strong></p>
+<p><strong><%= f.label :end_date %></strong></p>
+<p><strong><%= f.date_field :end_date %></strong></p>
+<p><strong><%= f.submit :save %></strong></p>
+<% end %>
+
+<hr>
+
+<p><strong><%= link_to "Back to Work Experience", application_work_experiences_path(@application.id) %></strong></p>

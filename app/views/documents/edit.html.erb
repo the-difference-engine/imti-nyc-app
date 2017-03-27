@@ -1,14 +1,16 @@
-<p>SECTION F: DOCUMENTS - Please attach your transcripts, recommendations and references below.</p>
+<h3>SECTION F: DOCUMENTS</h3> 
+<p><strong>Please attach your transcripts, recommendations and references below.</strong></p>
 <p>Click the + button to add additional documents.</p>
 
 <%= form_for [@application, @document], :url => {:action => "edit"} do |f| %>
-<p><%= f.label :attachment, "Attachment url" %></p>
-<p><%= f.text_field :attachment %></p>
-<p><%= f.label :category %></p>
-<p><%= f.select :category, [['transcript'], ['recommendation'], ['resume']] %></p>
-<p><%= f.submit :save %></p>
+<p><strong><%= f.label :attachment, "Attachment url" %></strong></p>
+<p><strong><%= f.text_field :attachment %></strong></p>
+<p><strong><%= f.label :category %></strong></p>
+<p><strong><%= f.select :category, [['transcript'], ['recommendation'], ['resume']] %></strong></p>
+<p><strong><%= f.submit :save %></strong></p>
 <% end %>
+<hr>
 
-<p><%= link_to 'Back to all Documents', "/applications/#{@application.id}/documents"%>
+<p><strong><%= link_to 'Back to all Documents', "/applications/#{@application.id}/documents"%></strong></p>
 
 

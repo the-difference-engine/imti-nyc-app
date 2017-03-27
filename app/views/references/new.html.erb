@@ -1,11 +1,11 @@
-<p>SECTION E: REFERENCES </p>
+<h3>>SECTION E: REFERENCES </h3>
 
 <%= form_for [@application, @reference] do |f| %>
-<p><%= f.label :name %></p>
-<p><%= f.text_field :name %></p>
-<p><%= f.label :address %></p>
-<p><%= f.text_field :address %></p>
-<p><%= f.label :position%></p>
-<p><%= f.text_field :position%></p>
-<p><%= f.submit :save %></p>
+<p><strong><%= f.label :name %></strong></p>
+<p><strong><%= f.text_field :name %></strong></p>
+<p><strong><%= f.label :address %></strong></p>
+<p><strong><%= f.text_field :address %></strong></p>
+<p><strong><%= f.label :position%></strong></p>
+<p><strong><%= f.text_field :position%></strong></p>
+<p><strong><%= f.submit :save %></strong></p>
 <% end %>
