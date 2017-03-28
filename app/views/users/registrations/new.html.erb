@@ -47,6 +47,9 @@
 
                     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
                       <%= devise_error_messages! %>
+                      <div class="form-group">
+                        <%= f.select(:role, options_for_select([['Domestic Applicant', 'domestic_applicant'], ['International Application', 'international_applicant'], ['Current Teacher', 'current_teacher'], ['Alumni', 'alumni'], ['Member', 'member']])) %>
+                      </div>
                       <!-- Single Register input area start -->
                       <div class="form-group">
                         <i class="fa fa-envelope-o" aria-hidden="true"></i>
@@ -77,6 +80,7 @@
                         <i class="fa fa-lock" aria-hidden="true"></i>
                         <%= f.password_field :password_confirmation, { :autocomplete => "off", :placeholder => "Password confirmation" } %>
                       </div>
+
                       <!-- Single Register input area start -->
                       <div class="actions">
                         <%= f.submit "Sign up", { :class => "btn btn-default", :id => "login_submit" } %>

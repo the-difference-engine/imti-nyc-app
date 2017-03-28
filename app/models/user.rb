@@ -14,7 +14,10 @@ class User < ApplicationRecord
     {
       local_school_admin: '/schools/sign_up',
       domestic_applicant: '/sign_up',
-      international_applicant: '/sign_up'
+      international_applicant: '/sign_up',
+      current_teacher: '/sign_up',
+      alumni: '/sign_up',
+      member: '/sign_up'
     }.with_indifferent_access
   end
 
