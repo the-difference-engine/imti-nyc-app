@@ -9,8 +9,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private 
 
   def validate_params
-    p "URI path #{URI(request.referer).path}"
-    p "User.role_params[params[:user][:role]] #{User.role_params[params[:user][:role]]}"
     if URI(request.referer).path != User.role_params[params[:user][:role]]
       flash[:danger] = "Please don't mess with the forms!"
       redirect_to request.referer and return
