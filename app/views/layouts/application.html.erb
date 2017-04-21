@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
 
     <meta name="description" content="AMI, Association Montessori Internationale, international montessori teacher training in Atlanta Georgia">
-    
+
     <meta name="keywords" content="Montessori teacher, teacher training, Montessori teacher training, AMI, Association Montessori Internationale, Atlanta, GA, Georgia, international, institute">
-    
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -67,7 +67,7 @@
                         <div class="social_reg_log_area">
                             <!--  Top Social bar start -->
                             <div class="top_social_bar">
-                                <%= link_to '<i class="fa fa-facebook" aria-hidden="true"></i>'.html_safe, 
+                                <%= link_to '<i class="fa fa-facebook" aria-hidden="true"></i>'.html_safe,
                                     "https://www.facebook.com/International-Montessori-Training-Institute-144259905606348/" %>
                             </div>
                             <!--  Login Register Area -->
@@ -192,7 +192,9 @@
 
     <div class="render_page">
       <%= render "/shared/alerts" %>
-      <%= yield %>
+      <div class="container">
+        <%= yield %>
+      </div>
     </div>
     <!-- ===================== Newsletter Area Start ===================== -->
     <div class="newsletter_area wow fadeInUp" data-wow-delay="0.2s">
