@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20170519000643) do
     t.string   "name"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "principal_name"
     t.string   "contact_name"
     t.string   "school_address"
     t.text     "bio"
