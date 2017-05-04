@@ -50,6 +50,24 @@ ActiveRecord::Schema.define(version: 20170502004637) do
     t.datetime "updated_at",                          null: false
   end
 
+  create_table "course_registrations", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.decimal  "price",       precision: 7, scale: 2
+    t.text     "description"
+    t.string   "lecturer"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
   create_table "documents", force: :cascade do |t|
     t.integer  "application_id"
     t.datetime "created_at",              null: false
@@ -82,6 +100,8 @@ ActiveRecord::Schema.define(version: 20170502004637) do
     t.string   "contact_name"
     t.string   "school_address"
     t.text     "bio"
+    t.string   "main_contact"
+    t.string   "address"
   end
 
   create_table "montessori_trainings", force: :cascade do |t|

@@ -23,4 +23,6 @@ Rails.application.routes.draw do
   resources :local_schools, only: [:index, :new, :create, :edit, :update]
 
   resources :charges
+  resources :courses
+  resources :course_registrations
 end

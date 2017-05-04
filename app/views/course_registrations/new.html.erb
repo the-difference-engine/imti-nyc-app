@@ -1,0 +1,6 @@
+Please select a course to register for:
+
+  <%= form_for @course_registration do |f| %>
+ 		<%= f.select :course_id, Course.all.collect { |c| [ c.name, c.id ] } %>
+  	<p><%= f.submit %></p>
+<% end %>
