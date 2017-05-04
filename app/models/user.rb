@@ -18,12 +18,12 @@ class User < ApplicationRecord
 
   def self.role_params
     {
-      local_school_admin: '/schools/sign_up',
-      domestic_applicant: '/sign_up',
-      international_applicant: '/sign_up',
-      current_teacher: '/sign_up',
-      alumni: '/sign_up',
-      member: '/sign_up'
+      local_school_admin: ['/schools/sign_up'],
+      domestic_applicant: ['/sign_up', '/'],
+      international_applicant: ['/sign_up', '/'],
+      current_teacher: ['/sign_up', '/'],
+      alumni: ['/sign_up', '/'],
+      member: ['/sign_up', '/']
     }.with_indifferent_access
   end
   
@@ -46,5 +46,4 @@ class User < ApplicationRecord
   def local_school_user? 
     local_school_admin? || local_school_teacher?
   end
-
 end

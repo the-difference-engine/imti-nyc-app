@@ -1,9 +1,9 @@
+require 'roo'
+
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :validate_params, only: :create
-  after_action :set_role, only: :create
   after_action :set_school, only: :create
   prepend_before_action :set_minimum_password_length, only: :new_school
-  require 'roo'
 
   def new_school
     new
@@ -16,12 +16,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def set_role
-    current_user.role = params[:user][:role]
-  end
-
   def validate_params
-    if URI(request.referer).path != User.role_params[params[:user][:role]]
+    if !User.role_params[params[:user][:role]].include?(URI(request.referer).path)
       flash[:danger] = "Please don't mess with the forms!"
       redirect_to request.referer and return
     elsif params[:user][:role] == 'local_school_admin' && params[:school_name].blank?

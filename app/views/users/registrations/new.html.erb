@@ -55,7 +55,6 @@
                     <%= f.select(:role, User.roles.collect { |p| [p[0].humanize, p[0]] if p[1]==3 || p[1]==4}.compact, {}, {class: "form-control"}) %>
                   </div>
                   <div class="actions">
-                    <%= f.hidden_field :role, :value => "domestic_applicant" %>
                     <%= f.submit "Sign up", { :class => "btn btn-default", :id => "login_submit" } %>
                   </div>
                 <% end %>
