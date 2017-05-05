@@ -8,7 +8,7 @@ class ChargesController < ApplicationController
     p "hello"
     p "*" * 50
     # Amount in cents
-    @amount = 100 * 100
+    @amount = 500
 
     customer = Stripe::Customer.create(
       :email => current_user.email,
@@ -20,7 +20,7 @@ class ChargesController < ApplicationController
       :amount      => @amount,
       :description => 'Rails Stripe customer',
       :currency    => 'usd'
-    ) 
+    )
 
     new_charge = current_user.charges.create(uid: charge.id, amount: charge.amount, description: charge.description, customer_id: customer.id)
     redirect_to charge_path(new_charge.id)
@@ -29,7 +29,7 @@ class ChargesController < ApplicationController
     flash[:error] = e.message
     redirect_to new_charge_path
   end
-  
+
   def show
     @charge = Charge.find(params[:id])
   end
