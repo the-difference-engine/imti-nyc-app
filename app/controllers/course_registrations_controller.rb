@@ -7,7 +7,9 @@ class CourseRegistrationsController < ApplicationController
 
 	def create
 		course_registration = CourseRegistration.new(course_registration_params)
-		@amount = Course.find(course_registration_params[:course_id]).price
+		course = Course.find(course_registration_params[:course_id])
+		@amount = course.price
+		@product_name = course.name
 		render 'charges/new.html.erb'
 	end
 
