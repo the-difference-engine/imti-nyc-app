@@ -33,6 +33,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(_)
-    applications_path
+    new_application_path
   end
 end

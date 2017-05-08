@@ -3,7 +3,7 @@
 
   <% if @application.present?  %>
     <p><%= current_user.last_name %>, <%= current_user.first_name %> - <%= link_to 'View application', "/applications/#{@application.id}"%></p>
+  <% elsif %>
+    <p><%= link_to 'Start New Application', 'applications/new' %></p>
   <% end %>
 </div>
-
-
