@@ -4,7 +4,7 @@
 
   <%= form_for [@application, @document] do |f| %>
     <%= f.file_field :attachment %>
-    <p><%= f.select :category, [['health form'], ['personal essay'], ['recommendation'], ['resume'], ['TOEFL score report'], ['transcript']] %></p>
+    <p><%= f.select :category, document_lists %></p>
     <p><%= f.submit :save %></p>
   <% end %>
 

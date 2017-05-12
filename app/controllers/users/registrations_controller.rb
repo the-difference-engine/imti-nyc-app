@@ -32,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.update(local_school_id: school.id)
   end
 
-  def after_sign_up_path_for(_)
-    new_application_path
+  def after_sign_up_path_for(resource)
+    current_user.local_school_admin? ? local_schools_path : new_application_path
   end
 end
