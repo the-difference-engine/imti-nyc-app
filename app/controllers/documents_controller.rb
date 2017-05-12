@@ -1,4 +1,5 @@
 class DocumentsController < ApplicationController
+  include DocumentsHelper
   
   def index
     @application = Application.find(params[:application_id])
