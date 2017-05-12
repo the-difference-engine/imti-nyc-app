@@ -20,11 +20,13 @@ class WorkshopsController < ApplicationController
   end
 
   def edit 
-    
+    @workshop = Workshop.find_by(id: params[:id])
+    render 'edit.html.erb'
   end
 
   def update
-    
+    @workshop = Workshop.find_by(id: params[:id])
+    @workshop.assign_attributes()
   end
 
   def destroy 
