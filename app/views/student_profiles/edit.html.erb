@@ -1,0 +1,19 @@
+<%= form_tag "/student_profiles", method: :patch do %>
+<div><%= label_tag :first_name  %>
+<%= text_field_tag :first_name, @student.first_name %></div>
+<div><%= label_tag :middle_initial  %>
+<%= text_field_tag :middle_initial, @student.middle_initial %></div>
+<div><%= label_tag :last_name  %>
+<%= text_field_tag :last_name, @student.last_name %></div>
+<div><%= label_tag :email  %>
+<%= text_field_tag :email, @student.email %></div>
+<div><%= label_tag :street_address  %>
+<%= text_field_tag :street, @student.application.street %></div>
+<div><%= label_tag :city  %>
+<%= text_field_tag :city, @student.application.city %></div>
+<div><%= label_tag :state  %>
+<%= text_field_tag :state, @student.application.state %></div>
+<div><%= label_tag :zip_code  %>
+<%= text_field_tag :zip_code, @student.application.zip_code %></div>
+<%= submit_tag("Update") %>
+<% end %>
