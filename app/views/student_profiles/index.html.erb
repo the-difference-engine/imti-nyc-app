@@ -1,0 +1,105 @@
+    <!-- Breadcumb area start -->
+    <section class="breadcumb_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="breadcumb_section">
+                        <!-- Breadcumb page title start -->
+                        <div class="page_title">
+                            <h3><%= @title %></h3>
+                        </div>
+                        <!-- Breadcumb page pagination start -->
+                        <div class="page_pagination">
+                            <ul>
+                                <li><%= link_to "Home", "/" %></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li><%= @title %></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcumb area end -->
+    <!-- About us area start -->
+    <section class="about_us_area section_padding_100">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <!-- About us text start -->
+                    <div class="about_us_text">
+                       <h5></h5>
+                    </div>
+                    <!-- About us special quote start -->
+                    <div class="special_service">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!-- About us single quote start -->
+                                <div class="single_special_service">
+                                    
+
+                                    <h5>Name:<%= "#{@student.first_name} #{@student.middle_initial} #{@student.last_name}"%></h5>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <!-- About us single quote start -->
+                                <div class="single_special_service">
+                                    
+                                    <h5>Email: <%= @student.email %></h5>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <!-- About us single quote start -->
+                                <div class="single_special_service">
+                                    
+                                    <h5>Address: 
+                                    <br>
+                                    <%= "#{@student.application.street} #{@student.application.city} #{@student.application.state} #{@student.application.zip_code}" %></h5>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <!-- About us single quote start -->
+                                <div class="single_special_service">
+                                    
+                                    <h5>Birthdate: <%= @student.application.birth_date %></h5>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <!-- About us single quote start -->
+                                <div class="single_special_service">
+                                    
+                                    <h5>Birthplace: <%= @student.application.birth_place %></h5>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <!-- About us single quote start -->
+                                <div class="single_special_service">
+                                    <h5><%= link_to "edit", "/student_profiles/#{@student.id}/edit" %></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h1>Bulk Import</h1>
+                    <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
+                    <%= form_tag "/users/registrations/", method: :post, multipart: true do %>
+                        <%= file_field_tag :file %>
+                        <%= submit_tag "Import" %>
+                    <% end %>
+
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <!-- About us thumb start -->
+                    <div class="about_us_thumb">
+                        <%= image_tag "img/about.jpg" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About us area end -->
+
+    <!-- ===================== Cool Facts Area Start ===================== -->
+
+    <!-- Our mission area end -->
