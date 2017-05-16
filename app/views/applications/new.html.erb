@@ -2,14 +2,6 @@
   <p>SECTION A: PERSONAL DATA </p>
 
   <%= bootstrap_form_for(@application) do |f| %>
-    <%= label_tag :last_name %>
-    <%= text_field_tag :'user[last_name]', current_user.last_name %>
-    <%= label_tag :first_name %>
-    <%= text_field_tag :'user[first_name]', current_user.first_name %>
-    <%= label_tag :middle_initial %>
-    <%= text_field_tag :'user[middle_initial]', current_user.middle_initial %>
-    <%= label_tag :email %>
-    <%= text_field_tag :'user[email]', current_user.email, disabled: true %>
     <%= f.text_field :phone_number %>
     <%= f.text_field :street %>
     <%= f.text_field :city %>
