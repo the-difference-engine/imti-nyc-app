@@ -5,7 +5,7 @@ class StudentProfilesController < ApplicationController
   end
 
   def update
-    
+    current_user.update()
   end
 
   def new
