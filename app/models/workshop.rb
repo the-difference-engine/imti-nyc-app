@@ -1,4 +1,2 @@
 class Workshop < ApplicationRecord
-
-  
 end
