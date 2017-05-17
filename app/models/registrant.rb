@@ -20,3 +20,4 @@ class Registrant < ApplicationRecord
     end
   end
 end
+

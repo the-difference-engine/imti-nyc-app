@@ -57,3 +57,10 @@
     <br>
   <% end %>
 </div>
+<div>Pric: <%= @workshop.price%></div>
+</div>
+<a href="/workshops/<%= @workshop.id%>/edit">Edit</a>
+<!-- Need to add featurew so only Admin could edit or delete -->
+<%= form_tag "/workshops/#{@workshop.id}", method: :delete do %> 
+ <%= submit_tag ' Too old  ' %>
+<% end %>

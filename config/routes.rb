@@ -29,8 +29,6 @@ Rails.application.routes.draw do
   resources :local_schools, only: [:index, :new, :create, :edit, :update]
   post "/registrants/import", to: "registrants#import"
   resources :registrants
-  
-
   resources :workshops
   resources :charges
   resources :courses
