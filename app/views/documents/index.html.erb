@@ -5,8 +5,12 @@
   <hr>
 
   <% @documents.each do |document| %>
-    <p>Attachment name: <%= document.attachment_file_name %></p>
-    <p>Category: <%= document.category %></p>
+    <% if document.category == 'passport_photo' %>
+      <img src="<%= document.attachment.url %>" alt="">
+    <% else %>
+      <p> Attachment name: <%= document.attachment_file_name %></p>
+    <% end %>
+    <p>Category: <%= document.category.humanize %></p>  
     <p><%= link_to 'Edit document', "/applications/#{@application.id}/documents/#{document.id}/edit"%>
     <hr>
   <% end %>

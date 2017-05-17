@@ -10,8 +10,9 @@ class WorkshopsController < ApplicationController
   end
 
   def create
-    @workshop = Workshop.new(first_name: params[:first_name], last_name: params[:last_name], affiliation: params[:affiliation], occupation: params[:occupation],  email: params[:email])
+    @workshop = Workshop.new(name: params[:name], description: params[:description], date: params[:date], price: params[:price])
     @workshop.save 
+    redirect_to "/workshops"
   end
 
   def show
@@ -26,11 +27,14 @@ class WorkshopsController < ApplicationController
 
   def update
     @workshop = Workshop.find_by(id: params[:id])
-    @workshop.assign_attributes()
+    @workshop.update(name: params[:name], description: params[:description], date: params[:date], price: params[:price])
+    redirect_to "/workshops/#{@workshop.id}"
   end
 
   def destroy 
-    
+    @workshop = Workshop.find_by( id: params[:id]) 
+    @workshop.destroy
+    redirect_to "/workshops"
   end
 
 end

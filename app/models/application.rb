@@ -4,9 +4,13 @@ class Application < ApplicationRecord
   has_many :transcripts, -> { where 'category = transcript' }, class_name: 'Document'
   has_many :recommendations, -> { where 'category = recommendation' }, class_name: 'Document'
   has_many :resumes, -> { where 'category = resume' }, class_name: 'Document'
-  has_many :personal_essays, -> { where 'category = personal essay' }, class_name: 'Document'
-  has_many :health_forms, -> { where 'category = health form' }, class_name: 'Document'
-  has_many :toefl_score_reports, -> { where 'category = TOEFL score report' }, class_name: 'Document'
+  has_many :personal_essays, -> { where 'category = personal_essay' }, class_name: 'Document'
+  has_many :health_forms, -> { where 'category = health_form' }, class_name: 'Document'
+  has_many :toefl_ielts_score_reports, -> { where 'category = toefl_ielts_score_report' }, class_name: 'Document'
+  has_one :passport_photo, -> { where 'category = passport_photo' }, class_name: 'Document'
+  has_one :wes_evaluation, -> { where 'category = wes_evaluation' }, class_name: 'Document'
+  has_one :contract, -> { where 'category = contract' }, class_name: 'Document'
+  has_one :student_visa, -> { where 'category = student_visa' }, class_name: 'Document'
   has_many :references
   has_many :educations
   has_many :montessori_trainings
