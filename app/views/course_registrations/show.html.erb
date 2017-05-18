@@ -7,4 +7,5 @@
 		<li> Reference Number: <%= @new_charge.uid %></li>
 	</ul>
 
-	<%= link_to("View Course", "/courses/#{current_user.course_id}") %>
+	<%= link_to("View Course", course_path(current_user.course_id)) %>
+</div>
