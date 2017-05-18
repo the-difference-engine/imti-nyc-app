@@ -5,13 +5,14 @@ class StudentProfilesController < ApplicationController
   end
 
   def update
-    student = current_user
+    @student = current_user
     application = current_user.application
-    if student.update(user_params) && application.update(application_params)
+    if @student.update(user_params) && application.update(application_params)
       flash[:success] = "Student Profile Successfully Update"
       redirect_to '/student_profiles'
     else
-      flash[:danger] = student.errors.full_messages 
+      flash[:danger] = @student.errors.full_messages
+      render 'edit.html.erb'
     end
   end
 
