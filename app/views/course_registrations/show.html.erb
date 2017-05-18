@@ -1,0 +1,7 @@
+<h1>Congrats! You are officially enrolled! </h1>
+<ul> 
+	<li> Amount: <%= number_to_currency(@new_charge.amount) %></li>
+	<li> Description: <%= @new_charge.description %></li>
+	<li> Email: <%= @new_charge.user.email %></li>
+	<li> Reference Number: <%= @new_charge.uid %></li>
+</ul>

@@ -21,8 +21,7 @@ class CourseRegistrationsController < ApplicationController
 
     @new_charge = current_user.charges.create(uid: charge.id, amount: charge.amount / 100, description: charge.description, customer_id: customer.id)
     current_user.update(course_id: course.id)
-    # redirect_to charge_path(new_charge.id)
-    render "/charges/show.html.erb"
+    render "show.html.erb"
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
