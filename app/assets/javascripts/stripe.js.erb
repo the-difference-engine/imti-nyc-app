@@ -1,4 +1,4 @@
-var stripe = Stripe('pk_test_cHr5bVzvVmkYDsaeVF4cFUN7');
+var stripe = Stripe('<%= Rails.application.secrets.stripe_publishable_key %>');
 		var elements = stripe.elements();
 		// Custom styling can be passed to options when creating an Element.
 		var style = {
