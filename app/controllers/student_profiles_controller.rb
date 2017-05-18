@@ -16,12 +16,8 @@ class StudentProfilesController < ApplicationController
     end
   end
 
-  def new
-    
-  end
-
   def create
-    
+    # To be coded when system admin has capability to mark application as accepted
   end
 
   def index
