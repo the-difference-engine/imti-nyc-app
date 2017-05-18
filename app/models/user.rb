@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :email, presence: true       
   has_one :application
   belongs_to :local_school, optional: true
+  belongs_to :course, optional: true
   has_many :charges
   has_many :course_registrations
   has_many :courses, through: :course_registrations
