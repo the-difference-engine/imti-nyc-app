@@ -7,6 +7,7 @@ class LocalSchoolsController < ApplicationController
   end
 
   def create
+    redirect_to "local_schools"
   end
 
   def edit
