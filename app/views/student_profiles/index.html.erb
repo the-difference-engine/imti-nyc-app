@@ -63,17 +63,11 @@
                             <div class="col-sm-12">
                                 <!-- About us single quote start -->
                                 <div class="single_special_service">
-                                    <h5><%= link_to "edit", "/student_profiles/#{@student.id}/edit" %></h5>
+                                    <h5><%= link_to "edit", "/student_profiles/edit" %></h5>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <h1>Bulk Import</h1>
-                    <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
-                    <%= form_tag "/users/registrations/", method: :post, multipart: true do %>
-                        <%= file_field_tag :file %>
-                        <%= submit_tag "Import" %>
-                    <% end %>
 
                 </div>
                 <div class="col-xs-12 col-md-6">

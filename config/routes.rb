@@ -17,10 +17,11 @@ Rails.application.routes.draw do
   	resources :documents, only: [:index, :new, :create, :edit, :update]
   end
 
-  resources :student_profiles, only: [:index, :new, :create, :update] do
+  resources :student_profiles, only: [:index, :new, :create] do
   end
 
   get "/student_profiles/edit" => "student_profiles#edit"
+  patch "/student_profiles" => "student_profiles#update"
   
   resources :school_profiles, only: [:index, :new, :create, :edit, :update] do
   end
