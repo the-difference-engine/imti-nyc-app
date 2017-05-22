@@ -1,0 +1,27 @@
+<%= form_tag '/registrants', method: :post do %>
+  <div>
+  <%= label_tag :first_name %>
+  <%= text_field_tag :first_name, @registrant.first_name %>
+</div>
+<div>
+  <%= label_tag :last_name %>
+  <%= text_field_tag :last_name, @registrant.last_name %>
+</div>
+<div>
+ <%= label_tag :affiliation %>
+ <%= text_field_tag :date, @registrant.affiliation %>
+</div>
+<div>
+  <%= label_tag :occupation %>
+  <%= text_field_tag :occupation, @registrant.occupation %>
+</div>
+<div>
+  <%= label_tag :email %>
+  <%= text_field_tag :email, @registrant.email %>
+</div>
+<div>
+  <%= label_tag :phone %>
+  <%= text_field_tag :phone, @registrant.phone %>
+</div>
+<%= submit_tag 'Create New registrant' %>
+<% end %>

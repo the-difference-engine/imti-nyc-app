@@ -4,8 +4,38 @@
 <div>Date: <%= @workshop.date%></div>
 <div>Pric: <%= @workshop.price%></div>
 </div>
-<a href="/workshops/<%= @workshop.id%>/edit">Edit</a>
+<h1>To register for this class please fill out this form.</h1>
+<%= form_tag '/registrants', method: :post do %>
+  <div>
+    <%= label_tag :first_name %>
+    <%= text_field_tag :first_name %>
+  </div>
+  <div>
+    <%= label_tag :last_name %>
+    <%= text_field_tag :last_name %>
+  </div>
+  <div>
+   <%= label_tag :affiliation %>
+   <%= text_field_tag :date%>
+  </div>
+  <div>
+    <%= label_tag :occupation %>
+    <%= text_field_tag :occupation %>
+  </div>
+  <div>
+    <%= label_tag :email %>
+    <%= text_field_tag :email%>
+  </div>
+  <div>
+    <%= label_tag :phone %>
+    <%= text_field_tag :phone%>
+  </div>
+  <%= hidden_field_tag :workshop_id, @workshop.id%>
+  <%= submit_tag 'Create New registrant' %>
+<% end %>
+<br>
 <!-- Need to add featurew so only Admin could edit or delete -->
+<%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
 <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %> 
- <%= submit_tag ' Too old  ' %>
+ <%= submit_tag 'Remove this workshop' %>
 <% end %>
