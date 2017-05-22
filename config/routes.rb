@@ -34,4 +34,5 @@ Rails.application.routes.draw do
   resources :charges
   resources :courses
   resources :course_registrations
+  resources :donations, only: [:index, :show, :new, :create]
 end
