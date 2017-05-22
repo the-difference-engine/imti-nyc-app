@@ -122,6 +122,13 @@ ActiveRecord::Schema.define(version: 20170519000643) do
     t.integer  "application_id"
   end
 
+  create_table "registrant_workshops", force: :cascade do |t|
+    t.string   "registrant_id"
+    t.string   "workshop_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "registrants", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"

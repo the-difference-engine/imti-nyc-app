@@ -1,5 +1,6 @@
 class WorkshopsController < ApplicationController
-
+  skip_before_action :authenticate_user!
+  
   def index
     @workshops = Workshop.all
     render 'index.html.erb'
@@ -35,6 +36,5 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.find_by( id: params[:id]) 
     @workshop.destroy
     redirect_to "/workshops"
-  end
-
+  end  
 end
