@@ -60,7 +60,4 @@ class ApplicationsController < ApplicationController
     :country_of_citizenship, :occupation, :name_of_spouse, 
     :ages_of_children).merge(user_id: current_user.id)
   end
-
- 
-
 end

@@ -6,7 +6,7 @@ class RegistrantsController < ApplicationController
   end
 
   def create
-    registrant = Registrant.new(first_name: params[:first_name], last_name: params[:last_name], affiliation: params[:affiliation], occupation: params[:occupation],  email: params[:email], phone: params[:phone])
+    registrant = Registrant.new(registrants_params)
     registrant.save 
     RegistrantWorkshop.create(registrant_id: registrant.id, workshop_id: params[:workshop_id])
     redirect_to "/workshops"
@@ -14,7 +14,13 @@ class RegistrantsController < ApplicationController
 
   def edit 
     @registrant = Registrant.find_by(id: params[:id])
-    @registrant.update(first_name: params[:first_name], last_name: params[:last_name], affiliation: params[:affiliation], occupation: params[:occupation],  email: params[:email])
+    @registrant.update(registrants_params)
     render 'edit.html.erb'
   end
+
+  private
+
+  def registrants_params
+    params.permit(:first_name, :last_name, :affiliation, :occupation, :email, :phone)
+  end 
 end
