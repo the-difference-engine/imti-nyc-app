@@ -9,16 +9,11 @@ class ApplicationsController < ApplicationController
 
   def create
     @application = Application.new(application_params)
-    if current_user.update(user_params)
-      if @application.save
-        flash[:success] = "Application saved."
-        redirect_to  "/applications/#{@application.id}"
-      else
-        flash[:danger] = @application.errors.full_messages
-        render :new
-      end
+    if @application.save
+      flash[:success] = "Application saved."
+      redirect_to  "/applications/#{@application.id}"
     else
-      flash[:danger] = current_user.errors.full_messages
+      flash[:danger] = @application.errors.full_messages
       render :new
     end
   end
