@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20170525232115) do
     t.datetime "updated_at",                          null: false
     t.text     "comment"
     t.string   "uid"
-  end
+end
 
   create_table "educations", force: :cascade do |t|
     t.integer  "application_id"

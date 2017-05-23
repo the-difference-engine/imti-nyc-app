@@ -1,9 +1,12 @@
 class DonationsController < ApplicationController
-	def new
-		
+	skip_before_action :authenticate_user!, except: [:index]
+
+  def new
+
 	end
 
 	def create
 		
 	end
+  
 end

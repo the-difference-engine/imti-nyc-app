@@ -1,4 +1,6 @@
-var stripe = Stripe('<%= Rails.application.secrets.stripe_publishable_key %>');
+var stripe = Stripe('<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>');
+// need to change back to Rails.application.secrets.stripe_publishable_key
+
 		var elements = stripe.elements();
 		// Custom styling can be passed to options when creating an Element.
 		var style = {
