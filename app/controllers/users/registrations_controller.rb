@@ -1,5 +1,4 @@
 require 'roo'
-
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :validate_params, only: :create
   after_action :set_school, only: :create

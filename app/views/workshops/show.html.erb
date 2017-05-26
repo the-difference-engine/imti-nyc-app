@@ -2,7 +2,7 @@
 <div>Title: <%= @workshop.name%></div>
 <div>Description: <%= @workshop.description%></div>
 <div>Date: <%= @workshop.date%></div>
-<div>Pric: <%= @workshop.price%></div>
+<div>Price: <%= @workshop.price%></div>
 </div>
 <h1>To register for this class please fill out this form.</h1>
 <%= form_tag '/registrants', method: :post do %>
@@ -34,8 +34,16 @@
   <%= submit_tag 'Create New registrant' %>
 <% end %>
 <br>
-<!-- Need to add featurew so only Admin could edit or delete -->
-<%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
-<%= form_tag "/workshops/#{@workshop.id}", method: :delete do %> 
- <%= submit_tag 'Remove this workshop' %>
-<% end %>
+  <!-- Need to add featurew so only Admin could edit or delete -->
+  <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
+  <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %> 
+  <%= submit_tag 'Remove this workshop' %>
+  <% end %>
+<br>
+  <h1>Bulk Import</h1>
+    <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
+    <%= form_tag "/registrants/import", method: :post, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= hidden_field_tag :workshop_id, @workshop.id%>
+        <%= submit_tag "Import" %>
+    <% end %>

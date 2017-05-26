@@ -1,3 +1,4 @@
+require 'roo'
 class RegistrantsController < ApplicationController
   skip_before_action :authenticate_user!
 
@@ -10,6 +11,11 @@ class RegistrantsController < ApplicationController
     registrant.save 
     RegistrantWorkshop.create(registrant_id: registrant.id, workshop_id: params[:workshop_id])
     redirect_to "/workshops"
+  end
+
+  def import
+    Registrant.import(params[:file], params[:workshop_id])
+    redirect_to "/local_schools", notice: "Your import was succesful!"
   end
 
   def edit 
