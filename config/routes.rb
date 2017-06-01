@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :school_profiles, only: [:index, :new, :create, :edit, :update] do
   end
 
-  resources :local_schools, only: [:index, :new, :create, :edit, :update]
+  resources :local_schools, only: [:index, :new, :create, :edit, :update] 
 
   resources :registrants
   resources :workshops
