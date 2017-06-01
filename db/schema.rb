@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170519000643) do
+ActiveRecord::Schema.define(version: 20170522230715) do
 
 
   # These are extensions that must be enabled in order to support this database
@@ -114,6 +114,13 @@ ActiveRecord::Schema.define(version: 20170519000643) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "application_id"
+  end
+
+  create_table "registrant_workshops", force: :cascade do |t|
+    t.integer  "registrant_id"
+    t.integer  "workshop_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "registrants", force: :cascade do |t|

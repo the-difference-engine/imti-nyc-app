@@ -1,5 +1,6 @@
 class WorkshopsController < ApplicationController
-
+  skip_before_action :authenticate_user!
+  
   def index
     @workshops = Workshop.all
     render 'index.html.erb'
@@ -10,7 +11,7 @@ class WorkshopsController < ApplicationController
   end
 
   def create
-    @workshop = Workshop.new(name: params[:name], description: params[:description], date: params[:date], price: params[:price])
+    @workshop = Workshop.new(workshops_params)
     @workshop.save 
     redirect_to "/workshops"
   end
@@ -27,7 +28,7 @@ class WorkshopsController < ApplicationController
 
   def update
     @workshop = Workshop.find_by(id: params[:id])
-    @workshop.update(name: params[:name], description: params[:description], date: params[:date], price: params[:price])
+    @workshop.update(workshops_params)
     redirect_to "/workshops/#{@workshop.id}"
   end
 
@@ -35,6 +36,11 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.find_by( id: params[:id]) 
     @workshop.destroy
     redirect_to "/workshops"
-  end
+  end  
 
+  private
+
+  def workshops_params
+    params.permit(:name, :description, :date, :price)
+  end
 end
