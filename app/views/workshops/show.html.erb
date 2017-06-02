@@ -1,45 +1,43 @@
-<div class="">
-<div>Title: <%= @workshop.name%></div>
-<div>Description: <%= @workshop.description%></div>
-<div>Date: <%= @workshop.date%></div>
-<div>Price: <%= @workshop.price%></div>
-</div>
-<h1>To register for this class please fill out this form.</h1>
-<%= form_tag '/registrants', method: :post do %>
-  <div>
-    <%= label_tag :first_name %>
-    <%= text_field_tag :first_name %>
-  </div>
-  <div>
-    <%= label_tag :last_name %>
-    <%= text_field_tag :last_name %>
-  </div>
-  <div>
-   <%= label_tag :affiliation %>
-   <%= text_field_tag :affiliation %>
-  </div>
-  <div>
-    <%= label_tag :occupation %>
-    <%= text_field_tag :occupation %>
-  </div>
-  <div>
-    <%= label_tag :email %>
-    <%= text_field_tag :email%>
-  </div>
-  <div>
-    <%= label_tag :phone %>
-    <%= text_field_tag :phone%>
-  </div>
-  <%= hidden_field_tag :workshop_id, @workshop.id%>
-  <%= submit_tag 'Create New registrant' %>
-<% end %>
-<br>
-  <!-- Need to add featurew so only Admin could edit or delete -->
-  <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
-  <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %> 
-  <%= submit_tag 'Remove this workshop' %>
+<div class="container">
+  <p>Title: <%= @workshop.name%></p>
+  <p>Description: <%= @workshop.description%></p>
+  <p>Date: <%= @workshop.date%></p>
+  <p>Price: <%= @workshop.price%></p>
+  <h1>To register for this class please fill out this form.</h1>
+  <%= form_tag '/registrants', method: :post do %>
+    <div>
+      <%= label_tag :first_name %>
+      <%= text_field_tag :first_name %>
+    </div>
+    <div>
+      <%= label_tag :last_name %>
+      <%= text_field_tag :last_name %>
+    </div>
+    <div>
+      <%= label_tag :affiliation %>
+      <%= text_field_tag :affiliation %>
+    </div>
+    <div>
+      <%= label_tag :occupation %>
+      <%= text_field_tag :occupation %>
+    </div>
+    <div>
+      <%= label_tag :email %>
+      <%= text_field_tag :email%>
+    </div>
+    <div>
+      <%= label_tag :phone %>
+      <%= text_field_tag :phone%>
+    </div>
+      <%= hidden_field_tag :workshop_id, @workshop.id%>
+      <%= submit_tag 'Create New registrant' %>
   <% end %>
-<br>
+  <br>
+    <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
+    <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %> 
+      <%= submit_tag 'Remove this workshop' %>
+    <% end %>
+  <br>
   <h1>Bulk Import</h1>
     <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
     <%= form_tag "/registrants/import", method: :post, multipart: true do %>
@@ -47,3 +45,15 @@
         <%= hidden_field_tag :workshop_id, @workshop.id%>
         <%= submit_tag "Import" %>
     <% end %>
+  <br>
+  <h1>Current Registrants:</h1>
+  <% @registrants.each do |registrant| %>
+    <%= registrant.first_name %>
+    <%= registrant.last_name %>
+    <%= registrant.email %>
+    <%= registrant.affiliation %>
+    <%= registrant.occupation %>
+    <%= registrant.phone %>
+    <br>
+  <% end %>
+</div>
