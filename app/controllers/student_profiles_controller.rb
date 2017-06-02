@@ -14,7 +14,10 @@ class StudentProfilesController < ApplicationController
       flash[:danger] = @student.errors.full_messages
       render 'edit.html.erb'
     end
+    current_user.update()
   end
+
+  def new
 
   end
 
