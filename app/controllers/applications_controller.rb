@@ -20,21 +20,8 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-    # @last_doc = Document.find(current_user.id).last
-    # @valid_user_info = validate_doc @last_doc
-
-    # 
-
     render :show
   end
-
-  def validate_doc document
-    valid = true
-    document.attributes.each_pair do |name, value|
-      valid = false if value.nil?
-    end
-    valid 
-  end 
 
   def edit
     @application = Application.find(params[:id])
