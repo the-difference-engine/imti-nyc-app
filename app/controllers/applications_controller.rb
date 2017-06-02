@@ -46,10 +46,12 @@ class ApplicationsController < ApplicationController
   private
 
   def user_params #strong params - disables postman as a way to bypass the system
+    binding.pry
     params.require(:user).permit(:first_name, :last_name, :email, :middle_initial)
   end
 
   def application_params
+    binding.pry
     params.require(:application).permit(:phone_number, :street, :city, 
     :state, :zip_code, :country, :birth_place, :birth_date, 
     :country_of_citizenship, :occupation, :name_of_spouse, 

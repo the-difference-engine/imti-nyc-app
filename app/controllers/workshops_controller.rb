@@ -18,6 +18,7 @@ class WorkshopsController < ApplicationController
 
   def show
     @workshop = Workshop.find_by(id: params[:id])
+    @registrants = @workshop.registrants
     render 'show.html.erb'    
   end
 
