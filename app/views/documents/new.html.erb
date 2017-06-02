@@ -2,6 +2,7 @@
   <h1>SECTION F: DOCUMENTS</h1>
   <p>Please attach your health form, personal essay, recommendation, resume, TOEFL report or transcript below.</p>
 
+  <% unless current_user.role == "domestic_applicant" %>
   <p>Use the following links to procure any necessary documents:</p>
   <ul>
     <li><a href="https://travel.state.gov/content/visas/en/study-exchange/student.html" target="_blank"> F1 Student Visa </a></li>
@@ -9,6 +10,8 @@
     <li><a href="https://www.ielts.org/book-a-test/getting-your-results" target="_blank"> IELTS Scores </a></li>
     <li><a href="http://www.wes.org/" target="_blank"> WES Evaluation </a></li>
   </ul>
+  <% end %>
+
 
   <%= form_for [@application, @document] do |f| %>
     <%= f.file_field :attachment %>
