@@ -18,11 +18,9 @@ Rails.application.routes.draw do
   end
 
   resources :student_profiles, only: [:index, :create]
-
   get "/student_profiles/edit" => "student_profiles#edit"
   patch "/student_profiles" => "student_profiles#update"
-  get "/student_profiles/edit" => "student_profiles#edit"
-  
+
   resources :school_profiles, only: [:index, :new, :create, :edit, :update] do
   end
 
