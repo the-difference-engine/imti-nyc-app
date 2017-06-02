@@ -58,17 +58,30 @@
                                     <%= "#{@student.application.street} #{@student.application.city} #{@student.application.state} #{@student.application.zip_code}" %></h5>
                                 </div>
                             </div>
-
+                            <div class="col-sm-12">
+                                <!-- About us single quote start -->
+                                <div class="single_special_service">
+                                    
+                                    <h5>Birthdate: <%= @student.application.birth_date %></h5>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <!-- About us single quote start -->
+                                <div class="single_special_service">
+                                    
+                                    <h5>Birthplace: <%= @student.application.birth_place %></h5>
+                                </div>
+                            </div>
 
                             <div class="col-sm-12">
                                 <!-- About us single quote start -->
                                 <div class="single_special_service">
                                     <h5><%= link_to "edit", "/student_profiles/edit" %></h5>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-xs-12 col-md-6">
                     <!-- About us thumb start -->
