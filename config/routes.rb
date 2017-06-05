@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   end
 
   resources :student_profiles, only: [:index, :create]
-
   get "/student_profiles/edit" => "student_profiles#edit"
   patch "/student_profiles" => "student_profiles#update"
 
@@ -28,8 +27,6 @@ Rails.application.routes.draw do
   resources :local_schools, only: [:index, :new, :create, :edit, :update]
   post "/registrants/import", to: "registrants#import"
   resources :registrants
-  
-
   resources :workshops
   resources :charges
   resources :courses

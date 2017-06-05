@@ -14,6 +14,18 @@
 <div>
   <%= label_tag :price %>
   <%= text_field_tag :price %>
+  <%= text_field_tag :name, @workshop.name %>
 </div>
-<%= submit_tag 'Create New workshop' %>
+<div>
+  <%= label_tag :description %>
+  <%= text_field_tag :description, @workshop.description %>
+</div>
+<div>
+ <%= label_tag :date %>
+ <%= text_field_tag :date  %>
+</div>
+<div>
+  <%= label_tag :price %>
+  <%= text_field_tag :price, @workshop.price %>
+</div>
 <% end %>
