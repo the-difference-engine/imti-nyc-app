@@ -2,7 +2,6 @@
   <h1>LOCAL SCHOOLS</h1>
 
   <%= bootstrap_form_for [@school.id, @local_schools], :url => {:action => "update"} do |f| %>
-    <p><%= f.text_field :principal_name %></p>
     <p><%= f.text_field :contact_name %></p>
     <p><%= f.text_field :school_address %></p>
     <p><%= f.text_field :bio %></p>
