@@ -9,38 +9,36 @@
 <h1>Please enter your donation here:</h1>
 
 <%= form_tag donations_path, id: "payment-form" do %>
-<%= label_tag :first_name %>
-<%= text_field_tag :first_name %>
-<%= label_tag :last_name %>
-<%= text_field_tag :last_name %>
-<%= label_tag :email %>
-<%= text_field_tag :email %>
-<%= label_tag :comment %>
-<%= text_area_tag :comment %>
-<%= radio_button_tag :amount, 25 %>
-<%= label_tag :twenty_five, "$25" %>
-<%= radio_button_tag :amount, 50 %>
-<%= label_tag :fifty, "$50" %>
-<%= radio_button_tag :amount, 100 %>
-<%= label_tag :one_hundred, "$100" %>
-<%= radio_button_tag :amount, 100 %>
-<%= label_tag :other_amount %>
-<%= text_area_tag :other_amount %>
-<div class="form-row">
-  <label for="card-element">
-    Credit or debit card
-  </label>
-  <div id="card-element">
-    <!-- a Stripe Element will be inserted here. -->
+  <p><%= label_tag :first_name %>
+  <%= text_field_tag :first_name %></p>
+  <p><%= label_tag :last_name %>
+  <%= text_field_tag :last_name %></p>
+  <p><%= check_box_tag(:anonymous, "yes") %>
+  <%= label_tag(:anonymous, "Check here to make your donation anonymously") %></p>
+  <p><%= label_tag :email %>
+  <%= text_field_tag :email %></p>
+  <p><%= label_tag :comment %>
+  <%= text_area_tag :comment %></p>
+  <p><%= radio_button_tag :amount, 25 %>
+  <%= label_tag :twenty_five, "$25" %></p>
+  <p><%= radio_button_tag :amount, 50 %>
+  <%= label_tag :fifty, "$50" %></p>
+  <p><%= radio_button_tag :amount, 100 %>
+  <%= label_tag :one_hundred, "$100" %></p>
+  <p><%= label_tag :other_amount %>
+  <%= text_field_tag :other_amount %></p>
+  <div class="form-row">
+    <label for="card-element">
+      Credit or debit card
+    </label>
+    <div id="card-element">
+      <!-- a Stripe Element will be inserted here. -->
+    </div>
+
+    <!-- Used to display Element errors -->
+    <div id="card-errors" role="alert"></div>
   </div>
 
-  <!-- Used to display Element errors -->
-  <div id="card-errors" role="alert"></div>
-</div>
-
-<button>Submit Payment</button>
-<!-- </form> -->
-
-
+  <button>Submit Payment</button>
 <% end %>
 

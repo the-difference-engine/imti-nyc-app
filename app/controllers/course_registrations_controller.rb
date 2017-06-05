@@ -28,6 +28,6 @@ class CourseRegistrationsController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:course_id).merge(user_id: current_user.id)
+    params.permit(:course_id).merge(user_id: current_user.id)
   end
 end

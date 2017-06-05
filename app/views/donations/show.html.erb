@@ -1,0 +1,8 @@
+<div class="container">
+	<h1>Thanks For Your Donation! </h1>
+	<ul>
+		<li> Amount: <%= number_to_currency(@donation.amount) %></li>
+		<li> Email: <%= @donation.email %></li>
+		<li> Reference Number: <%= @donation.uid %></li>
+	</ul>
+</div>
