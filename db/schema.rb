@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170522230715) do
+ActiveRecord::Schema.define(version: 20170523004830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,16 @@ ActiveRecord::Schema.define(version: 20170522230715) do
     t.integer  "attachment_file_size"
     t.string   "attachment_content_type"
     t.datetime "attachment_updated_at"
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.decimal  "amount",     precision: 10, scale: 2
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.text     "comment"
   end
 
   create_table "educations", force: :cascade do |t|
