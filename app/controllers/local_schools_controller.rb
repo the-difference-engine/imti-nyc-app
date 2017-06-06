@@ -15,10 +15,14 @@ class LocalSchoolsController < ApplicationController
 
   def update
     school = current_user.local_school
-    school.assign_attributes( contact_name: params[:contact_name],
-      school_address: params[:school_address], 
-      bio: params[:bio])
+    school.assign_attributes(school_params)
     school.save
     redirect_to "/local_schools"
+  end
+
+  private
+
+  def school_params
+    params.require(:local_school).permit(:contact_name, :school_address, :bio)
   end
 end
