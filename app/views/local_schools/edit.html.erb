@@ -1,7 +1,7 @@
 <div class="application">
   <h1>LOCAL SCHOOLS</h1>
 
-  <%= bootstrap_form_for (@school), :url => {:action => "update"} do |f| %>
+  <%= bootstrap_form_for(@school, :url => {:action => "update"}) do |f| %>
     <p><%= f.text_field :contact_name %></p>
     <p><%= f.text_field :school_address %></p>
     <p><%= f.text_field :bio %></p>
