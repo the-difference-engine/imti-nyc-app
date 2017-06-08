@@ -1,3 +1,7 @@
-<% @courses.each do |course| %>
-	<p><%= link_to( course.name, course_path(course.id)) %></p>
-<% end %>
+<div class="container coursesIndexContainer">
+<h1>These are the courses we're currently offering:</h1>
+<h4>Click on a course to see details</h4>
+	<% @courses.each do |course| %>
+		<p><%= link_to( course.name, course_path(course.id)) %></p>
+	<% end %>
+</div>

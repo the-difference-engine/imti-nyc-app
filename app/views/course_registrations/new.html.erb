@@ -5,27 +5,26 @@
 	</div>
 	<% end %>
 </article>
+<div class="container courseRegistrationsContainer">
+	<h1>Please select a course to register for:</h1>
 
-<h1>Please select a course to register for:</h1>
+	<%= form_tag course_registrations_path, id: "payment-form" do %>
 
-<%= form_tag course_registrations_path, id: "payment-form" do %>
+	<%= select("course", "course_id", Course.all.collect {|course| [ course.name + " - " + number_to_currency(course.price), course.id ] }) %>
+	<div class="form-row">
+		<label for="card-element">
+			Please enter your Credit or Debit card info:
+		</label>
+		<div id="card-element">
+			<!-- a Stripe Element will be inserted here. -->
+		</div>
 
-<%= select("course", "course_id", Course.all.collect {|course| [ course.name + " - " + number_to_currency(course.price), course.id ] }) %>
-<div class="form-row">
-	<label for="card-element">
-		Credit or debit card
-	</label>
-	<div id="card-element">
-		<!-- a Stripe Element will be inserted here. -->
+		<!-- Used to display Element errors -->
+		<div id="card-errors" role="alert"></div>
 	</div>
 
-	<!-- Used to display Element errors -->
-	<div id="card-errors" role="alert"></div>
+	<button class="btn btn-primary">Submit Payment</button>
+	<!-- </form> -->
+	<% end %>
 </div>
-
-<button>Submit Payment</button>
-<!-- </form> -->
-
-
-<% end %>
 
