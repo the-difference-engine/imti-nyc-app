@@ -40,7 +40,7 @@ class User < ApplicationRecord
   def self.import(file)
     spreadsheet = open_spreadsheet(file)
     spreadsheet.each do |row|
-      User.create(first_name: row[0], last_name: row[1], email: ActionView::Base.full_sanitizer.sanitize(row[2]), password: row[3], password_confirmation: row[4])
+      User.create(first_name: row[0], last_name: row[1], email: ActionView::Base.full_sanitizer.sanitize(row[2]), password: row[3], password_confirmation: row[4], course_id: row[5])
     end
   end
 
