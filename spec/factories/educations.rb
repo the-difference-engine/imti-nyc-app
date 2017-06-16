@@ -3,9 +3,7 @@ require 'date'
 FactoryGirl.define do
 
   factory :user do
-    # id {  }
-    email { Faker::Internet.email}
-    # encrypted_password { "wifnqwejvnew" }
+    email { Faker::Internet.email }
     password { "password" }
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
@@ -13,8 +11,6 @@ FactoryGirl.define do
 
   factory :application do
     association :user
-    # id { 5 }
-    # user_id { 5 }
     street { Faker::Address.street_address }
     city { Faker::Address.city }
     state { Faker::Address.state_abbr }
@@ -25,7 +21,6 @@ FactoryGirl.define do
 
   factory :education do
     association :application
-    # application_id { 5 }
     school { Faker::Educator.secondary_school }
     location { Faker::Educator.campus }
     start_date { Date.new(2001, 01, 01) }
@@ -37,7 +32,7 @@ FactoryGirl.define do
       application = build(:application)
       application.educations << education
       user = build(:user)
-      user.application = application 
+      user.application = application
     end 
   end
 end
