@@ -2,7 +2,7 @@ class ApplicationsController < ApplicationController
   def index
     @application = current_user.application
   end
-    
+
   def new
     @application = Application.new
   end
@@ -11,7 +11,7 @@ class ApplicationsController < ApplicationController
     @application = Application.new(application_params)
     if @application.save
       flash[:success] = "Application saved."
-      redirect_to  "/applications/#{@application.id}"
+      redirect_to "/applications/#{@application.id}"
     else
       flash[:danger] = @application.errors.full_messages
       render :new
@@ -71,14 +71,14 @@ class ApplicationsController < ApplicationController
 
   private
 
-  def user_params #strong params - disables postman as a way to bypass the system
+  def user_params # strong params - disables postman as a way to bypass the system
     params.require(:user).permit(:first_name, :last_name, :email, :middle_initial)
   end
 
   def application_params
-    params.require(:application).permit(:phone_number, :street, :city, 
-    :state, :zip_code, :country, :birth_place, :birth_date, 
-    :country_of_citizenship, :occupation, :name_of_spouse, 
+    params.require(:application).permit(:phone_number, :street, :city,
+    :state, :zip_code, :country, :birth_place, :birth_date,
+    :country_of_citizenship, :occupation, :name_of_spouse,
     :ages_of_children).merge(user_id: current_user.id)
   end
 end
