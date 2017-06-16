@@ -1,4 +1,12 @@
 FactoryGirl.define do
+  factory :user do 
+    first_name "John"
+     last_name "Smith"
+     email "js@email.com"
+     # course_id course.id
+     password "password"
+  end 
+
   factory :course do
     name "Summer"
     start_date "04/04/2017"
@@ -6,5 +14,10 @@ FactoryGirl.define do
     description "Summer class"
     price 400.00
     lecturer "John Doe"
+
+    # after(:build) do |course|
+    #   user = build(:user)
+    #   user.course = course
+    # end 
   end
 end
