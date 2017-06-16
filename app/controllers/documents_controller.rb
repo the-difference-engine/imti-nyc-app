@@ -4,6 +4,8 @@ class DocumentsController < ApplicationController
   def index
     @application = Application.find(params[:application_id])
     @documents = @application.documents
+    # @document = Document.find_by()
+    @document = Document.new
   end
 
   def new
