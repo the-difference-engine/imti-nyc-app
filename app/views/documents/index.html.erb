@@ -1,19 +1,44 @@
 <div class="application">
   <h1>SECTION F: DOCUMENTS</h1>
-  <p>Please see your attached transcripts, recommendations and/or references below.</p>
+  <!-- <p>Please see your attached transcripts, recommendations and/or references below.</p> -->
   <p><a href="/applications/<%= @application.id %>/documents/new">Add new document</a></p>
   <hr>
 
-  <% @documents.each do |document| %>
-    <% if document.category == 'passport_photo' %>
-      <img src="<%= document.attachment.url %>" alt="">
-    <% else %>
-      <p> Attachment name: <%= document.attachment_file_name %></p>
-    <% end %>
-    <p>Category: <%= document.category.humanize %></p>  
-    <p><%= link_to 'Edit document', "/applications/#{@application.id}/documents/#{document.id}/edit"%>
-    <hr>
+  <h3>You'll need the following:</h3>
+  <% document_lists.each do |document| %>
+  <p><%= document[0] %></p>
   <% end %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Document Name</th>
+        <th>Attachment</th>
+        <th class="upload">Upload</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% document_lists.each do |document| %>
+        <tr>
+          <%= form_for [@application, @document] do |f| %>
+          <td><%= document[0] %></td>
+          <% if @documents.find_by(category: document[1]) %>
+            <td><%= file_name(@documents, document[1]) %></td>
+          <% else %>
+            <td> </td>
+          <% end %>
+          <td>
+              <%= f.file_field :attachment %>
+              <%= f.hidden_field :category, value: document[1] %>
+              <%= f.submit :save %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <hr>
 
   <h3>Other Application Sections</h3>
   <p>Please double check all sections below to ensure that your application is accurate.</p>
