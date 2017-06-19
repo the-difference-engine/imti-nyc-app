@@ -4,10 +4,10 @@ FactoryGirl.define do
 p "defining user, education, and application factories"
 
   factory :user do
-    email "no@way.com"
+    sequence(:email) { |n| "johndoe#{n}@example.com"}
     password "jsrulez"
-    first_name "Putito"
-    last_name "Makiyo"
+    first_name Faker::Name.first_name
+    last_name Faker::Name.last_name
   end
 
   factory :education do
