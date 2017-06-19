@@ -1,7 +1,5 @@
 require "faker"
-
 FactoryGirl.define do
-
   factory :education do
     association :application
     school { Faker::Educator.secondary_school }

@@ -22,5 +22,10 @@ RSpec.describe Education, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to(:application) }
+    it "should be a valid factory" do
+      m = FactoryGirl.build(:education)
+      puts m
+      expect(m).to be_valid
+    end
   end
 end
