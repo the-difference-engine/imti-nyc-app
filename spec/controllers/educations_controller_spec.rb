@@ -1,25 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe EducationsController, type: :controller do
-<<<<<<< HEAD
   describe 'GET #index' do
     before :each do
       create(:user)
-      binding.pry
       @app = create(:application)
       @user = sign_in create(:user)
     end
 
-# describe '#type_id' do
-#   let(:resource) { FactoryGirl.create :device }
-#   let(:type)     { Type.find resource.type_id }
-
-#   it 'sets the type_id field' do
-#     expect(resource.type_id).to equal(type.id)
-#   end
-# end
-
-  context "signed in user"
+  context "signed in user" do
     it "can populate an array of all educations" do
       monte = create(:education, school: 'Monte', application_id: @app.id)
       sorri = create(:education, school: "Sorri", application_id: @app.id)
@@ -27,8 +16,9 @@ RSpec.describe EducationsController, type: :controller do
       get :index, params: {:application_id => @app}
       expect(assigns(:educations)).to match_array([monte, sorri, school])
     end
+  end
 
-  context "signed in user"
+  context "signed in user" do
     it "can render the :index template" do
       get :index, params: {:application_id => @app.id}
       expect(response).to render_template :index
@@ -76,7 +66,7 @@ RSpec.describe EducationsController, type: :controller do
       @app = create(:application)
       @user = sign_in create(:user)
     end
-    context 'with valid attributes'
+    context 'with valid attributes' do
       it 'saves an education to the database' do
         edu_params = FactoryGirl.attributes_for(:education)
         expect { post :create, params: {:education => edu_params, application_id: @app.id } }.to change(Education, :count).by(1)
@@ -87,7 +77,9 @@ RSpec.describe EducationsController, type: :controller do
         post :create, params: { :education => edu_params, application_id: @app.id }
         expect(response).to redirect_to application_educations_path
       end
-    context "with invalid attributes"
+    end
+
+    context "with invalid attributes" do
       it 'should list errors' do
         edu_params = FactoryGirl.attributes_for(:education, school: nil)
         post :create, params: { :education => edu_params, application_id: @app.id}
@@ -99,6 +91,7 @@ RSpec.describe EducationsController, type: :controller do
         post :create, params: { :education => edu_params, application_id: @app.id}
         expect(response).to render_template :new
       end
+    end
   end
 
   describe 'PATCH #update' do
@@ -108,7 +101,7 @@ RSpec.describe EducationsController, type: :controller do
       @education = create(:education)
     end
 
-    context 'valid attributes '
+    context 'valid attributes' do
       it 'locates requested @education ' do
         patch :update, params: { id: @education.id, application_id: @app.id, education: attributes_for(:education) }
         expect(assigns(:education)).to eq(@education)
@@ -124,8 +117,9 @@ RSpec.describe EducationsController, type: :controller do
         patch :update, params: { id: @education.id, application_id: @app.id, education: attributes_for(:education) }
         expect(response).to redirect_to application_educations_path
       end
+    end
 
-    context 'with unvalid attributes '
+    context 'with unvalid attributes' do
       it 'does not change the education attributes' do
         patch :update, params: {id: @education.id, application_id: @app.id, education:attributes_for(:education, school: nil)}
         @education.reload
@@ -136,8 +130,6 @@ RSpec.describe EducationsController, type: :controller do
         patch :update, params: { id: @education.id, application_id: @app.id, education: attributes_for(:education, school: nil) }
         expect(response).to render_template :edit
       end
+    end
   end
-=======
-
->>>>>>> Add factorygirl syntax to spec/support/factory_girl.rb. Require support/factorygirl.rb to rails_helper.rb. Add user, education, application factories to factories/educations.rb. Add first factory validation test to education_spec.rb
 end
