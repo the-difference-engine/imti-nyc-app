@@ -12,14 +12,41 @@ RSpec.describe Education, type: :model do
     expect(app).to be_valid
   end
 
-  it "should have a pretty_date automatically without calling pretty_date" do
-    edu = FactoryGirl.build(:education)
-    expect(edu.start_date).to eq 'Thu, 08 Jun 2017 19:36:36 UTC +00:00'
-  end
+  describe "test validations" do
+    it "should return error if start date is nil" do
+      education = FactoryGirl.build(:education, start_date: nil)
+      education.valid?
+      expect(education.errors[:start_date]).to include("can't be blank")
+    end
 
-  it "should have a different date if pretty_date is called on the date" do
-    edu = FactoryGirl.build(:education)
-    expect(edu.start_date.to_s).not_to eq "06/08/2017"
-  end
+    it "should return error if school is nil" do
+      education = FactoryGirl.build(:education, school: nil)
+      education.valid?
+      expect(education.errors[:school]).to include("can't be blank")
+    end
 
+    it "should return error if location is nil" do
+      education = FactoryGirl.build(:education, location: nil)
+      education.valid?
+      expect(education.errors[:location]).to include("can't be blank")
+    end
+
+    it "should return error if end date is nil" do
+      education = FactoryGirl.build(:education, end_date: nil)
+      education.valid?
+      expect(education.errors[:end_date]).to include("can't be blank")
+    end
+
+    it "should return error if degree is nil" do
+      education = FactoryGirl.build(:education, degree: nil)
+      education.valid?
+      expect(education.errors[:degree]).to include("can't be blank")
+    end
+
+    it "should return error if degree date is nil" do
+      education = FactoryGirl.build(:education, degree_date: nil)
+      education.valid?
+      expect(education.errors[:degree_date]).to include("can't be blank")
+    end
+  end
 end
