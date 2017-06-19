@@ -1,7 +1,7 @@
 class LocalSchool < ApplicationRecord
   has_many :users
-  validates :code, uniqueness: true, allow_nil: true 
-  after_create :generate_code 
+  validates :code, uniqueness: true, allow_nil: true
+  after_create :generate_code
 
   private
 

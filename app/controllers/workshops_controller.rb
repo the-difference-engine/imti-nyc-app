@@ -12,7 +12,7 @@ class WorkshopsController < ApplicationController
 
   def create
     @workshop = Workshop.new(workshops_params)
-    @workshop.save 
+    @workshop.save
     redirect_to "/workshops"
   end
 
