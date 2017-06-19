@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe EducationsController, type: :controller do
+<<<<<<< HEAD
   describe 'GET #index' do
     before :each do
       create(:user)
@@ -136,4 +137,7 @@ RSpec.describe EducationsController, type: :controller do
         expect(response).to render_template :edit
       end
   end
+=======
+
+>>>>>>> Add factorygirl syntax to spec/support/factory_girl.rb. Require support/factorygirl.rb to rails_helper.rb. Add user, education, application factories to factories/educations.rb. Add first factory validation test to education_spec.rb
 end
