@@ -25,7 +25,7 @@ class StudentProfilesController < ApplicationController
     @student = current_user
   end
 
-  private 
+  private
 
   def user_params
     params.permit(:first_name, :middle_initial, :last_name)
