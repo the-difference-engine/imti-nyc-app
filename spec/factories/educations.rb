@@ -1,3 +1,4 @@
+require "faker"
 FactoryGirl.define do
 
 p "defining user, education, and application factories"
@@ -11,8 +12,8 @@ p "defining user, education, and application factories"
 
   factory :education do
     association :application
-    school "My School"
-    location "No where"
+    school Faker::Educator.secondary_school
+    location Faker::Address.state
     start_date "2017-06-8 19:36:36"
     end_date "2017-06-10 19:36:36"
     degree "Being so rad"
@@ -21,12 +22,12 @@ p "defining user, education, and application factories"
 
   factory :application do
     association :user
-    street "williams st"
-    city "williamsburg"
-    state "New York"
-    country "USA"
-    zip_code "11206"
-    phone_number "111-234-2835"
+    street Faker::Address.street_address
+    city Faker::Address.city
+    state Faker::Address.state
+    country Faker::Address.country
+    zip_code Faker::Address.zip
+    phone_number Faker::PhoneNumber.cell_phone
     payment_status true
     background_check true
     application_status "complete"
@@ -34,11 +35,11 @@ p "defining user, education, and application factories"
     health_form "sdvzxcvcxz"
     personal_essay "dsvzxcvzxc"
     toefl_score "345"
-    name_of_spouse "Milly Molly"
-    birth_place "Washington DC"
+    name_of_spouse Faker::Name.name
+    birth_place Faker::Address.city
     birth_date "1998-06-8 19:36:36"
-    country_of_citizenship "USA"
-    occupation "Teacher"
+    country_of_citizenship Faker::Address.country
+    occupation "teacher"
     ages_of_children "2"
   end
 end
