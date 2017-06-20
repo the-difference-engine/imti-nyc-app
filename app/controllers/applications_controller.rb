@@ -20,7 +20,33 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
+    @amount = current_user.domestic_applicant? ? 50 : 75;
     render :show
+  end
+
+  def payment
+    amount = current_user.domestic_applicant? ? 50 : 75;
+    application = Application.find(params[:application_id])
+    customer = Stripe::Customer.create(
+      :email => current_user.email,
+      :source  => params[:stripeToken]
+      )
+
+    charge = Stripe::Charge.create(
+      :customer    => customer.id,
+      :amount      => amount * 100,
+      :description => "Application fee",
+      :currency    => 'usd'
+      )
+
+    new_charge = current_user.charges.create(uid: charge.id, amount: amount, description: charge.description, customer_id: customer.id)
+    application.update(payment_status: true)
+    flash[:success] = "Thank you for your payment."
+    redirect_to application_path(application.id)
+
+    rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to "/applications/show"
   end
 
   def edit
