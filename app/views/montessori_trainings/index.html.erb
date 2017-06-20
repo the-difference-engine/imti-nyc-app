@@ -9,7 +9,7 @@
     <p>Location: <%= montessori_training.location %></p>
     <p>Diploma: <%= montessori_training.diploma %></p>
     <p>Degree: <%= montessori_training.degree %></p>
-    <p>Degree date: <%= montessori_training.pretty_date(montessori_training.degree_date) %></p>
+    <p>Degree date: <%= montessori_training.pretty_date %></p>
     <p><%= link_to 'Edit montessori training', "/applications/#{@application.id}/montessori_trainings/#{montessori_training.id}/edit"%>
     <hr>
   <% end %>
