@@ -7,4 +7,3 @@ RSpec.describe Reference, type: :model do
     end
   end
 end
-
