@@ -39,6 +39,43 @@ understand my failure to provide complete, accurate and truthful information on 
 will be grounds to deny or withdraw my admission or dismiss me after enrollment.</p>
   
   
-  <a href="/charges/new" > pay</a>
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payModal">
+    Pay Application Fee
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Credit card information</h4>
+        </div>
+        <div class="modal-body">
+          <%= form_tag application_payment_path(params[:id]), method: :put, id: "payment-form" do %>
+
+          <div class="form-row">
+            <label for="card-element">
+              Please enter your Credit or Debit card information:
+            </label>
+            <p>Application Fee: $<%= @amount %></p>
+            <div id="card-element">
+              <!-- a Stripe Element will be inserted here. -->
+            </div>
+
+            <!-- Used to display Element errors -->
+            <div id="card-errors" role="alert"></div>
+          </div>
+          <input type="hidden" name="application_id" value="<%= params[:id] %>">
+
+          <button class="btn btn-primary">Submit Payment</button>
+          <!-- </form> -->
+          <% end %>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
   
 </div>
