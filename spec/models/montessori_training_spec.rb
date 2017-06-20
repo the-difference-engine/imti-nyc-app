@@ -34,4 +34,3 @@ describe MontessoriTraining do
     expect(montessori_training.pretty_date).to eq("06/19/2016")
   end
 end
-
