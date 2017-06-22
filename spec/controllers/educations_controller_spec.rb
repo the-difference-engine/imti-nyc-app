@@ -1,7 +1,6 @@
 require 'rails_helper'
 require 'pry'
 RSpec.describe EducationsController, type: :controller do
-
   describe 'GET #index' do
     before :each do
       @app = create(:application, id: 1)
@@ -13,7 +12,6 @@ RSpec.describe EducationsController, type: :controller do
       monte = create(:education, school: 'Monte', application_id: @app.id)
       sorri = create(:education, school: "Sorri", application_id: @app.id)
       school = create(:education, school: "the school", application_id: @app.id)
-
       get :index, {:application_id => @app, :user_id => @user}
       expect(assigns(:educations)).to match_array([monte, sorri, school])
     end
@@ -40,5 +38,42 @@ RSpec.describe EducationsController, type: :controller do
       get :new, {:application_id => @app.id}
       expect(response).to render_template :new
     end
+  end
+
+  describe 'GET #edit' do
+    before :each do 
+      @app = create(:application, id: 1)
+      @user = sign_in create(:user)
+    end
+
+    it 'assigns the requested Education to @education' do
+      edu = create(:education)
+      get :edit, {id: edu.id, :application_id => @app.id}
+      expect(assigns(:education)).to eq edu
+    end
+
+    it 'renders the :edit template' do
+      edu = create(:education)
+      get :edit, {id: edu.id, :application_id => @app.id}
+      expect(response).to render_template :edit
+    end
+  end
+
+  describe 'POST #create' do
+    before :each do 
+      @app = create(:application, id: 1)
+      @user = sign_in create(:user)
+    end
+    context 'with valid attributes'
+      it 'saves an education to the database' do
+        edu_params = FactoryGirl.attributes_for(:education)
+        expect { post :create, :education => edu_params, application_id: @app.id }.to change(Education, :count).by(1)
+      end 
+
+      # it 'should redirect to application_educations_path with successful save' do
+      #   edu_params = FactoryGirl.attributes_for(:education)
+      #   post :create, :education => edu_params, application_id: 1 
+      #   expect(response).to redirect_to application_educations_path(assigns[:education])
+      # end
   end
 end
