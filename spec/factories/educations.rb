@@ -1,8 +1,6 @@
 require "faker"
 FactoryGirl.define do
-
-p "defining user, education, and application factories"
-
+    
   factory :user do
     sequence(:email) { |n| "johndoe#{n}@example.com"}
     password "jsrulez"
