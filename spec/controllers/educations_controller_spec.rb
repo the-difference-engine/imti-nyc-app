@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 RSpec.describe EducationsController, type: :controller do
   describe 'GET #index' do
     before :each do
@@ -8,20 +7,24 @@ RSpec.describe EducationsController, type: :controller do
       @user = sign_in create(:user)
     end
 
-  context "signed in user" do
-    it "can populate an array of all educations" do
-      monte = create(:education, school: 'Monte', application_id: @app.id)
-      sorri = create(:education, school: "Sorri", application_id: @app.id)
-      school = create(:education, school: "the school", application_id: @app.id)
-      get :index, params: {:application_id => @app}
-      expect(assigns(:educations)).to match_array([monte, sorri, school])
+    context "signed in user" do
+      it "can populate an array of all educations" do
+        monte = create(:education, school: 'Monte', application_id: @app.id)
+        sorri = create(:education, school: "Sorri", application_id: @app.id)
+        school = create(:education, school: "the school", application_id: @app.id)
+        get :index, params: {:application_id => @app}
+        expect(assigns(:educations)).to match_array([monte, sorri, school])
+      end
     end
-  end
 
-  context "signed in user" do
-    it "can render the :index template" do
-      get :index, params: {:application_id => @app.id}
-      expect(response).to render_template :index
+    context "signed in user" do
+      it "can render the :index template" do
+        get :index, params: {:application_id => @app.id}
+        expect(response).to render_template :index
+
+        get :index, {:application_id => @app, :user_id => @user}
+        expect(assigns(:educations)).to match_array([monte, sorri, school])
+      end
     end
   end
 
@@ -129,6 +132,13 @@ RSpec.describe EducationsController, type: :controller do
       it 'should render the :edit template ' do
         patch :update, params: { id: @education.id, application_id: @app.id, education: attributes_for(:education, school: nil) }
         expect(response).to render_template :edit
+      end
+    end
+
+    context "signed in user" do
+      it "can render the :index template" do
+        get :index, {:application_id => @app.id}
+        expect(response).to render_template :index
       end
     end
   end
