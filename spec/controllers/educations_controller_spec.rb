@@ -24,4 +24,15 @@ RSpec.describe EducationsController, type: :controller do
       expect(response).to render_template :index
     end
   end
+
+  describe 'GET #new' do
+    before :each do 
+      @app = create(:application, id: 1)
+      @user = sign_in create(:user)
+    end
+    it 'assigns a new Education to @education' do
+      get :new, {:application_id => @app.id}
+      expect(assigns(:education)).to be_a_new(Education)
+    end
+  end
 end
