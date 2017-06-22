@@ -12,12 +12,10 @@ RSpec.describe EducationsController, type: :controller do
         monte = create(:education, school: 'Monte', application_id: @app.id)
         sorri = create(:education, school: "Sorri", application_id: @app.id)
         school = create(:education, school: "the school", application_id: @app.id)
-        get :index, params: {:application_id => @app}
+        get :index, {:application_id => @app, :user_id => @user}
         expect(assigns(:educations)).to match_array([monte, sorri, school])
       end
-    end
 
-    context "signed in user" do
       it "can render the :index template" do
         get :index, params: {:application_id => @app.id}
         expect(response).to render_template :index
@@ -47,13 +45,13 @@ RSpec.describe EducationsController, type: :controller do
 
   describe 'GET #edit' do
     before :each do
-      @app = create(:application)
+      @app = create(:application, id: 1)
       @user = sign_in create(:user)
     end
 
     it 'assigns the requested Education to @education' do
       edu = create(:education)
-      get :edit, params: {id: edu.id, :application_id => @app.id}
+      get :edit, {id: edu.id, :application_id => @app.id}
       expect(assigns(:education)).to eq edu
     end
 
@@ -139,6 +137,13 @@ RSpec.describe EducationsController, type: :controller do
       it "can render the :index template" do
         get :index, {:application_id => @app.id}
         expect(response).to render_template :index
+      end
+    end
+
+    context 'with valid attributes' do
+      it 'saves an education to the database' do
+        edu_params = FactoryGirl.attributes_for(:education)
+        expect { post :create, :education => edu_params, application_id: @app.id }.to change(Education, :count).by(1)
       end
     end
   end
