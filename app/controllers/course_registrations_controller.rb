@@ -1,4 +1,5 @@
 class CourseRegistrationsController < ApplicationController
+
   def new
     @courses = Course.all
   end
