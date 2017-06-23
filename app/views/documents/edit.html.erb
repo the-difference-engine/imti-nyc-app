@@ -1,11 +1,14 @@
 <div class="application">
   <h1>SECTION F: DOCUMENTS</h1>
-  <p>Please edit your document below.</p>
-
+  <hr>
+  
   <%= bootstrap_form_for [@application, @document], :url => {:action => "update"} do |f| %>
-    <p><%= f.text_field :attachment %></p>
-    <p><%= f.select :category, [['transcript'], ['recommendation'], ['resume']] %></p>
-    <p><%= f.submit :save %></p>
+    <h4>Currently Uploaded:</h4>
+    <p><%= @document.attachment_file_name %></p>
+    <hr>
+    <p><%= f.file_field :attachment %></p>
+    <hr>
+    <p><%= f.submit :Update %></p>
   <% end %>
 
   <p><%= link_to 'Cancel', "/applications/#{@application.id}/documents"%>
