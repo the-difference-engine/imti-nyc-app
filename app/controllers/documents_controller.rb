@@ -3,11 +3,26 @@ class DocumentsController < ApplicationController
   
   def index
     @application = Application.find(params[:application_id])
-    @documents = @application.documents
-    # @document = Document.find_by()
-    @document = Document.new
+    @documents = []
+
+    document_lists.each do |name, key|
+      document_info = {}
+      document_info[:name] = name
+      document_info[:key_name] = key
+      if @application.documents.find_by(category: key)
+        document_info[:attachment] = file_name(@application.documents, key)
+        document_info[:document_id] = Document.find_by(application_id: @application.id, category: key).id
+        @document = Document.find_by(application_id: @application.id, category: key)
+      else
+        @document = Document.new
+      end
+      @documents << document_info
+    end
+    p '-' * 100
+    p @documents
   end
 
+  # No longer need this page?
   def new
     @application = Application.find(params[:application_id])
     @document = Document.new
@@ -42,7 +57,7 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     if @document.update(document_params)
       flash[:success] = "Document updated."
-      redirect_to application_documents_path(@document.id)
+      redirect_to application_documents_path(@document[:application_id])
     else
       flash[:danger] = @document.errors.full_messages
       render :edit
@@ -54,5 +69,4 @@ class DocumentsController < ApplicationController
   def document_params
     params.require(:document).permit(:attachment, :category).merge(application_id: params[:application_id])
   end
-
 end

@@ -1,13 +1,6 @@
 <div class="application">
   <h1>SECTION F: DOCUMENTS</h1>
-  <!-- <p>Please see your attached transcripts, recommendations and/or references below.</p> -->
-  <p><a href="/applications/<%= @application.id %>/documents/new">Add new document</a></p>
   <hr>
-
-  <h3>You'll need the following:</h3>
-  <% document_lists.each do |document| %>
-  <p><%= document[0] %></p>
-  <% end %>
 
   <table>
     <thead>
@@ -18,21 +11,27 @@
       </tr>
     </thead>
     <tbody>
-      <% document_lists.each do |document| %>
+      <% @documents.each do |document| %>
         <tr>
-          <%= form_for [@application, @document] do |f| %>
-          <td><%= document[0] %></td>
-          <% if @documents.find_by(category: document[1]) %>
-            <td><%= file_name(@documents, document[1]) %></td>
+          <td><%= document[:name] %></td>
+          <td><%= document[:attachment] %></td>
+          <% if document[:attachment] %>
+            <td>
+              <%= form_for [@application, @document], :url => "/applications/2/documents/#{document[:document_id]}", :method => :patch do |f| %>
+                <%= f.file_field :attachment %>
+                <%= f.hidden_field :document_id, value: document[:document_id] %>
+                <%= f.submit :Save %>
+              <% end %>
+            </td>
           <% else %>
-            <td> </td>
+            <td>
+              <%= form_for [@application, @document] do |f| %>
+                <%= f.file_field :attachment %>
+                <%= f.hidden_field :category, value: document[:key_name] %>
+                <%= f.submit :Save %>
+              <% end %>
+            </td>
           <% end %>
-          <td>
-              <%= f.file_field :attachment %>
-              <%= f.hidden_field :category, value: document[1] %>
-              <%= f.submit :save %>
-            <% end %>
-          </td>
         </tr>
       <% end %>
     </tbody>
