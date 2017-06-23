@@ -61,7 +61,7 @@ RSpec.describe EducationsController, type: :controller do
 
   describe 'POST #create' do
     before :each do 
-      @app = create(:application, id: 1)
+      @app = create(:application, id: 487)
       @user = sign_in create(:user)
     end
     context 'with valid attributes'
@@ -70,10 +70,12 @@ RSpec.describe EducationsController, type: :controller do
         expect { post :create, :education => edu_params, application_id: @app.id }.to change(Education, :count).by(1)
       end 
 
-      # it 'should redirect to application_educations_path with successful save' do
-      #   edu_params = FactoryGirl.attributes_for(:education)
-      #   post :create, :education => edu_params, application_id: 1 
-      #   expect(response).to redirect_to application_educations_path(assigns[:education])
-      # end
+      it 'should redirect to application_educations_path with successful save' do
+        edu_params = FactoryGirl.attributes_for(:education)
+        add = {:application_id=> 99}
+        edu_params.merge!(add)
+        post :create, :education => edu_params, application_id: @app.id
+        expect(response).to redirect_to application_educations_path
+      end
   end
 end
