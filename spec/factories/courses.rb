@@ -3,7 +3,6 @@ FactoryGirl.define do
     first_name "John"
      last_name "Smith"
      email "js@email.com"
-     # course_id course.id
      password "password"
   end 
 <<<<<<< HEAD
@@ -16,11 +15,6 @@ FactoryGirl.define do
     description "Summer class"
     price 400.00
     lecturer "John Doe"
-
-    # after(:build) do |course|
-    #   user = build(:user)
-    #   user.course = course
-    # end 
   end
 >>>>>>> Add user association test, delete course_registration model
 end
