@@ -33,6 +33,6 @@ FactoryGirl.define do
       application.educations << education
       user = build(:user)
       user.application = application
-    end 
+    end
   end
 end
