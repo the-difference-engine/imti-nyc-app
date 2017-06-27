@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Education, type: :model do
-
   it "Education model should have a valid factory with faker" do
     edu = FactoryGirl.build(:education)
     expect(edu).to be_valid
