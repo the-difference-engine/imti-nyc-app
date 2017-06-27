@@ -1,6 +1,5 @@
 class Application < ApplicationRecord
-  # validates :phone_number, :street, :city, :state, :zip_code, :country, :birth_place, :birth_date,
-  #           :country_of_citizenship, :occupation, presence: true
+  validates :phone_number, :street, :city, :state, :zip_code, :country, :birth_place, :birth_date, :country_of_citizenship, :occupation, presence: true
   has_many :transcripts, -> { where 'category = transcript' }, class_name: 'Document'
   has_many :recommendations, -> { where 'category = recommendation' }, class_name: 'Document'
   has_many :resumes, -> { where 'category = resume' }, class_name: 'Document'
