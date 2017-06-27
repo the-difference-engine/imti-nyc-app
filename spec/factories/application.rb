@@ -3,7 +3,7 @@ require 'date'
 FactoryGirl.define do
   factory :user do
     email { Faker::Internet.email }
-    password { "password" }
+    password { 'password' }
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
   end
@@ -52,11 +52,10 @@ FactoryGirl.define do
 
   # # unused work experience
   # factory :work_experience do
-  #   association :application   
+  #   association :application
   #   employer { Faker::Company.name }
   #   occupation { Faker::Company.profession }
   #   start_date { Date.new(2016, 01, 01) }
   #   end_date { Date.new(2017, 01, 01) }
   # end
-
 end

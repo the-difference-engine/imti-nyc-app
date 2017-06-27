@@ -24,5 +24,4 @@ class Application < ApplicationRecord
       date.strftime("%m/%d/%Y")
     end
   end
-
 end
