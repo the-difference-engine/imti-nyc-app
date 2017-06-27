@@ -1,7 +1,7 @@
 class WorkExperiencesController < ApplicationController
   def index
     @application = Application.find(params[:application_id])
-    @work_experience = @application.work_experiences
+    @work_experiences = @application.work_experiences
   end
 
   def new
