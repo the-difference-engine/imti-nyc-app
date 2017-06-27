@@ -4,7 +4,7 @@
   <p><a href="/applications/<%= @application.id %>/work_experiences/new">Add new work experience</a></p>
   <hr>
 
-  <% @work_experience.each do |work| %>
+  <% @work_experiences.each do |work| %>
     <p>Name: <%= work.employer %></p>
     <p>Occupation: <%= work.occupation %></p>
     <p>Start Date: <%= work.pretty_start_date %></p>
