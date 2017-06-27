@@ -4,7 +4,7 @@ FactoryGirl.define do
 
   factory :user do
     email { Faker::Internet.email }
-    password { "password" }
+    password { 'password' }
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
   end
@@ -23,5 +23,4 @@ FactoryGirl.define do
     country_of_citizenship { Faker::Address.country }
     occupation { Faker::Job.title }
   end
-
 end
