@@ -34,4 +34,10 @@ RSpec.describe Application, type: :model do
     it { should have_one(:student_visa) }
   end
 
+  describe 'converts date to strftime' do
+    application = FactoryGirl.build(:application)
+    it 'should convert birth date to strftime' do
+      expect(application.pretty_date(application.birth_date)).to eq '01/01/2001'
+    end
+  end
 end
