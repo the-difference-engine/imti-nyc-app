@@ -1,7 +1,7 @@
 <div class="application">
   <h1>SECTION C: MONTESSORI TRAINING</h1>
-  <p>Please see your previous montessori training experience(s) below.</p>
-  <p><a href="/applications/<%= @application.id %>/montessori_trainings/new">Add new montessori training</a></p>
+  <p>Please see your previous Montessori training experience(s) below.</p>
+  <p><a href="/applications/<%= @application.id %>/montessori_trainings/new">Add new Montessori training</a></p>
   <hr>
 
   <% @montessori_trainings.each do |montessori_training| %>
@@ -10,7 +10,7 @@
     <p>Diploma: <%= montessori_training.diploma %></p>
     <p>Degree: <%= montessori_training.degree %></p>
     <p>Degree date: <%= montessori_training.pretty_date(montessori_training.degree_date) %></p>
-    <p><%= link_to 'Edit montessori training', "/applications/#{@application.id}/montessori_trainings/#{montessori_training.id}/edit"%>
+    <p><%= link_to 'Edit Montessori training', "/applications/#{@application.id}/montessori_trainings/#{montessori_training.id}/edit"%>
     <hr>
   <% end %>
 
