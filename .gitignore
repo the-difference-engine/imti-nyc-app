@@ -9,7 +9,7 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
-/tmp/*
+/tmp/*  
 !/log/.keep
 !/tmp/.keep
 
@@ -22,4 +22,7 @@
 # Ignore .env files
 .env
 /public/system
+
+# Ignore simplecov
+coverage
 
