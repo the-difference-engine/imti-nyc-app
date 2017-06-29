@@ -43,7 +43,6 @@ gem 'rails-erd'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
 group :development, :test do
   gem 'pry-rails'
   gem 'dotenv-rails'
