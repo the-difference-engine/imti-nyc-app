@@ -18,14 +18,6 @@ class DocumentsController < ApplicationController
       end
       @documents << document_info
     end
-    p '-' * 100
-    p @documents
-  end
-
-  # No longer need this page?
-  def new
-    @application = Application.find(params[:application_id])
-    @document = Document.new
   end
   
   #imtinyc@gmail.com is the public e-mail 
@@ -43,12 +35,7 @@ class DocumentsController < ApplicationController
       render :new
     end
   end
-
-  def edit
-    @application = Application.find(params[:application_id])
-    @document = Document.find(params[:id])
-  end
-
+  
   def update
     @document = Document.find(params[:id])
     if @document.update(document_params)
