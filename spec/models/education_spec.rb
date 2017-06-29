@@ -11,9 +11,9 @@ RSpec.describe Education, type: :model do
       expect(education.pretty_date(education.start_date)).to eq '01/01/2001'
     end
 
-    it 'converts education end date to strftime' do
-      expect(education.pretty_date(education.end_date)).to eq '05/30/2008'
-    end
+    # it 'converts education end date to strftime' do
+    #   expect(education.pretty_date(education.end_date)).to eq '05/30/2008'
+    # end
   end
 
   describe 'data validations' do
