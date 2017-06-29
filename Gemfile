@@ -59,7 +59,7 @@ group :development do
 end
 
 group :test do
-  gem "faker"
+  gem 'simplecov', :require => false
   gem "database_cleaner"
 end
 
