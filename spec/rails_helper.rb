@@ -32,9 +32,7 @@ RSpec.configure do |config|
   config.include ApplicationHelper
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  
-  #config for 
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # Devise helper
   config.include Devise::Test::ControllerHelpers, type: :controller
