@@ -7,6 +7,15 @@ RSpec.describe EducationsController, type: :controller do
       @user = sign_in create(:user)
     end
 
+# describe '#type_id' do
+#   let(:resource) { FactoryGirl.create :device }
+#   let(:type)     { Type.find resource.type_id }
+
+#   it 'sets the type_id field' do
+#     expect(resource.type_id).to equal(type.id)
+#   end
+# end
+
   context "signed in user"
     it "can populate an array of all educations" do
       monte = create(:education, school: 'Monte', application_id: @app.id)
@@ -74,6 +83,18 @@ RSpec.describe EducationsController, type: :controller do
         edu_params = FactoryGirl.attributes_for(:education)
         post :create, params: { :education => edu_params, application_id: @app.id } 
         expect(response).to redirect_to application_educations_path
+      end
+    context "with invalid attributes"
+      it 'should list errors' do
+        edu_params = FactoryGirl.attributes_for(:education, school: nil)
+        post :create, params: { :education => edu_params, application_id: @app.id}
+        expect(response.request.flash[:danger]).to_not be_nil
+      end
+
+      it 'should render :new template' do
+        edu_params = FactoryGirl.attributes_for(:education, school: nil)
+        post :create, params: { :education => edu_params, application_id: @app.id}
+        expect(response).to render_template :new
       end
   end
 
