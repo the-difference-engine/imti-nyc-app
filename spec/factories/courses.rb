@@ -5,6 +5,6 @@ FactoryGirl.define do
     end_date "06/06/2017"
     description "Summer class"
     price 400.00
-    lecturer "John Doe"
+    lecturer Faker::Name.name
   end
 end
