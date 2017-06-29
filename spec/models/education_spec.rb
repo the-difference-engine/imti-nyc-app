@@ -16,41 +16,16 @@ RSpec.describe Education, type: :model do
     end
   end
 
-  describe 'test validations' do
-    it 'returns an error if start date is nil' do
-      education = FactoryGirl.build(:education, start_date: nil)
-      education.valid?
-      expect(education.errors[:start_date]).to include("can't be blank")
-    end
+  describe 'data validations' do
+    it { is_expected.to validate_presence_of(:start_date) }
+    it { is_expected.to validate_presence_of(:school) }
+    it { is_expected.to validate_presence_of(:location) }
+    it { is_expected.to validate_presence_of(:end_date) }
+    it { is_expected.to validate_presence_of(:degree) }
+    it { is_expected.to validate_presence_of(:degree_date) }
+  end
 
-    it 'returns an error if school is nil' do
-      education = FactoryGirl.build(:education, school: nil)
-      education.valid?
-      expect(education.errors[:school]).to include("can't be blank")
-    end
-
-    it 'returns an error if location is nil' do
-      education = FactoryGirl.build(:education, location: nil)
-      education.valid?
-      expect(education.errors[:location]).to include("can't be blank")
-    end
-
-    it 'returns an error if end date is nil' do
-      education = FactoryGirl.build(:education, end_date: nil)
-      education.valid?
-      expect(education.errors[:end_date]).to include("can't be blank")
-    end
-
-    it 'returns an error if degree is nil' do
-      education = FactoryGirl.build(:education, degree: nil)
-      education.valid?
-      expect(education.errors[:degree]).to include("can't be blank")
-    end
-
-    it 'returns an error if degree date is nil' do
-      education = FactoryGirl.build(:education, degree_date: nil)
-      education.valid?
-      expect(education.errors[:degree_date]).to include("can't be blank")
-    end
+  describe 'associations' do
+    it { is_expected.to belong_to(:application) }
   end
 end

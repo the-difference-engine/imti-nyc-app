@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Application, type: :model do
+  it 'has a valid factory' do
+    expect(FactoryGirl.build(:application)).to be_valid
+  end
+
   describe 'data validations' do
     it { is_expected.to validate_presence_of(:street) }
     it { is_expected.to validate_presence_of(:phone_number) }
@@ -14,11 +18,8 @@ RSpec.describe Application, type: :model do
     it { is_expected.to validate_presence_of(:occupation) }
   end
 
-  describe 'belongs_to' do
+  describe 'associations' do
     it { is_expected.to belong_to(:user) }
-  end
-
-  describe 'has_many/has_one' do
     it { is_expected.to have_many(:references) }
     it { is_expected.to have_many(:educations) }
     it { is_expected.to have_many(:montessori_trainings) }
