@@ -22,3 +22,5 @@
 # Ignore .env files
 .env
 /public/system
+
+/coverage/*
