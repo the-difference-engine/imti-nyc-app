@@ -35,4 +35,5 @@ Rails.application.routes.draw do
   resources :charges
   resources :courses
   resources :course_registrations
+  get "/check_app" => 'sessions#destroy'
 end
