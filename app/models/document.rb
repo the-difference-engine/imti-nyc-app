@@ -7,6 +7,4 @@ class Document < ApplicationRecord
   validates :attachment_file_name, presence: true
 
   validates :category, inclusion: { in: ['health_form', 'personal_essay', 'recommendation', 'resume', 'toefl_ielts_score_report', 'transcript', 'wes_evaluation', 'contract', 'student_visa', 'passport_photo'] }
-
-  validates :attachment_file_size, numericality: { greater_than: 0 }
 end
