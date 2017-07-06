@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Charge, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
   it "is valid with a uid, amount, and customer_id" do
     charge = Charge.new(
       uid: "Bob",
@@ -40,15 +39,4 @@ RSpec.describe Charge, type: :model do
     charge.valid?
     expect(charge).to be_valid
   end
-
-  # it "is valid with an associated user_id" do
-  #   charge = Charge.new(
-  #     user_id: 2,
-  #     uid: "Bob",
-  #     amount: 2.00,
-  #     customer_id: 1
-  #   )
-  #   charge.valid?
-  #   expect(charge).to be_valid
-  # end
 end
