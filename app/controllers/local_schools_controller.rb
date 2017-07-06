@@ -3,21 +3,19 @@ class LocalSchoolsController < ApplicationController
     @school = current_user.local_school
   end
 
-  def new
-  end
-
-  def create
-  end
-
   def edit
     @school = current_user.local_school
   end
 
   def update
-    school = current_user.local_school
-    school.assign_attributes(school_params)
-    school.save
-    redirect_to "/local_schools"
+    @local_school = LocalSchool.find(params[:id])
+    if @local_school.update(school_params)
+      flash[:success] = "Local school updated"
+      redirect_to "/local_schools"
+    else
+      flash[:danger] = @local_school.errors.full_messages
+      render :edit
+    end
   end
 
   private
