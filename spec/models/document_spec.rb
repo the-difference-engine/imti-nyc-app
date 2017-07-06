@@ -23,12 +23,6 @@ RSpec.describe Document, type: :model do
     expect(document).to be_valid
   end
 
-  it "can't have a file size zero or below" do
-    document = FactoryGirl.create(:document)
-    document.attachment_file_size = 0
-    expect(document).to_not be_valid
-  end
-
   it "should be the correct file type" do
     document = FactoryGirl.create(:document)
     document.attachment_content_type = "application/pdf"
