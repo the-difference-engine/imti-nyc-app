@@ -60,9 +60,12 @@ GEM
     bootstrap_form (2.7.0)
     builder (3.2.3)
 <<<<<<< HEAD
+<<<<<<< HEAD
     climate_control (0.2.0)
 =======
     choice (0.2.0)
+=======
+>>>>>>> Remove unnecessary gems
     climate_control (0.1.0)
 >>>>>>> add gems xiao taught us
     cocaine (0.5.8)
@@ -181,12 +184,15 @@ GEM
     rails-dom-testing (2.0.2)
       activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6)
+<<<<<<< HEAD
     rails-erd (1.5.2)
       activerecord (>= 3.2)
       activesupport (>= 3.2)
       choice (~> 0.2.0)
       ruby-graphviz (~> 1.2)
 >>>>>>> add gems xiao taught us
+=======
+>>>>>>> Remove unnecessary gems
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
     railties (5.0.4)
@@ -233,8 +239,11 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+<<<<<<< HEAD
     ruby-graphviz (1.2.3)
 >>>>>>> add gems xiao taught us
+=======
+>>>>>>> Remove unnecessary gems
     rubyzip (1.2.1)
     sass (3.5.1)
       sass-listen (~> 4.0.0)
@@ -313,13 +322,15 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.1)
 <<<<<<< HEAD
+<<<<<<< HEAD
   rails-controller-testing
 =======
   rails-erd
 >>>>>>> add gems xiao taught us
+=======
+>>>>>>> Remove unnecessary gems
   roo
   rspec-rails
-  ruby-graphviz (~> 1.2, >= 1.2.2)
   sass-rails (~> 5.0)
   shoulda-matchers!
   simplecov
