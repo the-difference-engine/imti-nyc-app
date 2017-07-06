@@ -49,6 +49,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -60,10 +61,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :test do 
-  gem "faker"
+group :test do
   gem "database_cleaner"
-end     
+end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

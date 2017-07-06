@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates :first_name, :last_name, :email, presence: true       
+  validates :first_name, :last_name, :email, presence: true
   has_one :application
   belongs_to :local_school, optional: true
   belongs_to :course, optional: true
@@ -13,7 +13,7 @@ class User < ApplicationRecord
   # if role are changed (order or names), must update any code dealing with roles
   ROLES = [:admin, :local_school_admin, :local_school_applicant, :domestic_applicant,
     :international_applicant, :current_teacher, :alumni, :member]
-  enum role: ROLES 
+  enum role: ROLES
 
   def self.role_params
     {
@@ -25,7 +25,7 @@ class User < ApplicationRecord
       member: ['/sign_up', '/']
     }.with_indifferent_access
   end
-  
+
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
       when ".csv" then Roo::CSV.new(file.path)
@@ -42,7 +42,7 @@ class User < ApplicationRecord
     end
   end
 
-  def local_school_user? 
+  def local_school_user?
     local_school_admin? || local_school_teacher?
   end
 end
