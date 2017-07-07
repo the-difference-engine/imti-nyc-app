@@ -5,9 +5,9 @@
   <table id="attachments">
     <thead>
       <tr>
-        <th>Document Name</th>
-        <th>Attachment</th>
-        <th class="upload">Upload</th>
+        <th width="30%">Document Name</th>
+        <th width="50%">Attachment</th>
+        <th width="20%">Upload</th>
       </tr>
     </thead>
     <tbody>
@@ -18,9 +18,11 @@
           <% if document[:attachment] %>
             <td>
               <%= form_for [@application, @document], :url => "/applications/2/documents/#{document[:document_id]}", :method => :patch do |f| %>
-                <%= f.file_field :attachment %>
-                <%= f.hidden_field :document_id, value: document[:document_id] %>
-                <%= f.submit :Update %>
+                <div>
+                  <%= f.file_field :attachment %>
+                  <%= f.hidden_field :document_id, value: document[:document_id] %>
+                  <%= f.submit :Save, :class => 'btn btn-sm btn-primary' %>
+                </div>
               <% end %>
             </td>
           <% else %>
@@ -28,7 +30,7 @@
               <%= form_for [@application, @document] do |f| %>
                 <%= f.file_field :attachment %>
                 <%= f.hidden_field :category, value: document[:key_name] %>
-                <%= f.submit :Save %>
+                <%= f.submit :Save, :class => 'btn btn-sm btn-primary' %>
               <% end %>
             </td>
           <% end %>
@@ -36,6 +38,18 @@
       <% end %>
     </tbody>
   </table>
+
+  <hr>
+
+  <% if current_user.role == "international_applicant" %>
+    <p>Use the following links to procure any necessary documents:</p>
+    <ul>
+      <li><a href="https://travel.state.gov/content/visas/en/study-exchange/student.html" target="_blank"> F1 Student Visa </a></li>
+      <li><a href="https://www.ets.org/toefl/ibt/scores/get/" target="_blank"> TOEFL Scores </a></li>
+      <li><a href="https://www.ielts.org/book-a-test/getting-your-results" target="_blank"> IELTS Scores </a></li>
+      <li><a href="http://www.wes.org/" target="_blank"> WES Evaluation </a></li>
+    </ul>
+   <% end %>
 
   <hr>
 
