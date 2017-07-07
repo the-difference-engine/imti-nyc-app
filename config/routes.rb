@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, path: '', controllers: {registrations: 'users/registrations'}
+  devise_for :users, path: '', controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
   as :user do
     get '/schools/sign_up', to: 'users/registrations#new_school'
     post '/users/registrations/', to: 'users/registrations#import'
@@ -35,5 +35,4 @@ Rails.application.routes.draw do
   resources :charges
   resources :courses
   resources :course_registrations
-  get "/check_app" => 'sessions#destroy'
 end
