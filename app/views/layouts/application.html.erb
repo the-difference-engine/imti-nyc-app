@@ -75,7 +75,7 @@
                                 <% if user_signed_in? %>
                                     <div class="logout">
                                         <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                        <%= link_to 'Logout', "/check_app" %>
+                                        <%= link_to 'Logout', "/sign_out", :method => :delete %>
                                     </div>
                                 <% else %>
                                     <div class="login">
