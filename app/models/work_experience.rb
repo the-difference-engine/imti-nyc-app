@@ -3,11 +3,4 @@ class WorkExperience < ApplicationRecord
 
   belongs_to :application
 
-  def pretty_start_date
-    start_date.strftime("%m/%d/%Y")
-  end
-
-  def pretty_end_date
-    end_date.strftime("%m/%d/%Y")
-  end
 end
