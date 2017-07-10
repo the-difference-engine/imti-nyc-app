@@ -6,6 +6,18 @@
   <% end %>
 </article>
 
+<% if @donation.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@donation.errors.count, "error") %> prohibited this donation from being processed:</h2>
+ 
+    <ul class="errorsList">
+    <% @donation.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h1>Please enter your donation here:</h1>
 
 <%= form_tag donations_path, id: "payment-form" do %>
