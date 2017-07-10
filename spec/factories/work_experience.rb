@@ -1,5 +1,3 @@
-require 'faker'
-
 FactoryGirl.define do
   factory :work_experience do
     association :application

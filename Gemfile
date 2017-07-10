@@ -43,6 +43,9 @@ gem 'rails-erd'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem 'simplecov', :require => false, :group => :test
+
 group :development, :test do
   gem 'pry-rails'
   gem 'dotenv-rails'

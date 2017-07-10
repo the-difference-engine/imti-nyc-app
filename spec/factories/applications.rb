@@ -1,4 +1,3 @@
-require 'faker'
 FactoryGirl.define do
   factory :application do
     association :user
