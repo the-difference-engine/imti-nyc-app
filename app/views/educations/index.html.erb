@@ -6,10 +6,10 @@
   <% @educations.each do |education| %>
     <p>School: <%= education.school %></p>
     <p>Location: <%= education.location %></p>
-    <p>Start Date: <%= education.pretty_date(education.start_date) %></p>
-    <p>End Date: <%= education.pretty_date(education.end_date) %></p>
+    <p>Start Date: <%= pretty_date(education.start_date) %></p>
+    <p>End Date: <%= pretty_date(education.end_date) %></p>
     <p>Degree: <%= education.degree %></p>
-    <p>Degree date: <%= education.pretty_date(education.degree_date) %></p>
+    <p>Degree date: <%= pretty_date(education.degree_date) %></p>
     <p><%= link_to 'Edit education', "/applications/#{@application.id}/educations/#{education.id}/edit"%>
     <hr>
   <% end %>
