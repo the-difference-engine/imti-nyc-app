@@ -1,4 +1,6 @@
 class EducationsController < ApplicationController
+  helper_method :pretty_date
+  
   def index
     @application = Application.find(params[:application_id])
     @educations = @application.educations
