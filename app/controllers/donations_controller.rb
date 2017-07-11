@@ -6,8 +6,11 @@ class DonationsController < ApplicationController
   end
 
   def create
-    #   rewrite controller create code to create the donation as Donation.new, then check if it's valid, then charge, then save the donation.
-
+    if donation_params[:email] == ""
+      flash[:warning] = "Please enter your email so we can send you a confirmation."
+      redirect_to new_donation_path and return
+    end
+  
     if donation_params[:other_amount] == ""
       amount = (donation_params[:amount].to_i * 100)
     else
@@ -35,9 +38,13 @@ class DonationsController < ApplicationController
       if donation_params[:anonymous]
         @donation.update(first_name: nil, last_name: nil, email: nil)
       end
+
+      #should probably send confirmation email here
+
+      @email = params[:email]
       render 'show'
 
-    else
+    else # if @donation was not saved successfully
       p @donation.errors.full_messages
       render 'new'
     end #end if @donation.save
