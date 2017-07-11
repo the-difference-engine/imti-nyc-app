@@ -19,4 +19,12 @@ class Application < ApplicationRecord
   has_many :work_experiences
   belongs_to :user
 
+  accepts_nested_attributes_for :documents
+
+  def pretty_date(date)
+    if date
+      date.strftime("%m/%d/%Y")
+    end
+  end
+  
 end
