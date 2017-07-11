@@ -1,6 +1,20 @@
 <div class="application">
+  <%= form_tag application_documents_path do %>
+    <% @application.documents.each do |d| %>
+      <%= label_tag :category, d.category.humanize %>
+      <%= file_field_tag :attachment %>
+    <% end %>
+
+    <% @documents_needed.each do |d| %>
+    <%= label_tag :category, d[0] %>
+      <%= file_field_tag :attachment %>
+
+    <% end %>
+
+  <% end %>
   <h1>SECTION F: DOCUMENTS</h1>
   <hr>
+
 
   <table id="attachments">
     <thead>
@@ -21,7 +35,7 @@
                 <div>
                   <%= f.file_field :attachment %>
                   <%= f.hidden_field :document_id, value: document[:document_id] %>
-                  <%= f.submit :Save, :class => 'btn btn-sm btn-primary' %>
+                  <%= f.submit :Update, :class => 'btn btn-sm btn-success' %>
                 </div>
               <% end %>
             </td>

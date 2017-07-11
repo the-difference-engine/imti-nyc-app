@@ -2,21 +2,17 @@ class DocumentsController < ApplicationController
   include DocumentsHelper
 
   def index
+
     @application = Application.find(params[:application_id])
     @documents = []
+    @documents_needed = []
+    existing_categories = @application.documents.map(&:category)
+    # make logic to find documents we don't have
 
-    document_lists.each do |name, key|
-      document_info = {}
-      document_info[:name] = name
-      document_info[:key_name] = key
-      if @application.documents.find_by(category: key)
-        document_info[:attachment] = file_name(@application.documents, key)
-        document_info[:document_id] = Document.find_by(application_id: @application.id, category: key).id
-        @document = Document.find_by(application_id: @application.id, category: key)
-      else
-        @document = Document.new
+    document_lists.each do |label, category|
+      unless existing_categories.include?(category)
+        @documents_needed << [label, category]
       end
-      @documents << document_info
     end
   end
 
