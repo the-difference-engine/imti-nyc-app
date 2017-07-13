@@ -36,3 +36,4 @@ class DocumentsController < ApplicationController
     params.require(:document).permit(:attachment, :category).merge(application_id: params[:application_id])
   end
 end
+
