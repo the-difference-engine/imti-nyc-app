@@ -15,6 +15,12 @@ class DocumentsController < ApplicationController
         existing_doc_attachment.destroy if existing_doc_attachment
         @application.documents.create(attachment: attachment, category: attachment_name)
       end
+      redirect_to application_documents_path(@application.id)
+    elsif @document.save && !finished && current_user.destroy_user_session_path
+      send_unfinished_email_mailgun
+    else
+      flash[:danger] = @document.errors.full_messages
+      render :new
     end
     redirect_to application_documents_path(@application.id)
   end
