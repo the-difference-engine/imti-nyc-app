@@ -39,7 +39,7 @@ class DonationsController < ApplicationController
         @donation.update(first_name: nil, last_name: nil, email: nil)
       end
 
-      #should probably send confirmation email here
+      #still need to send confirmation email here
 
       @email = params[:email]
       render 'show'
