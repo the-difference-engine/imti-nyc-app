@@ -9,12 +9,9 @@ class User < ApplicationRecord
   belongs_to :local_school, optional: true
   belongs_to :course, optional: true
   has_many :charges
-  has_many :course_registrations
-  has_many :courses, through: :course_registrations
-
+  belongs_to :course
   # if role are changed (order or names), must update any code dealing with roles
-  ROLES = [:admin, :local_school_admin, :local_school_applicant, :domestic_applicant,
-    :international_applicant, :current_teacher, :alumni, :member]
+  ROLES = [:admin, :local_school_admin, :local_school_applicant, :domestic_applicant, :international_applicant, :current_teacher, :alumni, :member]
   enum role: ROLES 
 
   def self.role_params

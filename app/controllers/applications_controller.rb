@@ -66,7 +66,7 @@ class ApplicationsController < ApplicationController
     else
       flash[:danger] = current_user.errors.full_messages
       render :edit
-    end  
+    end
   end
 
   private

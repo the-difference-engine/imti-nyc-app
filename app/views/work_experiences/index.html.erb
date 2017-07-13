@@ -4,11 +4,11 @@
   <p><a href="/applications/<%= @application.id %>/work_experiences/new">Add new work experience</a></p>
   <hr>
 
-  <% @work_experience.each do |work| %>
+  <% @work_experiences.each do |work| %>
     <p>Name: <%= work.employer %></p>
-    <p>Location: <%= work.occupation %></p>
-    <p>Diploma: <%= work.pretty_date(work.start_date) %></p>
-    <p>Degree: <%= work.pretty_date(work.end_date) %></p>
+    <p>Occupation: <%= work.occupation %></p>
+    <p>Start Date: <%= work.pretty_start_date %></p>
+    <p>End Date: <%= work.pretty_end_date %></p>
     <p><%= link_to 'Edit work experience', "/applications/#{@application.id}/work_experiences/#{work.id}/edit"%>
     <hr>
   <% end %>
