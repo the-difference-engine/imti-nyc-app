@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
   include DocumentsHelper
-  
+
   def index
     @application = Application.find(params[:application_id])
     @documents = @application.documents
@@ -10,9 +10,9 @@ class DocumentsController < ApplicationController
     @application = Application.find(params[:application_id])
     @document = Document.new
   end
-  
-  #imtinyc@gmail.com is the public e-mail 
-  def create 
+
+  #imtinyc@gmail.com is the public e-mail
+  def create
     @application = Application.find(params[:application_id])
     @document = Document.new(document_params)
     if @document.save
