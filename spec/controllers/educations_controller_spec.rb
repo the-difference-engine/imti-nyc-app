@@ -1,8 +1,10 @@
 require 'rails_helper'
-require 'pry'
+
 RSpec.describe EducationsController, type: :controller do
   describe 'GET #index' do
     before :each do
+      create(:user)
+      binding.pry
       @app = create(:application)
       @user = sign_in create(:user)
     end
@@ -33,11 +35,11 @@ RSpec.describe EducationsController, type: :controller do
   end
 
   describe 'GET #new' do
-    before :each do 
+    before :each do
       @app = create(:application)
       @user = sign_in create(:user)
     end
-    
+
     it 'assigns a new Education to @education' do
       get :new, params: {:application_id => @app.id}
       expect(assigns(:education)).to be_a_new(Education)
@@ -50,7 +52,7 @@ RSpec.describe EducationsController, type: :controller do
   end
 
   describe 'GET #edit' do
-    before :each do 
+    before :each do
       @app = create(:application)
       @user = sign_in create(:user)
     end
@@ -69,7 +71,7 @@ RSpec.describe EducationsController, type: :controller do
   end
 
   describe 'POST #create' do
-    before :each do 
+    before :each do
       @app = create(:application)
       @user = sign_in create(:user)
     end
@@ -77,11 +79,11 @@ RSpec.describe EducationsController, type: :controller do
       it 'saves an education to the database' do
         edu_params = FactoryGirl.attributes_for(:education)
         expect { post :create, params: {:education => edu_params, application_id: @app.id } }.to change(Education, :count).by(1)
-      end 
+      end
 
       it 'should redirect to application_educations_path with successful save' do
         edu_params = FactoryGirl.attributes_for(:education)
-        post :create, params: { :education => edu_params, application_id: @app.id } 
+        post :create, params: { :education => edu_params, application_id: @app.id }
         expect(response).to redirect_to application_educations_path
       end
     context "with invalid attributes"
@@ -104,7 +106,7 @@ RSpec.describe EducationsController, type: :controller do
       @user = sign_in create(:user)
       @education = create(:education)
     end
-   
+
     context 'valid attributes '
       it 'locates requested @education ' do
         patch :update, params: { id: @education.id, application_id: @app.id, education: attributes_for(:education) }

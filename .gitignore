@@ -9,7 +9,7 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
-/tmp/*  
+/tmp/*
 !/log/.keep
 !/tmp/.keep
 
@@ -24,5 +24,4 @@
 /public/system
 
 # Ignore simplecov
-coverage
 /coverage/*
