@@ -22,7 +22,8 @@ class DocumentsController < ApplicationController
       flash[:success] = "E-mail sent to confirm all neccessary documents have been uploaded." if finished
       send_email_mailgun if finished
 
-      send_unfinished_email_mailgun if list_of_domestic_documents >=1 && destroy_user_session_path(method: :delete)
+      # send_unfinished_email_mailgun if !finished
+       # && destroy_user_session_path
 
       redirect_to application_documents_path(@application.id)
     else
