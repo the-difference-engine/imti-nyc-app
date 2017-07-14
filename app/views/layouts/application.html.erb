@@ -89,12 +89,12 @@
                                     <%= link_to 'Register', "/sign_up" %>
                                 </div>
 
-                            <% if current_user.role == "local_school_admin" %>
+                            <% if current_user && current_user.role == "local_school_admin" %>
                                 <div class="school_signup">
                                     <i class="fa fa-building" aria-hidden="true"></i>
                                     <%= link_to 'School Sign Up', "/schools/sign_up" %>
                                 </div> 
-                            <% end %>                              
+                            <% end %>                            
                             </div>
 
                             <div class="language_area">

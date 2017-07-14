@@ -18,9 +18,13 @@ class DocumentsController < ApplicationController
     if @document.save
       flash[:success] = "Document saved."
       finished = finish_domestic_documents(@application)
+
       flash[:success] = "E-mail sent to confirm all neccessary documents have been uploaded." if finished
       send_email_mailgun if finished
+
       redirect_to application_documents_path(@application.id)
+    elsif @document.save && !finished && current_user.destroy_user_session_path
+      send_unfinished_email_mailgun
     else
       flash[:danger] = @document.errors.full_messages
       render :new
