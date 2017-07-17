@@ -11,17 +11,18 @@
       </tr>
     </thead>
     <tbody>
+
       <% @documents.each do |document| %>
         <tr>
           <td><%= document[:name] %></td>
           <td><%= document[:attachment] %></td>
           <% if document[:attachment] %>
             <td>
-              <%= form_for [@application, @document], :url => "/applications/2/documents/#{document[:document_id]}", :method => :patch do |f| %>
+              <%= form_for [@application, @document], :url => "/applications/#{@application.id}/documents/#{document[:document_id]}", :method => :patch do |f| %>
                 <div>
                   <%= f.file_field :attachment %>
                   <%= f.hidden_field :document_id, value: document[:document_id] %>
-                  <%= f.submit :Save, :class => 'btn btn-sm btn-primary' %>
+                  <%= f.submit :Update, :class => 'btn btn-sm btn-success' %>
                 </div>
               <% end %>
             </td>

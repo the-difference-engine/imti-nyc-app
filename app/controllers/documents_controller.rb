@@ -1,4 +1,5 @@
-class DocumentsController < ApplicationController
+
+ class DocumentsController < ApplicationController
   include DocumentsHelper
   
   def index
@@ -37,13 +38,14 @@ class DocumentsController < ApplicationController
   end
   
   def update
+    @application = Application.find(params[:application_id])
     @document = Document.find(params[:id])
     if @document.update(document_params)
       flash[:success] = "Document updated."
       redirect_to application_documents_path(@document[:application_id])
     else
       flash[:danger] = @document.errors.full_messages
-      render :edit
+      redirect_to "/applications/#{@application.id}/documents"
     end
   end
 
