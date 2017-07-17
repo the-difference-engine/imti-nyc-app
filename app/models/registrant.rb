@@ -13,10 +13,10 @@ class Registrant < ApplicationRecord
     end
   end
 
-  def self.import(file, workshop_id)
+  def self.import(file, workshop_id, local_school_id)
     spreadsheet = open_spreadsheet(file)
     spreadsheet.each do |row|
-      registrant = Registrant.create(first_name: row[0], last_name: row[1], email: ActionView::Base.full_sanitizer.sanitize(row[2]), affiliation: row[3], occupation: row[4], phone: row[5])
+      registrant = Registrant.create(first_name: row[0], last_name: row[1], email: ActionView::Base.full_sanitizer.sanitize(row[2]), affiliation: row[3], occupation: row[4], phone: row[5], local_school_id: local_school_id)
       RegistrantWorkshop.create(registrant_id: registrant.id, workshop_id: workshop_id)
     end
   end
