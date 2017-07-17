@@ -2,9 +2,7 @@ class DocumentsController < ApplicationController
   include DocumentsHelper
 
   def index
-
     @application = Application.find(params[:application_id])
-    @documents = []
     @documents_needed = []
     existing_categories = @application.documents.map(&:category)
     # make logic to find documents we don't have
@@ -16,24 +14,19 @@ class DocumentsController < ApplicationController
     end
   end
 
-  #imtinyc@gmail.com is the public e-mail
   def create
     @application = Application.find(params[:application_id])
-    @document = Document.new(document_params)
-    if @document.save
-      flash[:success] = "Document saved."
-      finished = finish_domestic_documents(@application)
-      flash[:success] = "E-mail sent to confirm all neccessary documents have been uploaded." if finished
-      send_email_mailgun if finished
-      redirect_to application_documents_path(@application.id)
-    elsif @document.save && !finished && current_user.destroy_user_session_path
-      send_unfinished_email_mailgun
-    else
-      flash[:danger] = @document.errors.full_messages
-      render :new
+
+    unless params[:document].nil?
+      params[:document].each do |attachment_name, attachment|
+        existing_doc_attachment = @application.documents.find_by(category: attachment_name)
+        existing_doc_attachment.destroy if existing_doc_attachment
+        @application.documents.create(attachment: attachment, category: attachment_name)
+      end
     end
+    redirect_to application_documents_path(@application.id)
   end
-  
+
   def update
     @document = Document.find(params[:id])
     if @document.update(document_params)
