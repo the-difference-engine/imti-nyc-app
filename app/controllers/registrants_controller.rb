@@ -14,7 +14,7 @@ class RegistrantsController < ApplicationController
   end
 
   def import
-    Registrant.import(params[:file], params[:workshop_id])
+    Registrant.import(params[:file], params[:workshop_id], params[:local_school_id])
     redirect_to "/local_schools", notice: "Your import was succesful!"
   end
 
