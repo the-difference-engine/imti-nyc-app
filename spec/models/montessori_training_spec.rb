@@ -29,9 +29,4 @@ describe MontessoriTraining do
     montessori_training.valid?
     expect(montessori_training.errors[:degree_date]).to include("can't be blank")
   end
-  it "returns a pretty date" do
-    montessori_training = create(:montessori_training, degree_date: "2016-06-19")
-    expect(montessori_training.pretty_date).to eq("06/19/2016")
-  end
 end
-

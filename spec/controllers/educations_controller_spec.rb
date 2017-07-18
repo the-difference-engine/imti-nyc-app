@@ -17,6 +17,9 @@ RSpec.describe EducationsController, type: :controller do
       end
 
       it "can render the :index template" do
+        monte = create(:education, school: 'Monte', application_id: @app.id)
+        sorri = create(:education, school: "Sorri", application_id: @app.id)
+        school = create(:education, school: "the school", application_id: @app.id)
         get :index, params: {:application_id => @app.id}
         expect(response).to render_template :index
 
