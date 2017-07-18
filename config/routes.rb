@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   resources :registrants
   
 
-  resources :workshops
+  resources :workshops do
+    put :payment
+  end
   resources :charges
   resources :courses
   resources :course_registrations
