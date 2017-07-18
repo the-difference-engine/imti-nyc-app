@@ -68,7 +68,7 @@ class WorkshopsController < ApplicationController
     new_charge = current_user.charges.create(uid: charge.id, amount: amount, description: charge.description, customer_id: customer.id)
     
     flash[:success] = "Thank you for your payment."
-    redirect_to application_path(application.id)
+    redirect_to workshop_path(params[:workshop_id])
 
     rescue Stripe::CardError => e
     flash[:error] = e.message
