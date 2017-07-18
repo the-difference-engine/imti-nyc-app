@@ -24,12 +24,4 @@ describe WorkExperience do
     work_experience.valid?
     expect(work_experience.errors[:end_date]).to include("can't be blank")
   end
-  it 'returns a pretty start date' do
-    work_experience = build(:work_experience, start_date: '2007-06-22')
-    expect(work_experience.pretty_start_date).to eq('06/22/2007')
-  end
-  it 'returns a pretty end date' do
-    work_experience = build(:work_experience, end_date: '2009-06-22')
-    expect(work_experience.pretty_end_date).to eq('06/22/2009')
-  end
 end

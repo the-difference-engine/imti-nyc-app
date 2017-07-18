@@ -2,7 +2,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :work_experience do
-    association :application
+    application
     employer Faker::Company.name
     occupation Faker::Job.title
     start_date '2004-06-22'
