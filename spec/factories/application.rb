@@ -3,7 +3,6 @@ require 'date'
 FactoryGirl.define do
   factory :application do
     association :user
-    association :document
     street { Faker::Address.street_address }
     city { Faker::Address.city }
     state { Faker::Address.state_abbr }
