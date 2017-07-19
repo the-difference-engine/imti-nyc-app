@@ -19,7 +19,13 @@ class WorkshopsController < ApplicationController
   def show
     @workshop = Workshop.find_by(id: params[:id])
     @registrants = @workshop.registrants
-    render 'show.html.erb'    
+        registrant_workshop = RegistrantWorkshop.where(workshop_id: params[:id])
+    @workshop = Workshop.find_by(id: params[:id])
+
+    count = calc_count_in_show(registrant_workshop)
+    # amount should be changed to workshop price multiplied by count
+    @amount = count * @workshop.price.to_f.round(3);
+    render 'show.html.erb'  
   end
 
   def edit 
@@ -40,19 +46,17 @@ class WorkshopsController < ApplicationController
   end
 
   def payment
-    amount = current_user.domestic_applicant? ? 50 : 75;
-    registrantWorkshop = RegistrantWorkshop.where(workshop_id: params[:id])
-    
-    count = 0
-    registrantWorkshop.each do |registrant_workshop|
-      # where the local school id matches
-      registrant = Registrant.find_by(id: registrant_workshop.registrant_id)
-      if registrant.local_school_id == current_user.id
-        registrant_workshop.update(payment_status: true)
-        count += 1
-      end
-    end
-
+    registrant_workshop = RegistrantWorkshop.where(workshop_id: params[:workshop_id] )
+    @workshop = Workshop.find_by(id: params[:workshop_id])
+  
+    count = calc_count_in_payment(registrant_workshop)
+    # amount should be changed to workshop price multiplied by count
+    @amount = count * @workshop.price.to_i ;
+    # binding.pry
+    puts "=" *100
+    puts "#{@amount} @amount" 
+    puts "#{count} count"
+    puts "#{@workshop.price.to_i} workshoppirce"
     customer = Stripe::Customer.create(
       :email => current_user.email,
       :source  => params[:stripeToken]
@@ -60,12 +64,11 @@ class WorkshopsController < ApplicationController
 
     charge = Stripe::Charge.create(
       :customer    => customer.id,
-      :amount      => amount * 100,
-      :description => "Application fee",
+      :amount      => @amount * 100,
+      :description => "Workshop cost",
       :currency    => 'usd'
       )
-
-    new_charge = current_user.charges.create(uid: charge.id, amount: amount, description: charge.description, customer_id: customer.id)
+    new_charge = current_user.charges.create(uid: charge.id, amount: @amount, description: charge.description, customer_id: customer.id)
     
     flash[:success] = "Thank you for your payment."
     redirect_to workshop_path(params[:workshop_id])
@@ -75,6 +78,46 @@ class WorkshopsController < ApplicationController
     redirect_to "/workshops/#{params[:workshop_id]}"
   end  
 
+  def calc_count_in_payment(registrant_workshop)
+    count = 0
+    # checks if current user is local school admin
+    if current_user.local_school_id
+      registrant_workshop.each do |registrant_workshop|
+        # where the local school id matches
+        registrant = Registrant.find_by(id: registrant_workshop.registrant_id)
+        # counts number of registrants from current user's local school that have a payment status of false
+          puts registrant_workshop.payment_status
+        if registrant.local_school_id == current_user.local_school_id && !registrant_workshop.payment_status 
+          puts "=="*100
+          registrant_workshop.update(payment_status: true)
+          count += 1
+        end
+      end
+      # current user is not affiliated with local school
+    else 
+      count += 1
+    end
+    count
+  end
+
+  def calc_count_in_show(registrant_workshop)
+    count = 0
+        # checks if current user is local school admin
+    if current_user.local_school_id
+      registrant_workshop.each do |registrant_workshop|
+        # where the local school id matches
+        registrant = Registrant.find_by(id: registrant_workshop.registrant_id)
+# counts number of registrants from current user's local school that have a payment status of false
+        if registrant.local_school_id == current_user.local_school_id && registrant_workshop.payment_status == nil
+          registrant_workshop.update(payment_status: true)
+          count += 1
+        end
+      end
+    else 
+      count += 1
+    end
+    count
+  end
   private
 
   def workshops_params
