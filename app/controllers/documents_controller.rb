@@ -3,15 +3,7 @@ class DocumentsController < ApplicationController
 
   def index
     @application = Application.find(params[:application_id])
-    @documents_needed = []
-    existing_categories = @application.documents.map(&:category)
-    # make logic to find documents we don't have
-
-    document_lists.each do |label, category|
-      unless existing_categories.include?(category)
-        @documents_needed << [label, category]
-      end
-    end
+    @application_documents = document_lists
   end
 
   def create
