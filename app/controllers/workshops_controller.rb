@@ -78,15 +78,18 @@ class WorkshopsController < ApplicationController
     redirect_to "/workshops/#{params[:workshop_id]}"
   end  
 
-  def calc_count_in_payment(registrant_workshop)
+  def calc_count_in_payment(registrant_workshops)
     count = 0
+    puts "calc count" + "=="*100 
     # checks if current user is local school admin
     if current_user.local_school_id
-      registrant_workshop.each do |registrant_workshop|
+      puts "local school?" + "=="*100 
+      registrant_workshops.each do |registrant_workshop|
         # where the local school id matches
         registrant = Registrant.find_by(id: registrant_workshop.registrant_id)
         # counts number of registrants from current user's local school that have a payment status of false
-          puts registrant_workshop.payment_status
+
+          # puts registrant_workshop.payment_status + "=="*100 
         if registrant.local_school_id == current_user.local_school_id && !registrant_workshop.payment_status 
           puts "=="*100
           registrant_workshop.update(payment_status: true)
@@ -108,8 +111,7 @@ class WorkshopsController < ApplicationController
         # where the local school id matches
         registrant = Registrant.find_by(id: registrant_workshop.registrant_id)
 # counts number of registrants from current user's local school that have a payment status of false
-        if registrant.local_school_id == current_user.local_school_id && registrant_workshop.payment_status == nil
-          registrant_workshop.update(payment_status: true)
+        if registrant.local_school_id == current_user.local_school_id && !registrant_workshop.payment_status
           count += 1
         end
       end
