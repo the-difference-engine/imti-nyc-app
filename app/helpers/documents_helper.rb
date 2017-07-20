@@ -10,10 +10,6 @@ module DocumentsHelper
       ['Transcript', 'transcript']]  
   end
 
-  def file_name(documents, category)
-    file_name = documents.find_by(category: category).attachment_file_name
-  end
- 
   def send_email_mailgun
     mg_client = Mailgun::Client.new(ENV["MAILGUN_API_KEY"])
 
