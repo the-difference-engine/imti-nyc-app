@@ -1,5 +1,4 @@
 <div class="application">
-
   <%= form_tag application_documents_path do %>
     <% @application.documents.each do |d| %>
       <%= label_tag :category, d.category.humanize %>
@@ -16,9 +15,6 @@
 
   <% end %>
 
-
-
->>>>>>> Latest as of 7/17
   <h1>SECTION F: DOCUMENTS</h1>
   <hr>
 
@@ -31,7 +27,6 @@
       </tr>
     </thead>
     <tbody>
-<<<<<<< HEAD
       <%= form_for [@application, Document.new] do |f| %>
         <% @application_documents.each do |d| %>
           <tr>
@@ -48,12 +43,9 @@
     </table>
     <br>
     <%= f.submit :Save, :class => 'btn btn-sm btn-primary' %>
-  <% end %>
-=======
-   
+  <% end %> 
     </tbody>
   </table>
->>>>>>> Latest as of 7/17
 
   <hr>
 
