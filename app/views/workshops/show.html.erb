@@ -74,10 +74,11 @@
       <% end %>
     </tbody>
   </table>
-
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payModal">
-    Pay Application Fee
+<% if !@amount.eql?(0.0) %>
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payModal">
+    Pay Workshop Fee
   </button>
+<% end %>
 
   <!-- Modal -->
   <div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
