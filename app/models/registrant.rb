@@ -18,9 +18,9 @@ class Registrant < ApplicationRecord
     spreadsheet.each do |row|
       registrant = Registrant.new(first_name: row[0], last_name: row[1], email: ActionView::Base.full_sanitizer.sanitize(row[2]), affiliation: row[3], occupation: row[4], phone: row[5], local_school_id: local_school_id)
       if registrant.save
-      RegistrantWorkshop.create(registrant_id: registrant.id, workshop_id: workshop_id)
+        RegistrantWorkshop.create(registrant_id: registrant.id, workshop_id: workshop_id)
       else
-        puts "NAH"
+        flash[:danger] = registrant.errors.full_messages     
       end
     end
   end
