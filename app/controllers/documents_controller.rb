@@ -1,21 +1,20 @@
 class DocumentsController < ApplicationController
   include DocumentsHelper
-  
+
   def index
     @application = Application.find(params[:application_id])
     @application_documents = document_lists
   end
-  
-  def create 
+
+  def create
     @application = Application.find(params[:application_id])
-    
     unless params[:document].nil?
       params[:document].each do |attachment_name, attachment|
         existing_doc_attachment = @application.documents.find_by(category: attachment_name)
         existing_doc_attachment.destroy if existing_doc_attachment
         @application.documents.create(attachment: attachment, category: attachment_name)
-      end 
-    end 
+      end
+    end
     redirect_to application_documents_path(@application.id)
   end
   
