@@ -5,7 +5,7 @@ class Users::SessionsController < Devise::SessionsController
   def send_admin_email
     current_user.application
     if !current_user.application.try(:payment_status?)
-      # send_email_mailgun
+      send_email_mailgun
     end
   end
 end
