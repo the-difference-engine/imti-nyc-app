@@ -7,6 +7,7 @@ class RegistrantsController < ApplicationController
   end
 
   def create
+    p "Am I IN THE REGISTRANT CREATE ACITON!?!?!"
     registrant = Registrant.new(registrants_params)
     registrant.save 
     RegistrantWorkshop.create(registrant_id: registrant.id, workshop_id: params[:workshop_id])

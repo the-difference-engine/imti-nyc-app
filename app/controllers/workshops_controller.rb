@@ -18,7 +18,7 @@ class WorkshopsController < ApplicationController
 
   def show
     @workshop = Workshop.find_by(id: params[:id])
-    @registrants = @workshop.registrants
+    @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id)
         registrant_workshop = RegistrantWorkshop.where(workshop_id: params[:id])
     @workshop = Workshop.find_by(id: params[:id])
 
@@ -31,7 +31,7 @@ class WorkshopsController < ApplicationController
   def edit 
     @workshop = Workshop.find_by(id: params[:id])
     render 'edit.html.erb'
-  end
+  end 
 
   def update
     @workshop = Workshop.find_by(id: params[:id])
