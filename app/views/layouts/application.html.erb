@@ -40,14 +40,6 @@
 </head>
 
 <body>
-    <!-- Color Changer Area Start -->
-    <div class="color_palate" id="color_changer">
-        <div class="single_color" id="color_1"></div>
-        <div class="single_color" id="color_2"></div>
-        <div class="single_color" id="color_3"></div>
-        <div class="single_color" id="color_4"></div>
-    </div>
-
     <!-- preloader start -->
     <div id="preloader"></div>
     <!-- /.end preloader -->
@@ -96,22 +88,6 @@
 
                             <% end %>                              
                             </div>
-
-                            <div class="language_area">
-                                <div class="dropdown">
-                                    <button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="lag" type="button" class="btn btn-default dropdown-toggle">
-                                        <i class="fa fa-globe" aria-hidden="true"></i>Language
-                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                    </button>
-                                    <ul aria-labelledby="lag" class="dropdown-menu">
-                                        <li><%= link_to (image_tag("img/core-img/lan-1.jpg") + 'English'), '#' %></li>
-                                        <li><%= link_to (image_tag("img/core-img/lan-2.jpg") + 'German'), '#' %></li>
-                                        <li><%= link_to (image_tag("img/core-img/lan-3.jpg") + 'Spanish'), '#' %></li>
-                                        <li><%= link_to (image_tag("img/core-img/lan-4.jpg") + 'Bangla'), '#' %></li>
-                                        <li><%= link_to (image_tag("img/core-img/lan-5.jpg") + 'China'), '#' %></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -137,15 +113,9 @@
                                 <nav>
                                     <ul id="nav">
                                         <li><%= link_to "Home", "/" %></li>
-                                        <li><%= link_to "My Application", "/applications" %></li>
-                                        <li><a href="#">Gallery<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                            <ul class="sub-menu">
-                                                <li><%= link_to 'Gallery Fullwidth', '#' %></li>
-                                                <li><%= link_to 'Gallery 4 Column', '#' %></li>
-                                                <li><%= link_to 'Gallery 3 Column', '#' %></li>
-                                                <li><%= link_to 'Gallery 2 Column', '#' %></li>
-                                            </ul>
-                                        </li>
+                                        <% if user_signed_in? %>
+                                            <li><%= link_to "My Application", "/applications" %></li>
+                                        <% end%>
                                         <li><a href="#">course<i class="fa fa-caret-down" aria-hidden="true"></i></a>
                                             <ul class="sub-menu">
                                                 <li><%= link_to "Course Grid" '#' %></li>
@@ -166,8 +136,10 @@
                                                 <li><%= link_to "Event Details", "#" %></li>
                                             </ul>
                                         </li>
+
                                         <li><%= link_to "Contact", "/contact" %></li>
                                         <li><%= link_to "About", "/about" %></li>
+
                                     </ul>
                                 </nav>
                             </div>
