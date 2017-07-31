@@ -10,6 +10,7 @@ class ApplicationsController < ApplicationController
   def create
     @application = Application.new(application_params)
     if @application.save
+      @application.update(application_status: "started")
       flash[:success] = "Application saved."
       redirect_to "/applications/#{@application.id}"
     else
@@ -41,6 +42,7 @@ class ApplicationsController < ApplicationController
 
     new_charge = current_user.charges.create(uid: charge.id, amount: amount, description: charge.description, customer_id: customer.id)
     application.update(payment_status: true)
+    application.update(application_status: "finished")
     flash[:success] = "Thank you for your payment."
     redirect_to application_path(application.id)
 
