@@ -172,9 +172,6 @@
         </div>
         <!-- Search Box Area End -->
     </header>
-    <div class="alert">
-        <%= javascript_tag "confirm('please finish your application')" if @is_finished.eql? "unfinished" %>
-    </div> 
     <div class="render_page">
       <%= render "/shared/alerts" %>
       <div class="container">
