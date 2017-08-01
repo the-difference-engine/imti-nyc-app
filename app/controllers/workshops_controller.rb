@@ -18,7 +18,8 @@ class WorkshopsController < ApplicationController
 
   def show
     @workshop = Workshop.find_by(id: params[:id])
-    @registrants = @workshop.registrants
+    @registrant = Registrant.new
+    @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id) if current_user.local_school_admin? 
     render 'show.html.erb'    
   end
 
