@@ -1,0 +1,41 @@
+<style>
+table {
+   font-family: arial, sans-serif;
+   border-collapse: collapse;
+   width: 100%;
+   margin-bottom: 50px;
+   margin-top: 50px;
+}
+
+td, th {
+   border: 1px solid #dddddd ;
+   text-align: left;
+   padding: 8px;
+}
+
+tr:nth-child(even) {
+   background-color: #dddddd ;
+}
+
+</style>
+
+<table>
+ <tr>
+   <th>First Name</th>
+   <th>Last Name</th>
+   <th>Status</th>
+   <th>View Application</th>
+ </tr>
+
+<% @applications.each do |application| %>
+   <tr> 
+      <td> <%= application.user.first_name %> </td>
+      <td> <%= application.user.last_name %></td>
+      <td> <%= application.application_status %></td>
+      <td> <%= link_to "View", "#" %></td>
+
+   </tr>
+
+<% end %>
+
+</table>
