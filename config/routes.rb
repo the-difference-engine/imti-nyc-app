@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "/template" => 'pages#template'
   get "/calendar" => 'pages#calendar'
 
+  get "/completed_applications" => 'applications#completed_applications'
   resources :applications, only: [:index, :new, :show, :create, :edit, :update] do
     put :payment
   	resources :educations, only: [:index, :new, :create, :edit, :update]
