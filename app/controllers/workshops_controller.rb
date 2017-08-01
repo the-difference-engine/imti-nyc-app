@@ -18,6 +18,7 @@ class WorkshopsController < ApplicationController
 
   def show
     @workshop = Workshop.find_by(id: params[:id])
+<<<<<<< HEAD
     @registrants = @workshop.registrants
         registrant_workshop = RegistrantWorkshop.where(workshop_id: params[:id])
     @workshop = Workshop.find_by(id: params[:id])
@@ -26,6 +27,11 @@ class WorkshopsController < ApplicationController
     # amount should be changed to workshop price multiplied by count
     @amount = count * @workshop.price.to_f.round(3);
     render 'show.html.erb'  
+=======
+    @registrant = Registrant.new
+    @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id) if current_user.local_school_admin? 
+    render 'show.html.erb'    
+>>>>>>> d71e6bc... Allow admin users to view only their registrants
   end
 
   def edit 

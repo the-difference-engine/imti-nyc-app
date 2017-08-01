@@ -7,31 +7,32 @@
   <%= form_tag '/registrants', method: :post do %>
     <div>
       <%= label_tag :first_name %>
-      <%= text_field_tag :first_name %>
+      <%= text_field_tag :first_name, @registrant.first_name %>
     </div>
     <div>
       <%= label_tag :last_name %>
-      <%= text_field_tag :last_name %>
+      <%= text_field_tag :last_name, @registrant.last_name %>
     </div>
     <div>
       <%= label_tag :affiliation %>
-      <%= text_field_tag :affiliation %>
+      <%= text_field_tag :affiliation, @registrant.affiliation %>
     </div>
     <div>
       <%= label_tag :occupation %>
-      <%= text_field_tag :occupation %>
+      <%= text_field_tag :occupation, @registrant.occupation %>
     </div>
     <div>
       <%= label_tag :email %>
-      <%= text_field_tag :email%>
+      <%= text_field_tag :email, @registrant.email %>
     </div>
     <div>
       <%= label_tag :phone %>
-      <%= text_field_tag :phone%>
+      <%= text_field_tag :phone, @registrant.phone %>
     </div>
       <%= hidden_field_tag :workshop_id, @workshop.id%>
       <%= submit_tag 'Create New registrant' %>
   <% end %>
+<<<<<<< HEAD
   <br>
     <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
     <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %> 
@@ -39,11 +40,23 @@
     <% end %>
   <br>
   <% if current_user && current_user.local_school_id %>
+=======
+  <% if current_user && current_user.admin? %>
+    <br>
+      <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
+      <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %> 
+        <%= submit_tag 'Remove this workshop' %>
+      <% end %>
+    <br>
+  <% end %>
+  <% if current_user && current_user.local_school_admin? %>
+>>>>>>> d71e6bc... Allow admin users to view only their registrants
     <h1>Bulk Import</h1>
       <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
       <%= form_tag "/registrants/import", method: :post, multipart: true do %>
           <%= file_field_tag :file %>
           <%= hidden_field_tag :workshop_id, @workshop.id%>
+<<<<<<< HEAD
           <%= hidden_field_tag :local_school_id, current_user.local_school_id %>
           <%= submit_tag "Import" %>
       <% end %>
@@ -63,17 +76,27 @@
     </thead>
     <tbody>
       <% @registrants.each do |registrant| %>
+=======
+          <%= submit_tag "Import" %>
+      <% end %>
+    <br>
+    <h1>Current Registrants:</h1>
+    <table class="table-condensed">
+      <thead>
+>>>>>>> d71e6bc... Allow admin users to view only their registrants
         <tr>
-          <td><%= registrant.first_name %></td>
-          <td><%= registrant.last_name %></td>
-          <td><%= registrant.email %></td>
-          <td><%= registrant.affiliation %></td>
-          <td><%= registrant.occupation %></td>
-          <td><%= registrant.phone %></td>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Affiliation</th>
+          <th>Occupation</th>
+          <th>Phone Number</th>
         </tr>
+<<<<<<< HEAD
       <% end %>
     </tbody>
   </table>
+
 <% if !@amount.eql?(0.0) %>
   <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payModal">
     Pay Workshop Fee
@@ -115,4 +138,21 @@
     </div>
   </div>
 
+=======
+      </thead>
+      <tbody>
+        <% @registrants.each do |registrant| %>
+          <tr>
+            <td><%= registrant.first_name %></td>
+            <td><%= registrant.last_name %></td>
+            <td><%= registrant.email %></td>
+            <td><%= registrant.affiliation %></td>
+            <td><%= registrant.occupation %></td>
+            <td><%= registrant.phone %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+>>>>>>> d71e6bc... Allow admin users to view only their registrants
 </div>

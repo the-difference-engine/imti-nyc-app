@@ -3,6 +3,7 @@ class Registrant < ApplicationRecord
   has_many :registrant_workshops
   has_many :workshops, through: :registrant_workshops
   belongs_to :local_school, optional: true
+  validates :email, :first_name, :last_name, presence: true
 
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)

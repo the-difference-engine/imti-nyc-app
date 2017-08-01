@@ -7,15 +7,30 @@ class RegistrantsController < ApplicationController
   end
 
   def create
-    registrant = Registrant.new(registrants_params)
-    registrant.save 
-    RegistrantWorkshop.create(registrant_id: registrant.id, workshop_id: params[:workshop_id])
-    redirect_to "/workshops"
+    @registrant = Registrant.new(registrants_params)
+    @registrant.local_school_id = current_user.local_school_id if current_user && current_user.local_school_admin?
+    if @registrant.save
+      RegistrantWorkshop.create(registrant_id: @registrant.id, workshop_id: params[:workshop_id])
+      flash[:success] = "Registrant has been created"
+      redirect_to workshop_path(params[:workshop_id])
+    else
+      @workshop = Workshop.find_by(id: params[:workshop_id])
+      if current_user && current_user.local_school_admin?
+        @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id)
+      end
+      flash[:danger] = @registrant.errors.full_messages
+      render 'workshops/show'
+    end
   end
 
   def import
+<<<<<<< HEAD
     Registrant.import(params[:file], params[:workshop_id], params[:local_school_id])
     redirect_to "/local_schools", notice: "Your import was succesful!"
+=======
+    Registrant.import(params[:file], params[:workshop_id], current_user.local_school_id)
+    redirect_to workshop_path(params[:workshop_id]), notice: "Your import was succesful!"
+>>>>>>> d71e6bc... Allow admin users to view only their registrants
   end
 
   def edit 

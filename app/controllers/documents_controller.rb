@@ -1,6 +1,5 @@
 class DocumentsController < ApplicationController
   include DocumentsHelper
-
   def index
     @application = Application.find(params[:application_id])
     @application_documents = document_lists
@@ -18,7 +17,7 @@ class DocumentsController < ApplicationController
     end
     redirect_to application_documents_path(@application.id)
   end
-
+  
   def update
     @document = Document.find(params[:id])
     if @document.update(document_params)
