@@ -1,5 +1,9 @@
 <div class="application">
-  <h1>MY APPLICATION</h1>
+  <% if current_user.role == "admin" %>
+    <h1> APPLICATION FOR <%= @application.user.first_name.upcase %> </h1>
+  <% else %>
+    <h1>MY APPLICATION</h1>
+  <% end %>
 
   <h3>SECTION A: PERSONAL DATA </h3>
 
@@ -32,6 +36,7 @@
   <h4><a href="/applications/<%= @application.id %>/references">E. References</a></h4>
   <h4><a href="/applications/<%= @application.id %>/documents">F. Documents</a></h4>
   <hr>
+<% unless current_user.role == "admin" %>
 
   <h3>Pay Application Fee and Submit Application</h3>
   <p>I certify that the information I have given on the application is complete and correct. I
@@ -78,4 +83,7 @@ will be grounds to deny or withdraw my admission or dismiss me after enrollment.
     </div>
   </div>
   
+  <% end %>
 </div>
+
+
