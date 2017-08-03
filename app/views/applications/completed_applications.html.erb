@@ -29,10 +29,10 @@ tr:nth-child(even) {
 
 <% @applications.each do |application| %>
    <tr> 
-      <td> <%= application.user.first_name %> </td>
-      <td> <%= application.user.last_name %></td>
-      <td> <%= application.application_status %></td>
-      <td> <%= link_to "View", "#" %></td>
+      <td> <%= application.user.first_name.capitalize %> </td>
+      <td> <%= application.user.last_name.capitalize %></td>
+      <td> <%= application.application_status.capitalize %></td>
+      <td> <%= link_to "View", "/applications/#{application.id}" %></td>
 
    </tr>
 
