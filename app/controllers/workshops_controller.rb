@@ -18,13 +18,8 @@ class WorkshopsController < ApplicationController
 
   def show
     @workshop = Workshop.find_by(id: params[:id])
-    @registrants = @workshop.registrants
-        registrant_workshop = RegistrantWorkshop.where(workshop_id: params[:id])
-    @workshop = Workshop.find_by(id: params[:id])
-
-    count = calc_count_in_show(registrant_workshop)
-    # amount should be changed to workshop price multiplied by count
-    @amount = count * @workshop.price.to_f.round(3);
+    @registrant = Registrant.new
+    @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id) if current_user.local_school_admin? 
     render 'show.html.erb'  
   end
 
