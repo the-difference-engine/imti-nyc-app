@@ -28,12 +28,12 @@ class RegistrantsController < ApplicationController
     if registrants == "Invalid File"
       flash[:danger] = "Invalid File Type"
     else
-      flash[:success] = "Your import was succesful!"  
+      flash[:success] = "Your import was succesful!"
     end
-      redirect_to "/workshops/#{params[:workshop_id]}"
+    redirect_to workshop_path(params[:workshop_id]), notice: "Your import was succesful!"
   end
 
-  def edit 
+  def edit
     @registrant = Registrant.find_by(id: params[:id])
     @registrant.update(registrants_params)
     render 'edit.html.erb'
@@ -43,5 +43,5 @@ class RegistrantsController < ApplicationController
 
   def registrants_params
     params.permit(:first_name, :last_name, :affiliation, :occupation, :email, :phone)
-  end 
+  end
 end
