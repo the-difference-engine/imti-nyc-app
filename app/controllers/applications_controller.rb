@@ -72,8 +72,9 @@ class ApplicationsController < ApplicationController
   end
 
   def completed_applications
+
     if current_user.role == 'admin'
-      @applications = Application.where(application_status: 'finished')
+      @applications = Application.where(application_status: 'finished').paginate(:page => params[:page], :per_page => 15)
       render 'completed_applications'
     else 
       redirect_to root_path
