@@ -19,23 +19,27 @@ tr:nth-child(even) {
 
 </style>
 
-<table>
- <tr>
-   <th>First Name</th>
-   <th>Last Name</th>
-   <th>Status</th>
-   <th>View Application</th>
- </tr>
+   <table>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Status</th>
+      <th>View Application</th>
+    </tr>
 
-<% @applications.each do |application| %>
-   <tr> 
-      <td> <%= application.user.first_name.capitalize %> </td>
-      <td> <%= application.user.last_name.capitalize %></td>
-      <td> <%= application.application_status.capitalize %></td>
-      <td> <%= link_to "View", "/applications/#{application.id}" %></td>
+   <% @applications.each do |application| %>
+      <tr> 
+         <td> <%= application.user.first_name.capitalize %> </td>
+         <td> <%= application.user.last_name.capitalize %></td>
+         <td> <%= application.application_status.capitalize %></td>
+         <td> <%= link_to "View", "/applications/#{application.id}" %></td>
 
-   </tr>
+      </tr>
 
-<% end %>
+   <% end %>
 
-</table>
+   </table>
+<%= will_paginate @applications %>
+
+
+
