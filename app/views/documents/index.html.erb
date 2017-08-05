@@ -1,19 +1,4 @@
 <div class="application">
-  <%= form_tag application_documents_path do %>
-    <% @application.documents.each do |d| %>
-      <%= label_tag :category, d.category.humanize %>
-      <%= d.attachment_file_name %>
-      <%= file_field_tag :attachment, multiple: true %> 
-    <% end %>
-
-    <% @documents_needed.each do |d| %>
-      <%= label_tag :category, d[0] %>
-      <%= file_field_tag :attachment %>
-    <% end %>
-
-    <input type="submit" name="attachments[attachment]">
-
-  <% end %>
 
   <h1>SECTION F: DOCUMENTS</h1>
   <hr>
@@ -43,9 +28,7 @@
     </table>
     <br>
     <%= f.submit :Save, :class => 'btn btn-sm btn-primary' %>
-  <% end %> 
-    </tbody>
-  </table>
+  <% end %>
 
   <hr>
 
@@ -70,3 +53,4 @@
   <h4><a href="/applications/<%= @application.id %>/references">E. References</a></h4>
   <h4><a href="/applications/<%= @application.id %>/documents">F. Documents</a></h4>
 </div>
+
