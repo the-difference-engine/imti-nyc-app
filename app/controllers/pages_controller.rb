@@ -8,6 +8,10 @@ class PagesController < ApplicationController
     @title = "About Us"
   end
 
+  def calendar
+    @title = "Calendar"
+  end
+
   def contact
     @title = "Contact"
   end

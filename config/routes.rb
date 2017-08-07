@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "/about" => 'pages#about'
   get "/contact" => 'pages#contact'
   get "/template" => 'pages#template'
+  get "/calendar" => 'pages#calendar'
 
   resources :applications, only: [:index, :new, :show, :create, :edit, :update] do
     put :payment
