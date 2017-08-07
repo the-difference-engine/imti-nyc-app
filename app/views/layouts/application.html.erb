@@ -67,7 +67,7 @@
                                 <% if user_signed_in? %>
                                     <div class="logout">
                                         <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                        <% if current_user.application && (current_user.application.application_status == "started") %>
+                                        <% if current_user.application && (current_user.application.application_status == "pending") %>
                                             <%= link_to 'Logout', "/sign_out", :method => :delete, :data => {:confirm => "Your application is not finished. Are you sure you want to logout?"} %>
                                         <% else %>
                                             <%= link_to 'Logout', "/sign_out", :method => :delete %>

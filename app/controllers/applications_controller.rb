@@ -10,7 +10,7 @@ class ApplicationsController < ApplicationController
   def create
     @application = Application.new(application_params)
     if @application.save
-      @application.update(application_status: "started")
+      @application.update(application_status: "pending") #application is started but not paid for
       flash[:success] = "Application saved."
       redirect_to "/applications/#{@application.id}"
     else
