@@ -10,7 +10,7 @@ class DonationsController < ApplicationController
       amount: params[:amount]
     )
     if donation.save
-      flash[:success] = "Donation submitted"
+      flash[:success] = "Thank you #{donation.first_name}! Your donation of $#{donation.amount}0 has been submitted."
       redirect_to "/"
     else
       flash[:danger] = "YOU DID IT WROOOOOOOOOONG"
