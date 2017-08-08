@@ -1,0 +1,8 @@
+<%= form_tag "/donations", method: :post do %>
+  <p><input type="text" name="first_name" placeholder="First Name"></p>
+  <p><input type="text" name="last_name" placeholder="Last Name"></p>
+  <p><input type="email" name="email" placeholder="Email"></p>
+  <p><input type="text" name="comment" placeholder="Comment"></p>
+  <p><input type="number" min="0.01" step="0.01" max="999,999.99" placeholder="Amount"></p>
+  <p><input type="submit" value="Submit" class="btn btn-primary"></p>
+<% end %>

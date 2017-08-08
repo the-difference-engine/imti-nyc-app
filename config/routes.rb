@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   resources :student_profiles, only: [:index, :create]
 
+  resources :donations, only: [:index, :new, :create]
+
   get "/student_profiles/edit" => "student_profiles#edit"
   patch "/student_profiles" => "student_profiles#update"
 
