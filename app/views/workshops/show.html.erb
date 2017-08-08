@@ -30,7 +30,6 @@
       <%= text_field_tag :phone, @registrant.phone%>
     </div>
       <%= hidden_field_tag :workshop_id, @workshop.id%>
-      <%= hidden_field_tag :id, @workshop.id %>
       <%= submit_tag 'Create New registrant' %>
   <% end %>
   <br> 
@@ -92,7 +91,7 @@
           <h4 class="modal-title" id="myModalLabel">Credit card information</h4>
         </div>
         <div class="modal-body">
-          <%= form_tag workshop_payment_path(params[:id]), method: :put, id: "payment-form" do %>
+          <%= form_tag workshop_payment_path(@workshop), method: :put, id: "payment-form" do %>
           <div class="form-row">
             <label for="card-element">
               Please enter your Credit or Debit card information:
