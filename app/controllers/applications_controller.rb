@@ -21,7 +21,7 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-    @amount = current_user.domestic_applicant? ? 50 : 75;
+    @amount = @application.user.domestic_applicant? ? 50 : 75;
     render :show
   end
 
@@ -74,13 +74,12 @@ class ApplicationsController < ApplicationController
   def completed_applications
 
     if current_user.role == 'admin'
-      @applications = Application.where(application_status: 'finished').paginate(:page => params[:page], :per_page => 15)
+      @applications_finished = Application.where(application_status: 'finished').paginate(:page => params[:page], :per_page => 15)
       render 'completed_applications'
     else 
       redirect_to root_path
     end
   end
-
 
   private
 

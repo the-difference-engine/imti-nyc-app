@@ -1,0 +1,29 @@
+<h3>Finished Applications</h3>
+
+<div class="users-table">
+  <table>
+    <tr>
+      <th>Applicant</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>View</th>
+      <th>Review Application</th>
+
+    </tr>
+    <% @applications_finished.each do |application| %>
+      <tr>
+        <td><%= application.user.first_name + " " + application.user.last_name %></td>
+        <td><%= application.user.email %></td>
+        <td><%= application.phone_number %></td>
+        <td><%= link_to "View", { controller: "applications", action: "show", id: application.id, } %></td>
+        <td><%= form_tag "/application_decision/#{application.id}", method: :post  do %>
+          <select name="status">
+            <option value="approved">Approve</option>
+            <option value="rejected">Reject</option>
+          </select>
+          <input type="submit" value="Save">
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
