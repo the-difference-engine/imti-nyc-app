@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, path: '', controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
   as :user do
     get '/schools/sign_up', to: 'users/registrations#new_school'
@@ -37,4 +38,5 @@ Rails.application.routes.draw do
   resources :charges
   resources :courses
   resources :course_registrations
+  resources :teachers, only: [:index]
 end
