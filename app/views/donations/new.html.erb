@@ -28,7 +28,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <%= form_tag "/donations", method: :post do %>
+                    <%= form_tag "/donations/confirmation", method: :post do %>
                         <!-- Message Input Area Start -->
                         <div class="contact_input_area">
                             <div id="success_fail_info"></div>
@@ -36,17 +36,17 @@
                                 <!-- Single Input Area Start -->
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <input type="text" name="first_name" class="form-control" id="name" placeholder="First Name *">
+                                        <input type="text" name="first_name" class="form-control" id="name" placeholder="First Name (Optional)" value="<%= @donation.first_name %>">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <input type="text" name="last_name" class="form-control" id="name" placeholder="Last Name *">
+                                        <input type="text" name="last_name" class="form-control" id="name" placeholder="Last Name (Optional)" value="<%= @donation.last_name %>">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <input type="email" name="email" class="form-control" id="name" placeholder="Email">
+                                        <input type="email" name="email" class="form-control" id="name" placeholder="Email (Optional)" value="<%= @donation.email %>">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-xs-12">
                                     <div class="form-group">
-                                        <textarea name="comment" id="message" class="form-control" cols="30" rows="10" placeholder="Comment" type="text"></textarea>
+                                        <textarea name="comment" id="message" class="form-control" cols="30" rows="10" placeholder="Comment" type="text"><%= @donation.comment %></textarea>
                                     </div>
                                 </div>
                                 <!-- Single Input Area Start -->
