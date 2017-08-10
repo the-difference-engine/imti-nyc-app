@@ -37,4 +37,6 @@ Rails.application.routes.draw do
   resources :charges
   resources :courses
   resources :course_registrations
+
+  get '/show_users', to: 'admins#show_users'
 end
