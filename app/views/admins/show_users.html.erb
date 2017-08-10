@@ -1,1 +1,40 @@
-<%= @users %>
+<style>
+.users-table table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.users-table td, th {
+  border: 1px solid #dddddd ;
+  text-align: center;
+  padding: 8px;
+}
+
+.users-table tr:nth-child(even) {
+  background-color: #dddddd ;
+}
+</style>
+
+<div class="users-table">
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Full Name</th>
+      <th>Role</th>
+      <th>View Profile</th>
+      <th>Move to Admin</th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.first_name + ' ' + user.last_name %></td>
+        <td><%= user.role %></td>
+        <td><%= link_to "view profile", "#" %></td>
+        <td><%= link_to "move to admin", "#" %></td>
+      </tr>
+      <% end %>
+  </table>
+</div>
