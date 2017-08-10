@@ -1,6 +1,13 @@
 <div class="application">
   <% if current_user.role == "admin" %>
     <h1> APPLICATION FOR <%= @application.user.first_name.upcase %> </h1>
+    <%= form_tag "/application_decision/#{@application.id}", method: :post  do %>
+      <select name="status">
+        <option value="approved">Approve</option>
+        <option value="rejected">Reject</option>
+      </select>
+      <input type="submit" value="Save">
+    <% end %>
   <% else %>
     <h1>MY APPLICATION</h1>
   <% end %>

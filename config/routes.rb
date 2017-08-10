@@ -35,7 +35,6 @@ Rails.application.routes.draw do
   resources :local_schools, only: [:index, :new, :create, :edit, :update]
   post "/registrants/import", to: "registrants#import"
   resources :registrants
-  
 
   resources :workshops do
     put :payment
@@ -44,4 +43,11 @@ Rails.application.routes.draw do
   resources :courses
   resources :course_registrations
   resources :teachers, only: [:index]
+
+  get '/show_users', to: 'admins#show_users'
+  get '/delete_user', to: 'admins#destroy_user'
+  get '/approve_applications', to: 'admins#approve_applications'
+  post '/assign_current_teacher/:application_id', to: 'admins#assign_current_teacher'
+  post '/assign_current_teacher', to: 'admins#assign_current_teacher'
+  post '/application_decision/:application_id', to: 'admins#application_decision'
 end

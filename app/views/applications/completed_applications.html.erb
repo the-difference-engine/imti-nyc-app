@@ -5,14 +5,24 @@
       <th>Last Name</th>
       <th>Status</th>
       <th>View Application</th>
+      <th>Review Application</th>
     </tr>
 
-   <% @applications.each do |application| %>
+   <% @applications_finished.each do |application| %>
       <tr> 
          <td> <%= application.user.first_name.capitalize %> </td>
          <td> <%= application.user.last_name.capitalize %></td>
          <td> <%= application.application_status.capitalize %></td>
          <td> <%= link_to "View", "/applications/#{application.id}" %></td>
+         <td>
+            <%= form_tag "/application_decision/#{application.id}", method: :post  do %>
+              <select name="status">
+                <option value="approved">Approve</option>
+                <option value="rejected">Reject</option>
+              </select>
+              <input type="submit" value="Save">
+            <% end %>
+          </td>
 
       </tr>
 
@@ -22,7 +32,7 @@
 </div>
 
 <div class="digg_pagination">
-   <%= will_paginate @applications %>
+   <%= will_paginate @applications_finished %>
 </div>
 
 

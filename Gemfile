@@ -38,8 +38,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'faker'
 gem 'will_paginate', '~> 3.1.0'
-
 gem 'cancancan', '~> 2.0'
+gem 'rb-readline'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
