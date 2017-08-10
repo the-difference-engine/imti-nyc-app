@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, path: '', controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
   resources :users, only: [:index, :update, :destroy]
   as :user do
@@ -42,4 +43,5 @@ Rails.application.routes.draw do
   resources :charges
   resources :courses
   resources :course_registrations
+  resources :teachers, only: [:index]
 end
