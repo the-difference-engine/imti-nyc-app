@@ -16,7 +16,6 @@ class DonationsController < ApplicationController
     if @donation.amount.to_f > 0
       render 'confirmation.html.erb'
     else
-      p @donation.comment
       flash[:danger] = "Provide an amount."
       render 'new.html.erb'
     end

@@ -26,7 +26,7 @@
     <p>First Name: <%= @donation.first_name %></p>
     <p>Last Name: <%= @donation.last_name %></p>
     <p>Email: <%= @donation.email %></p>
-    <p>Amount: <%= @donation.amount %></p>
+    <p>Amount: <%= number_to_currency(sprintf('%.2f', @donation.amount))%></p>
     <!-- ==================== Message Now Area Start ==================== -->
     <section class="message_now_area">
         <div class="container">
@@ -37,6 +37,7 @@
                     <input type="hidden" name="last_name" value="<%= @donation.last_name %>">
                     <input type="hidden" name="email" value="<%= @donation.email %>">
                     <input type="hidden" name="amount" value="<%= @donation.amount %>">
+                    <button>Confirm donation</button>
                     <% end %>
                 </div>
             </div>
