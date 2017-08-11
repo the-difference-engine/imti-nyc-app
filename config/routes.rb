@@ -39,4 +39,6 @@ Rails.application.routes.draw do
   resources :course_registrations
 
   get '/show_users', to: 'admins#show_users'
+  get '/move_to_admin', to: 'admins#move_to_admin'
+  get '/move_to_local_school_admin', to: 'admins#move_to_local_school_admin'
 end

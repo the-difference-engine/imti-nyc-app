@@ -34,13 +34,13 @@
         <td><%= user.first_name + ' ' + user.last_name %></td>
         <td><%= user.role %></td>
         <td><%= link_to "view profile", "#" %></td>
-        <td><%= link_to "move to local admin", "#" %></td>
+        <td><%= link_to "move to local school admin", { controller: "admins", action: "move_to_local_school_admin", user_id: user.id} %></td>
       </tr>
       <% end %>
   </table>
 </div>
 
-<h3>Local Admin Users</h3>
+<h3>Local School Admin Users</h3>
 <div class="users-table">
   <table>
     <tr>
@@ -56,7 +56,7 @@
         <td><%= user.first_name + ' ' + user.last_name %></td>
         <td><%= user.role %></td>
         <td><%= link_to "view profile", "#" %></td>
-        <td><%= link_to "move to admin", "#" %></td>
+        <td><%= link_to "move to admin", { controller: "admins", action: "move_to_admin", user_id: user.id} %></td>
       </tr>
       <% end %>
   </table>
@@ -78,7 +78,10 @@
         <td><%= user.first_name + ' ' + user.last_name %></td>
         <td><%= user.role %></td>
         <td><%= link_to "view profile", "#" %></td>
-        <td><%= link_to "move to admin", "#" %></td>
+        <td>
+          <%= link_to "move to admin", { controller: "admins", action: "move_to_admin", user_id: user.id} %> | 
+          <%= link_to "move to local school admin", { controller: "admins", action: "move_to_local_school_admin", user_id: user.id} %>
+        </td>
       </tr>
       <% end %>
   </table>
