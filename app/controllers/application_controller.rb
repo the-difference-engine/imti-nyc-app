@@ -17,4 +17,10 @@ class ApplicationController < ActionController::Base
       super
     end
   end
+
+  def validate_admin?
+    unless current_user && current_user.admin?
+      redirect_to "/"
+    end
+  end
 end

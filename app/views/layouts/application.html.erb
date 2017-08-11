@@ -43,7 +43,6 @@
     <!-- preloader start -->
     <div id="preloader"></div>
     <!-- /.end preloader -->
-
     <header class="header_area">
         <!-- Top Header Area Start -->
         <div class="top_header_area hidden-xs">
@@ -119,6 +118,14 @@
                                         <% if user_signed_in? %>
                                             <li><%= link_to "My Application", "/applications" %></li>
                                         <% end%>
+                                        <% if current_user && current_user.admin? %>
+                                            <li><a href="#">Admin<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                            <ul class="sub-menu">
+                                                <li><%= link_to "View Users", '/users' %></li>
+                                                <li><%= link_to "View Courses", '/courses' %></li>
+                                            </ul>
+                                        </li>
+                                        <% end %>
                                         <li><a href="#">course<i class="fa fa-caret-down" aria-hidden="true"></i></a>
                                             <ul class="sub-menu">
                                                 <li><%= link_to "Course Grid" '#' %></li>
