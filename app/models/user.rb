@@ -45,5 +45,4 @@ class User < ApplicationRecord
   def local_school_user?
     local_school_admin? || local_school_teacher?
   end
-
 end
