@@ -20,7 +20,6 @@ class RegistrantsController < ApplicationController
       end
       flash[:danger] = @registrant.errors.full_messages
       render 'workshops/show'
-
     end
   end
 
