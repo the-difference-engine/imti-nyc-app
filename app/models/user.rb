@@ -7,7 +7,8 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :email, presence: true      
   has_one :application
   belongs_to :local_school, optional: true
-  belongs_to :course, optional: true
+  has_many :user_courses
+  has_many :courses, through: :user_courses
   has_many :charges
   # if role are changed (order or names), must update any code dealing with roles
 
