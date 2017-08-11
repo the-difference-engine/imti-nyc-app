@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root :to => 'pages#index'
   get "/about" => 'pages#about'
   get "/contact" => 'pages#contact'
+  post "/message" => 'pages#send_message'
   get "/template" => 'pages#template'
 
   resources :applications, only: [:index, :new, :show, :create, :edit, :update] do
