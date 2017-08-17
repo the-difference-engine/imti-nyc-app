@@ -26,4 +26,7 @@ class AdminsController < ApplicationController
     user.destroy
     redirect_to :back
   end
+
+  def destroy_user
+  end
 end
