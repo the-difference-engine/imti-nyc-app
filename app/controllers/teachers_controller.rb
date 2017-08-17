@@ -1,8 +1,7 @@
 class TeachersController < ApplicationController
   def index
-    application = Application.find_by(user_id: current_user.id);
-    if application.application_status != "accepted"
-      flash[:danger] = "Access denied because user application status does not equal 'accepted'"
+    if current_user.application.application_status != "accepted"
+      flash[:danger] = "Your application must first be accepted in order to access this page."
       redirect_to "/"
     end
   end
