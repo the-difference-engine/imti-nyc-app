@@ -1,0 +1,58 @@
+<%= render partial: 'shared/breadcrumbs', locals: { page_title: "Alumni Signup" } %>
+
+<div class="application">
+  <p>SECTION A: PERSONAL DATA </p>
+
+  <%= form_tag('/alumni', method: :post) do %>
+    <div>
+      <%= label_tag :home_phone %>
+      <%= text_field_tag :home_phone, @alumnu.home_phone %>
+    </div>
+    <div>
+      <%= label_tag :mobile_phone %>
+      <%= text_field_tag :mobile_phone, @alumnu.mobile_phone %>
+    </div>
+    <div>
+     <%= label_tag :work_phone %>
+     <%= text_field_tag :work_phone, @alumnu.work_phone %>
+    </div>
+    <div>
+      <%= label_tag :street %>
+      <%= text_field_tag :street, @alumnu.street %>
+    </div>
+    <div>
+      <%= label_tag :city %>
+      <%= text_field_tag :city, @alumnu.city %>
+    </div>
+    <div>
+      <%= label_tag :state %>
+      <%= text_field_tag :state, @alumnu.state %>
+    </div>
+    <div>
+      <%= label_tag :country %>
+      <%= text_field_tag :country, @alumnu.country %>
+    </div>
+    <div>
+      <%= label_tag :zip_code %>
+      <%= text_field_tag :zip_code, @alumnu.zip_code %>
+    </div>
+    <div>
+      <%= label_tag :birth_date %>
+      <%= date_field_tag :birth_date, @alumnu.birth_date %>
+    </div>
+    <div>
+      <%= label_tag :graduation_year %>
+      <%= text_field_tag :graduation_year, @alumnu.graduation_year %>
+    </div>
+    <div>
+      <%= label_tag :occupation %>
+      <%= text_field_tag :occupation, @alumnu.occupation %>
+    </div>
+    <div>
+      <%= label_tag :bio %>
+      <%= text_area_tag :bio, @alumnu.bio %>
+    </div>
+    <div><%= submit_tag "Save" %></div>
+  <% end %>
+
+</div>

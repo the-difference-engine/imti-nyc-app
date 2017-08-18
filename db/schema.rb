@@ -15,6 +15,24 @@ ActiveRecord::Schema.define(version: 20170829005614) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "alumnus", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "home_phone"
+    t.string   "mobile_phone"
+    t.string   "work_phone"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.string   "zip_code"
+    t.datetime "birth_date"
+    t.integer  "graduation_year"
+    t.string   "occupation"
+    t.text     "bio"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "applications", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "street"
@@ -70,6 +88,16 @@ ActiveRecord::Schema.define(version: 20170829005614) do
     t.integer  "attachment_file_size"
     t.string   "attachment_content_type"
     t.datetime "attachment_updated_at"
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "comment"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.decimal  "amount",     precision: 8, scale: 2
   end
 
   create_table "educations", force: :cascade do |t|

@@ -20,6 +20,8 @@
               <div class="register_form">
                 <h2>Sign up</h2>
                 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                <% p "resource name: " + resource_name.to_s %>
+                <% p "registration page: " + registration_path(resource_name).to_s %>
                   <!-- Single Register input area start -->
                   <div class="form-group">
                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
@@ -52,7 +54,7 @@
                   </div>
                   <div class="form-group">
                     <i class="fa fa-angle-right"></i>
-                    <%= f.select(:role, User.roles.collect { |p| [p[0].humanize, p[0]] if p[1]==3 || p[1]==4}.compact, {}, {class: "form-control"}) %>
+                    <%= f.select(:role, User.roles.collect { |p| [p[0].humanize, p[0]] if p[1]==3 || p[1]==4 || p[1]==6}.compact, {}, {class: "form-control"}) %>
                   </div>
                   <div class="actions">
                     <%= f.submit "Sign up", { :class => "btn btn-default", :id => "login_submit" } %>

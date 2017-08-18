@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   resources :courses
   resources :course_registrations
   resources :teachers, only: [:index]
+  resources :alumni
 
   get '/show_users', to: 'admins#show_users'
   get '/delete_user', to: 'admins#destroy_user'
