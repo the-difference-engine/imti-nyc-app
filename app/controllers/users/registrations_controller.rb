@@ -32,6 +32,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    current_user.local_school_admin? ? local_schools_path : new_application_path
+    p "we found the right method"
+    if current_user.alumni?
+      p "ALUMNI!!!!!!!!!!"
+    end
+
+    if current_user.alumni?
+      new_alumni_path
+    else
+      # current_user.local_school_admin? ? local_schools_path : new_application_path
+      p "buttfor"
+    end
   end
 end
