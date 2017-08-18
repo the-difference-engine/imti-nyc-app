@@ -17,16 +17,26 @@ class AdminsController < ApplicationController
     user = User.find_by(id: params[:user_id])
     user.role = "local_school_admin"
     user.save
-    redirect_to :back
+    redirect_to "/show_users"
+  end
+
+  def select_school
+    @schools = LocalSchool.all
+    @user_id = params[:user_id]
+    render "select_school.html.erb"
   end
 
   def remove_admin
     #delete user
     user = User.find_by(id: params[:user_id])
-    user.destroy
+    user.role = "member"
+    user.save
     redirect_to :back
   end
 
   def destroy_user
+    user = User.find_by(id: params[:user_id])
+    user.destroy
+    redirect_to :back
   end
 end

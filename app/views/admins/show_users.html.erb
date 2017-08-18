@@ -24,17 +24,19 @@
     <tr>
       <th>Email</th>
       <th>Full Name</th>
-      <th>Role</th>
       <th>View Profile</th>
       <th>Move to Admin</th>
+      <th>Remove User</th>
     </tr>
     <% @users_admin.each do |user| %>
       <tr>
         <td><%= user.email %></td>
         <td><%= user.first_name + ' ' + user.last_name %></td>
-        <td><%= user.role %></td>
         <td><%= link_to "view profile", "#" %></td>
-        <td><%= link_to "move to local school admin", { controller: "admins", action: "move_to_local_school_admin", user_id: user.id} %></td>
+        <td>
+          <%= link_to "move to local school admin", { controller: "admins", action: "select_school", user_id: user.id} %>
+        </td>
+        <td><%= link_to "delete", { controller: "admins", action: "destroy_user", user_id: user.id}, :data => {:confirm => "Do you want to delete #{user.first_name}?"} %></td>
       </tr>
       <% end %>
   </table>
@@ -46,17 +48,17 @@
     <tr>
       <th>Email</th>
       <th>Full Name</th>
-      <th>Role</th>
       <th>View Profile</th>
       <th>Move to Admin</th>
+      <th>Remove User</th>
     </tr>
     <% @users_local_school_admin.each do |user| %>
       <tr>
         <td><%= user.email %></td>
         <td><%= user.first_name + ' ' + user.last_name %></td>
-        <td><%= user.role %></td>
         <td><%= link_to "view profile", "#" %></td>
         <td><%= link_to "move to admin", { controller: "admins", action: "move_to_admin", user_id: user.id} %></td>
+        <td><%= link_to "delete", { controller: "admins", action: "destroy_user", user_id: user.id}, :data => {:confirm => "Do you want to delete #{user.first_name}?"} %></td>
       </tr>
       <% end %>
   </table>
@@ -71,6 +73,7 @@
       <th>Role</th>
       <th>View Profile</th>
       <th>Move to Admin</th>
+      <th>Delete</th>
     </tr>
     <% @users_not_admin.each do |user| %>
       <tr>
@@ -80,8 +83,9 @@
         <td><%= link_to "view profile", "#" %></td>
         <td>
           <%= link_to "move to admin", { controller: "admins", action: "move_to_admin", user_id: user.id} %> | 
-          <%= link_to "move to local school admin", { controller: "admins", action: "move_to_local_school_admin", user_id: user.id} %> | <%= link_to "delete", { controller: "admins", action: "destroy_user", user_id: user.id} %>
+          <%= link_to "move to local school admin", { controller: "admins", action: "select_school", user_id: user.id} %>
         </td>
+        <td><%= link_to "delete", { controller: "admins", action: "destroy_user", user_id: user.id}, :data => {:confirm => "Do you want to delete #{user.first_name}?"} %></td>
       </tr>
       <% end %>
   </table>

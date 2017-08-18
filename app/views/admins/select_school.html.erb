@@ -1,0 +1,44 @@
+<style>
+.users-table table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.users-table td, th {
+  border: 1px solid #dddddd ;
+  text-align: center;
+  padding: 8px;
+}
+
+.users-table tr:nth-child(even) {
+  background-color: #dddddd ;
+}
+</style>
+
+<h3>Select a School for this User</h3>
+
+<div class="users-table">
+  <table>
+    <tr>
+      <th>School Code</th>
+      <th>School Name</th>
+      <th>Address</th>
+      <th>Contact Name</th>
+      <th>Select School</th>
+    </tr>
+    <% @schools.each do |school| %>
+      <tr>
+        <td><%= school.code %></td>
+        <td><%= school.name %></td>
+        <td><%= school.contact_name %></td>
+        <td>
+          <%= school.school_address %>
+        </td>
+        <td><%= link_to "select", { controller: "admins", action: "move_to_local_school_admin", school_id: school.id, user_id: @user_id} %></td>
+      </tr>
+      <% end %>
+  </table>
+</div>
