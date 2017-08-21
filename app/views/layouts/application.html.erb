@@ -115,6 +115,10 @@
                                 <nav>
                                     <ul id="nav">
                                         <li><%= link_to "Home", "/" %></li>
+                                        <% if current_user.role == "admin" %>
+                                            <li><%= link_to "View Users", '/show_users' %></li>
+
+                                        <% end %>
                                         <% if user_signed_in? %>
                                             <li><%= link_to "My Application", "/applications" %></li>
                                         <% end%>
