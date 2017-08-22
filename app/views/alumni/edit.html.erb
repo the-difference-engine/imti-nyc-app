@@ -1,0 +1,28 @@
+<div class="application">
+
+  <h1>Edit Info</h1>
+
+  <%= bootstrap_form_for @alumnu, :url => {:action => "update"} do |f| %>
+    <p><%= label_tag :first_name %></p>
+    <p><%= text_field_tag :first_name, @alumnu.user.first_name, class: "form-control" %></p>
+    <p><%= label_tag :middle_initial %></p>
+    <p><%= text_field_tag :middle_initial, @alumnu.user.middle_initial, class: "form-control" %></p>
+    <p><%= label_tag :last_name %></p>
+    <p><%= text_field_tag :last_name, @alumnu.user.last_name, class: "form-control"%></p>
+    <p><%= label_tag :email %></p>
+    <p><%= text_field_tag :email, @alumnu.user.email, class: "form-control" %></p>
+    <p><%= f.text_field :home_phone %></p>
+    <p><%= f.text_field :mobile_phone %></p>
+    <p><%= f.text_field :work_phone %></p>
+    <p><%= f.text_field :street %></p>
+    <p><%= f.text_field :city %></p>
+    <p><%= f.text_field :state %></p>
+    <p><%= f.text_field :zip_code %></p>
+    <p><%= f.text_field :country %></p>
+    <p><%= f.text_field :graduation_year %></p>
+    <p><%= f.text_field :occupation %></p>
+    <p><%= f.text_area :bio %></p>
+    <p><%= f.submit :Save %></p>
+    <p><%= link_to 'Cancel', "/alumni/#{@alumnu.id}/"%></p>
+  <% end %>
+</div>

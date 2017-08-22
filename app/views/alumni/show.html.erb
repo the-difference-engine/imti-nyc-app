@@ -1,0 +1,78 @@
+<section class="about_us_area section_padding_100">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <!-- About us text start -->
+                <div class="about_us_text">
+                   <h5></h5>
+                </div>
+                <!-- About us special quote start -->
+                <div class="special_service">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="single_special_service">    
+                            <h5>Name: <%= "#{@alumnu.user.first_name} #{@alumnu.user.last_name}" %></h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                          <div class="single_special_service">
+                              
+                              <h5>Email: <%= @alumnu.user.email %></h5>
+                          </div>
+                      </div>
+                      <div class="col-sm-12">
+                          <div class="single_special_service">
+                              
+                              <h5>Address: 
+                              <br>
+                              <%= "#{@alumnu.street}, #{@alumnu.city}, #{@alumnu.state} #{@alumnu.zip_code}, #{@alumnu.country}" %></h5>
+                          </div>
+                      </div>
+                      <div class="col-sm-12">
+                          <div class="single_special_service">
+                              <h5>Home Phone: <%= @alumnu.home_phone %></h5>
+                          </div>
+                      </div>
+                      <div class="col-sm-12">
+                          <div class="single_special_service">
+                              <h5>Mobile Phone: <%= @alumnu.mobile_phone %></h5>
+                          </div>
+                      </div>
+                      <div class="col-sm-12">
+                          <div class="single_special_service">
+                              <h5>Work Phone: <%= @alumnu.work_phone %></h5>
+                          </div>
+                      </div>
+                      <div class="col-sm-12">
+                          <div class="single_special_service">
+                              <h5>Graduation Year: <%= @alumnu.graduation_year %></h5>
+                          </div>
+                      </div>
+                      <div class="col-sm-12">
+                          <div class="single_special_service">
+                              <h5>Occupation: <%= @alumnu.occupation %></h5>
+                          </div>
+                      </div>
+                      <div class="col-sm-12">
+                          <div class="single_special_service">
+                              <h5>Bio: <%= @alumnu.bio %></h5>
+                          </div>
+                      </div>
+                      <div class="col-sm-12">
+                          <div class="single_special_service">
+                              <h5><%= link_to "edit", "/alumni/#{@alumnu.id}/edit" %></h5>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <!-- About us thumb start -->
+                <div class="about_us_thumb">
+                    <%= image_tag "img/about.jpg" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
