@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/template" => 'pages#template'
   get "/calendar" => 'pages#calendar'
 
+
   get "/completed_applications" => 'applications#completed_applications'
   get "/download_applicants" => 'applications#download_spreadsheet'
 
@@ -27,8 +28,9 @@ Rails.application.routes.draw do
 
   resources :student_profiles, only: [:index, :create]
 
-  resources :donations, only: [:index, :new, :create]
+  resources :donations, only: [:index, :new, :create] 
   post "/donations/confirmation" => 'donations#confirmation'
+  # post "/donations/confirmation" => 'charges#new'
 
   get "/student_profiles/edit" => "student_profiles#edit"
   patch "/student_profiles" => "student_profiles#update"
@@ -44,7 +46,7 @@ Rails.application.routes.draw do
   resources :workshops do
     put :payment
   end
-  resources :charges
+  resources :charges 
   resources :courses
   resources :course_registrations
   resources :teachers, only: [:index]

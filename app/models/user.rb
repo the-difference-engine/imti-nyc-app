@@ -9,6 +9,7 @@ class User < ApplicationRecord
   belongs_to :local_school, optional: true
   belongs_to :course, optional: true
   has_many :charges
+  has_many :donations
   # if role are changed (order or names), must update any code dealing with roles
 
   ROLES = [:admin, :local_school_admin, :local_school_applicant, :domestic_applicant,

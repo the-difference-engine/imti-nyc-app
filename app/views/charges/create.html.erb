@@ -1,1 +1,1 @@
-<h2>Thanks, you paid <strong>$100.00</strong>!</h2>
+<h2>Thanks you for your donation of <strong><%= number_to_currency(sprintf('%.2f', current_user.donations.last.amount ))%></strong></h2>
