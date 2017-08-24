@@ -5,7 +5,7 @@ class DonationsController < ApplicationController
     @donation = Donation.new
   end
   def show
-    @charge = Donation.find(params[:id])
+    @charge = Donation.find_by_uid(params[:id])
   end
   def create
     puts "helloooo"
@@ -20,6 +20,11 @@ class DonationsController < ApplicationController
       :source => "tok_visa", # obtained with Stripe.js
       :description => "Donation")
       current_user.donations.last.update(confirmed: true)
+      Charge.create(customer_id: customer.id, 
+                                 description: charge.description,
+                                 amount: (Donation.all.where(email:params[:stripeEmail]).last.amount).to_i,
+                                 uid: SecureRandom.uuid,
+                                 user_id: current_user.id)
    else
       # binding.pry
       charge= Stripe::Charge.create(
@@ -27,12 +32,13 @@ class DonationsController < ApplicationController
       :currency => "usd",
       :source => "tok_visa", # obtained with Stripe.js
       :description => "anonymous donation")
+      Charge.create(customer_id: customer.id, 
+                                 description: charge.description,
+                                 amount: (Donation.all.where(email:params[:stripeEmail]).last.amount).to_i,
+                                 uid: SecureRandom.uuid)
     end
     Donation.all.where(email:params[:stripeEmail]).last.update(email: params[:stripeEmail],confirmed: true)
-    payment= Charge.create(customer_id: customer.id, 
-                               description: charge.description,
-                               amount: (Donation.all.where(email:params[:stripeEmail]).last.amount).to_i,
-                               uid: SecureRandom.uuid)
+
     redirect_to donation_path(Donation.all.where(email:params[:stripeEmail]).last.id)
       # first_name: @donation.first_name,
       # last_name: @donation.last_name,
