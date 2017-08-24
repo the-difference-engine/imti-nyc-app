@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   resources :student_profiles, only: [:index, :create]
 
-  resources :donations, only: [:index, :new, :create] 
+  resources :donations, only: [:index, :show, :new, :create] 
   post "/donations/confirmation" => 'donations#confirmation'
   # post "/donations/confirmation" => 'charges#new'
 
