@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "/contact" => 'pages#contact'
   post "/message" => 'pages#send_message'
   get "/template" => 'pages#template'
-  get "/calendar" => 'pages#calendar'
+  get "/calendar" => 'calendar#show'
 
   get "/completed_applications" => 'applications#completed_applications'
   resources :applications, only: [:index, :new, :show, :create, :edit, :update] do
