@@ -5,15 +5,12 @@ class AlumniController < ApplicationController
   end
 
   def create
-    p "hitting the right method!!!!!!!!!!!!!!!!!!!!!!!"
-    p alumnu_params
     @alumnu = Alumnu.new(alumnu_params)
     if @alumnu.save
-      p @alumnu
-      redirect to "alumni/#{@alumnu.id}"
+      redirect_to "/alumni/#{@alumnu.id}"
     else
-      p "error!!!!!!"
-      p @alumnu.errors.full_messages
+      flash[:danger] = @alumnu.errors.full_messages
+      render "new.html.erb"
     end
   end
 
@@ -37,13 +34,13 @@ class AlumniController < ApplicationController
       flash[:danger] = @alumnu.errors.full_messages + @user.errors.full_messages
       render "edit.html.erb"
     else
-      flash[:success] = "Hooray, updated!!!"
+      flash[:success] = "Alumni info has been updated!"
       redirect_to "/alumni/#{@alumnu.id}"
     end
   end
 
   def alumnu_params
-    params.permit(:home_phone, :mobile_phone, :work_phone, :street, :city, :state, :country, :zip_code, :birth_date, :graduation_year, :occupation, :bio).merge(user_id: current_user.id)
+    params.require(:alumnu).permit(:home_phone, :mobile_phone, :work_phone, :street, :city, :state, :country, :zip_code, :birth_date, :graduation_year, :occupation, :bio).merge(user_id: current_user.id)
   end
 
   def user_params
