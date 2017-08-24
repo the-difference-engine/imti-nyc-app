@@ -46,7 +46,11 @@
                                       data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                                       data-description="Your donation"
                                       data-amount="<%= @donation.amount*100 %>"
+                                      <% if current_user %>
                                       data-email="<%= current_user.email %>"
+                                      <% else %>
+                                      data-email="<%= @donation.email %>"
+                                      <% end %>
                                       data-locale="auto"></script>
                                     <% end %>
 
