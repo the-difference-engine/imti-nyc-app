@@ -20,6 +20,12 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.find_by(id: params[:id])
     @registrant = Registrant.new
     @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id) if current_user.local_school_admin? 
+
+    registrant_workshop = RegistrantWorkshop.where(workshop_id: @workshop.id)
+    count = calc_count_in_show(registrant_workshop)
+    # amount should be changed to workshop price multiplied by count
+    @amount = count * @workshop.price.to_i
+
     render 'show.html.erb'  
   end
 
@@ -46,7 +52,7 @@ class WorkshopsController < ApplicationController
   
     count = calc_count_in_payment(registrant_workshop)
     # amount should be changed to workshop price multiplied by count
-    @amount = count * @workshop.price.to_i ;
+    @amount = count * @workshop.price.to_i
     # binding.pry
     puts "=" *100
     puts "#{@amount} @amount" 
