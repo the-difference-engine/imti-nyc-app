@@ -121,7 +121,7 @@ class WorkshopsController < ApplicationController
   end
   private
 
-  def workshops_params
-    params.require(:workshop).permit(:name, :description, :price, :time)
-  end
+    def workshops_params
+      params.permit(:name, :description, :date, :price)
+    end
 end

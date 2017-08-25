@@ -7,86 +7,59 @@ class DonationsController < ApplicationController
   def show
     @charge = Donation.find_by_uid(params[:id])
   end
+
   def create
-    puts "helloooo"
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
       :source  => params[:stripeToken]
     )
-    if current_user
-      charge= Stripe::Charge.create(
-      :amount => (current_user.donations.last.amount*100).to_i,
+    charge= Stripe::Charge.create(
+      :amount => (params[:amount].to_i)*100,
       :currency => "usd",
       :source => "tok_visa", # obtained with Stripe.js
       :description => "Donation")
-      current_user.donations.last.update(confirmed: true)
-      Charge.create(customer_id: customer.id, 
-                                 description: charge.description,
-                                 amount: (Donation.all.where(email:params[:stripeEmail]).last.amount).to_i,
+    Donation.find(params[:donation_id]).update(confirmed: true)
+    new_charge= Charge.new(customer_id: customer.id, 
+                                 amount: params[:amount].to_i,
                                  uid: SecureRandom.uuid,
-                                 user_id: current_user.id)
-   else
-      # binding.pry
-      charge= Stripe::Charge.create(
-      :amount => (Donation.all.where(email:params[:stripeEmail]).last.amount*100).to_i,
-      :currency => "usd",
-      :source => "tok_visa", # obtained with Stripe.js
-      :description => "anonymous donation")
-      Charge.create(customer_id: customer.id, 
-                                 description: charge.description,
-                                 amount: (Donation.all.where(email:params[:stripeEmail]).last.amount).to_i,
-                                 uid: SecureRandom.uuid)
-    end
-    Donation.all.where(email:params[:stripeEmail]).last.update(email: params[:stripeEmail],confirmed: true)
+                                 payment_id: params[:donation_id],
+                                 currency: charge.currency, 
+                                 card: params[:stripeToken])
+    new_charge.user_id =  current_user  ? current_user.id : nil
+    new_charge.description =  current_user  ? charge.description : "anonymous"
+    new_charge.save
 
-    redirect_to donation_path(Donation.all.where(email:params[:stripeEmail]).last.id)
-      # first_name: @donation.first_name,
-      # last_name: @donation.last_name,
-      # email: @donation.email,
-      # comment: @donation.comment,
-    #   amount: @donation.amount,
-    #   confirmed: true
-    # )
+    Donation.find(params[:donation_id]).update(confirmed: true)
+
+    redirect_to donation_path(Donation.all.where(email:params[:stripeEmail]).last.uid)
+
+
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_charge_path
   end
+
   def confirmation
-    amount = 5
-    if current_user
-      @donation = Donation.new(
-      first_name: current_user.first_name,
-      last_name: current_user.last_name,
-      email:current_user.email,
-      comment: params[:comment],
-      amount: params[:amount],
-      user_id: current_user.id,
-      confirmed: false)
-   else
-     @donation = Donation.new(
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      email:params[:email],
-      comment: params[:comment],
-      amount: params[:amount],
-      confirmed: false)
-    end
-  # @donation = Donation.new(
-  #     first_name: params[:first_name],
-  #     last_name: params[:last_name],
-  #     email: params[:email],
-  #     comment: params[:comment],
-  #     amount: params[:amount],
-  #     user_id: current_user.id,
-  #     confirmed: false
-  #   )
-  # binding.pry
-    if @donation.amount.to_f  >= amount
+    @donation = Donation.new(donation_params)
+    @donation.uid = SecureRandom.uuid
+
+    @donation.first_name = current_user ? current_user.first_name : "anonymous"
+    @donation.last_name = current_user ? current_user.last_name : "anonymous"
+    @donation.user_id =  current_user  ? current_user.id : nil
+
+    if @donation.amount.to_f  >= Donation::MINIMUN_AMOUNT
       @donation.save
-    else
-      flash[:danger] = "Provide an amount greater than or equal to #{amount}."
-      render 'new.html.erb'
+  else
+    flash[:danger] = "Provide an amount greater than or equal to #{amount}."
+    render 'new.html.erb'
+    end
+  end
+
+  private
+
+    def donation_params
+      params.permit(:donation_id, :first_name, :last_name, :email, :comment, :amount, :uid, :confirmed, :amount)
     end
 
-  end
 end
+

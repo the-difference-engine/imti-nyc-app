@@ -27,17 +27,12 @@ Rails.application.routes.draw do
   end
 
   resources :student_profiles, only: [:index, :create]
-
   resources :donations, only: [:index, :show, :new, :create] 
   post "/donations/confirmation" => 'donations#confirmation'
-  # post "/donations/confirmation" => 'charges#new'
-
   get "/student_profiles/edit" => "student_profiles#edit"
   patch "/student_profiles" => "student_profiles#update"
-
   resources :school_profiles, only: [:index, :new, :create, :edit, :update] do
   end
-
 
   resources :local_schools, only: [:index, :new, :create, :edit, :update]
   post "/registrants/import", to: "registrants#import"

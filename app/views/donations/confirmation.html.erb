@@ -1,4 +1,4 @@
-<!-- Breadcumb area start -->
+Breadcumb area start -->
     <section class="breadcumb_area">
         <div class="container">
             <div class="row">
@@ -21,7 +21,6 @@
             </div>
         </div>
     </section>
-    <!-- Breadcumb area end -->
 
     <p>First Name: <%= @donation.first_name %></p>
     <p>Last Name: <%= @donation.last_name %></p>
@@ -29,34 +28,32 @@
     <p>Amount: <%= number_to_currency(sprintf('%.2f', @donation.amount))%></p>
     <!-- ==================== Message Now Area Start ==================== -->
     <section class="message_now_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    
-        <!-- .end container -->
-             <%= form_tag "/donations", method: :post, id: "stripe-button" do %>
-                                    <article>
-                                      <% if flash[:error].present? %>
-                                      <div id="error_explanation">
-                                        <p><%= flash[:error] %></p>
-                                      </div>
-                                      <% end %>
-                                    </article>
-                                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                                      data-description="Donation"
-                                      data-amount="<%= @donation.amount*100 %>"
-                                      <% if current_user %>
-                                      data-email="<%= current_user.email %>"
-                                      <% else %>
-                                      data-email="<%= @donation.email %>"
-                                      <% end %>
-                                      data-locale="auto"></script>
-                                    <% end %>
-
-                </div>
-            </div>
-        </div>
+       <div class="container">
+             <div class="row">
+                  <div class="col-xs-12">
+                      <%= form_tag donations_path(amount: @donation.amount, donation_id: @donation.id), method: :post  do %>
+                            <article>
+                              <% if flash[:error].present? %>
+                                  <div id="error_explanation">
+                                    <p><%= flash[:error] %></p>
+                                  </div>
+                              <% end %>
+                            </article>
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                              data-description="Donation"
+                              data-amount="<%= @donation.amount*100 %>"
+                              <% if current_user %>
+                              data-email="<%= current_user.email %>"
+                              <% else %>
+                              data-email="<%= @donation.email %>"
+                              <% end %>
+                              data-locale="auto">
+                            </script>
+                      <% end %>
+                  </div>
+             </div>
+       </div>
     </section>
     <!-- ==================== Message Now Area Start ==================== -->
 
@@ -65,4 +62,4 @@
         <!-- Map Area Start -->
         <div class="map_area" id="googleMap"></div>
     </div>
-    <!-- ==================== Map and Contact Area End ==================== -->
+    <!-- ==================== Map and Contact Area End ====================
