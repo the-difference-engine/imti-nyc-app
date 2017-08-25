@@ -1,0 +1,68 @@
+<%= render partial: 'shared/breadcrumbs', locals: { page_title: "Register" } %>
+
+<div class="login_area section_padding_100">
+    <div class="container">
+        <%= devise_error_messages! %>
+        <div class="row">
+            <!-- Login thumb -->
+            <div class="col-xs-12 col-md-5 col-lg-6">
+                <div class="login_thumb">
+                    <%= image_tag "img/bg-pattern/courses-bg.jpg" %>
+                    <!-- Login thumb caption -->
+                    <div class="login_thumb_caption">
+                        <h3>Register is so Easy!</h3>
+                        <p>Register &amp; start learning.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Register form area start -->
+            <div class="col-xs-12 col-md-7 col-lg-6">
+              <div class="register_form">
+                <h2>Sign up</h2>
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                  <!-- Single Register input area start -->
+                  <div class="form-group">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <%= f.email_field :email, { :autofocus => true, :placeholder => "Email" } %>
+                  </div>
+                  <!-- Single Register input area start -->
+                  <div class="form-group">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <%= f.text_field :first_name, { :placeholder => "First name" } %>
+                  </div>
+                  <!-- Single Register input area start -->
+                  <div class="form-group">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <%= f.text_field :middle_initial, { :placeholder => "Middle initial"} %>
+                  </div>
+                  <!-- Single Register input area start -->
+                  <div class="form-group">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <%= f.text_field :last_name, { :placeholder => "Last name" } %>
+                  </div>
+                  <!-- Single Register input area start -->
+                  <div class="form-group">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                    <%= f.password_field :password, { :autocomplete => "off", :placeholder => "Password #{@minimum_password_length ? "(#{@minimum_password_length} characters minimum)" : "" } " } %>
+                  </div>
+                  <!-- Single Register input area start -->
+                  <div class="form-group">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                    <%= f.password_field :password_confirmation, { :autocomplete => "off", :placeholder => "Password confirmation" } %>
+                  </div>
+                  <div class="form-group">
+                    <i class="fa fa-angle-right"></i>
+                    <%= f.select(:role, User.roles.collect { |p| [p[0].humanize, p[0]] if p[1]==3 || p[1]==4}.compact, {}, {class: "form-control"}) %>
+                  </div>
+                  <div class="actions">
+                    <%= f.submit "Sign up", { :class => "btn btn-default", :id => "login_submit" } %>
+                  </div>
+                <% end %>
+
+                <%= render "devise/shared/links" %>
+              </div>
+            </div>
+            <!-- Register form area end  -->
+        </div>
+    </div>
+</div>

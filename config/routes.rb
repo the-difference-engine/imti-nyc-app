@@ -53,4 +53,5 @@ Rails.application.routes.draw do
   post '/assign_current_teacher/:application_id', to: 'admins#assign_current_teacher'
   post '/assign_current_teacher', to: 'admins#assign_current_teacher'
   post '/application_decision/:application_id', to: 'admins#application_decision'
+  resources :admins
 end
