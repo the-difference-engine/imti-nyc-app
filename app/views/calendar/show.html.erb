@@ -20,10 +20,30 @@
                 </div>
             </div>
         </div>
-    </section>
+    
     <!-- Breadcumb area end -->
-    <section class="calendar_area section_padding_100">
-      <div class="container">
-        <iframe src="https://calendar.google.com/calendar/embed?src=l92o39p1csj2nt1knkashmtuk4%40group.calendar.google.com&ctz=America/New_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-      </div>
+    <!-- <section class="calendar_area section_padding_100"> -->
+    <style> 
+    .test{
+        height: 750px;
+    }
+
+    .simple-calendar table {
+        height: 700px !important;
+        /*width: 90% !important;*/
+    }
+    </style>  
+        <div class="container" >  
+            <div class="row">
+                <div class="col-xs-11">
+                    <div class='test'>
+                       
+                        <%= month_calendar  do |date| %>
+                            <%= date.day %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+    <!-- </section> -->
