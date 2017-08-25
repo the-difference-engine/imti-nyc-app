@@ -44,4 +44,5 @@ Rails.application.routes.draw do
   resources :courses
   resources :course_registrations
   resources :teachers, only: [:index]
+  resources :admins
 end
