@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require css/bootstrap.css
+ *= require simple_calendar
  *= require css/nivoslider.css
  *= require css/magnific-popup.css
  *= require css/animate.css
@@ -20,7 +21,10 @@
  *= require css/et-line.css
  *= require rails_bootstrap_forms
  *= require_self
+
  *= require_tree .
+
+
  */
 
 .application {
