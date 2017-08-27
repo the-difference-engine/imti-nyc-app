@@ -1,4 +1,4 @@
-Breadcumb area start -->
+ <!-- Breadcumb area start -->
     <section class="breadcumb_area">
         <div class="container">
             <div class="row">
@@ -21,11 +21,13 @@ Breadcumb area start -->
             </div>
         </div>
     </section>
-
+     <div>
+    <%= image_tag "img/stripe-payments-logos.png" %>
     <p>First Name: <%= @donation.first_name %></p>
     <p>Last Name: <%= @donation.last_name %></p>
     <p>Email: <%= @donation.email %></p>
     <p>Amount: <%= number_to_currency(sprintf('%.2f', @donation.amount))%></p>
+    </div>
     <!-- ==================== Message Now Area Start ==================== -->
     <section class="message_now_area">
        <div class="container">
