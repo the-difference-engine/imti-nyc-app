@@ -4,6 +4,7 @@ class DonationsController < ApplicationController
   def new
     @donation = Donation.new
   end
+
   def show
     @charge = Donation.find_by_uid(params[:id])
   end
@@ -17,7 +18,7 @@ class DonationsController < ApplicationController
       :amount => (params[:amount].to_i)*100,
       :currency => "usd",
       :source => "tok_visa", # obtained with Stripe.js
-      :description => "Donation")
+      :description => "donation")
     Donation.find(params[:donation_id]).update(confirmed: true)
     new_charge= Charge.new(customer_id: customer.id, 
                                  amount: params[:amount].to_i,
@@ -26,13 +27,12 @@ class DonationsController < ApplicationController
                                  currency: charge.currency, 
                                  card: params[:stripeToken])
     new_charge.user_id =  current_user  ? current_user.id : nil
-    new_charge.description =  current_user  ? charge.description : "anonymous"
+    new_charge.description =  current_user  ? charge.description : "anonymous donation"
     new_charge.save
 
     Donation.find(params[:donation_id]).update(confirmed: true)
 
     redirect_to donation_path(Donation.all.where(email:params[:stripeEmail]).last.uid)
-
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
