@@ -238,20 +238,16 @@
                             <div class="underline"></div>
                         </div>
                         <!-- Single upcoming post -->
-                        <div class="event_single_post">
-                            <%= image_tag "img/news-img/blog-2.jpg" %>
-                            <%= link_to "<p>September 8: Human Tendencies</p>".html_safe, "http://www.montessori-imti.org/Events/Theory%20Lectures.html"%>
-                        </div>
                         <!-- Single upcoming post -->
                         <div class="event_single_post">
-                            <%= image_tag "img/news-img/blog-3.jpg" %>
-                            <%= link_to "<p>September 9: 4 Planes of Development</p>".html_safe, "http://www.montessori-imti.org/Events/Theory%20Lectures.html"%>
+                            <% @workshops.last(3).each do |workshop|%>
+                            <%= workshop.name %><br>
+                            <%= workshop.description %><br>
+                            <%= workshop.date %><br>
+                            <%end%>
                         </div>
                         <!-- Single upcoming post -->
-                        <div class="event_single_post">
-                            <%= image_tag "img/news-img/blog-4.jpg" %>
-                            <%= link_to "<p>September 12: Absorbent Mind </p>".html_safe, "http://www.montessori-imti.org/Events/Theory%20Lectures.html"%>
-                        </div>
+                        
                     </div>
                 </div>
                 <!-- Upcoming Area End -->
