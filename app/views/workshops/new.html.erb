@@ -1,19 +1,10 @@
-<%= form_tag '/workshops', method: :post do %>
+  <h1>Add New Workshop</h1>  
   <div>
-  <%= label_tag :name %>
-  <%= text_field_tag :name %>
-</div>
-<div>
-  <%= label_tag :description %>
-  <%= text_field_tag :description %>
-</div>
-<div>
- <%= label_tag :date %>
- <%= text_field_tag :date%>
-</div>
-<div>
-  <%= label_tag :price %>
-  <%= text_field_tag :price %>
-</div>
-<%= submit_tag 'Create New workshop' %>
-<% end %>
+  <%= bootstrap_form_for(@workshop) do |f| %>
+    <%= f.text_field :name%>
+    <%= f.text_field :description %>
+    <%= f.text_field :price %>
+    <%= f.datetime_select :time %>
+    <%= f.submit :save %>
+  <% end %>
+  </div>
