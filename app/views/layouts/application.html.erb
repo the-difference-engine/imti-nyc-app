@@ -241,9 +241,10 @@
                         <!-- Single upcoming post -->
                         <div class="event_single_post">
                             <% @workshops.last(3).each do |workshop|%>
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                             <%= workshop.name %><br>
                             <%= workshop.description %><br>
-                            <%= workshop.date %><br>
+                            <%= pretty_date(workshop.date) %><br>
                             <%end%>
                         </div>
                         <!-- Single upcoming post -->
