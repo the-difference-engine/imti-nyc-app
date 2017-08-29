@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
-  devise_for :users, path: '', controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
+  devise_for :users, path: '', controllers: {registrations: 'users/registrations', admins: 'admins', sessions: 'users/sessions'}
   resources :users, only: [:index, :update, :destroy]
   as :user do
     get '/schools/sign_up', to: 'users/registrations#new_school'
     post '/users/registrations/', to: 'users/registrations#import'
+    # get "/users/registrations/new", to: 'users/registrations#new_admin'
   end
   root :to => 'pages#index'
   get "/about" => 'pages#about'
