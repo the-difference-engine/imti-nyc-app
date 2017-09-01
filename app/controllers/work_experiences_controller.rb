@@ -12,6 +12,7 @@ class WorkExperiencesController < ApplicationController
   def create
     @application = Application.find(params[:application_id])
     @work_experience = WorkExperience.new(work_experience_params)
+    @work_experience.current_job(params[:current_job])
     if @work_experience.save
       flash[:success] = "Work_Experience saved."
       redirect_to application_work_experiences_path
@@ -27,7 +28,9 @@ class WorkExperiencesController < ApplicationController
   end
 
   def update
+    @application = Application.find(params[:application_id])
     @work_experience = WorkExperience.find(params[:id])
+    @work_experience.current_job(params[:current_job])
     if @work_experience.update(work_experience_params)
       flash[:success] = "work_experience updated."
       redirect_to application_work_experiences_path
