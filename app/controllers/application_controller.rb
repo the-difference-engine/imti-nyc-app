@@ -23,7 +23,8 @@ class ApplicationController < ActionController::Base
       redirect_to "/"
     end
   end
+
   def workshop_footer 
-    @workshops = Workshop.all
+    @footer_workshops = Workshop.where("time >= ?", Time.now).limit(3).order("time asc")
   end
 end
