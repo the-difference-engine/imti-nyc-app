@@ -18,11 +18,17 @@ class PagesController < ApplicationController
   end
 
   def send_message
-    send_email_mailgun
+      send_email_mailgun
+      send_email_confirmation
+      flash[:success] = "Message has been sent"
+    else
+      flash[:danger] = "Message failed to send"
+    end
     redirect_to '/'
   end
 
   def template
     @title = "Example Title"
   end
+
 end
