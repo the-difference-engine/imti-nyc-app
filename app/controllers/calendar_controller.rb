@@ -30,4 +30,5 @@ class CalendarController < ApplicationController
     )
     redirect_to '/calendar'
   end
+
 end
