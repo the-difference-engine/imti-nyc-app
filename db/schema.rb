@@ -82,6 +82,16 @@ ActiveRecord::Schema.define(version: 20170914222350) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.string   "location"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "local_schools", force: :cascade do |t|
     t.integer  "code"
     t.string   "name"

@@ -20,30 +20,51 @@
                 </div>
             </div>
         </div>
-    
+    </section>
     <!-- Breadcumb area end -->
     <!-- <section class="calendar_area section_padding_100"> -->
     <style> 
     .test{
-        height: 750px;
+        overflow: hidden;
+        height:750px;
+        
     }
-
+    .alignleft{
+        align-content: left !important;
+    }
     .simple-calendar table {
+
         height: 700px !important;
         /*width: 90% !important;*/
+        text-align: left !important;
+        .day {
+        height: 80px;
+        }
     }
-    </style>  
+    </style> 
+    <section>
         <div class="container" >  
             <div class="row">
                 <div class="col-xs-11">
-                    <div class='test'>
-                       
-                        <%= month_calendar  do |date| %>
+                    <div >
+                        <div class="test">
+                        <%= month_calendar events: @events  do |date, events| %>
                             <%= date.day %>
+                            <div>
+                                <% events.each do |event| %>
+                                    <%= event.title %>
+                                    <%= event.start_time %>
+                                    <% if event.start_time == date.day %>
+                                        <%= event.title %>
+                                        <%= event.start_time %>
+                                    <% end %>
+                                <% end %>
+                            </div>
                         <% end %>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    <section>
     <!-- </section> -->
