@@ -15,16 +15,17 @@ class CalendarController < ApplicationController
 		@month = "#{params[:date]["month"]}"
 		@year = "#{params[:date]["year"]}"
 		@date = "#{day}"+"/"+"#{month}"+"/"+"#{year}"
-		strp_format = "%d%m%Y"
+		# strp_format = "%d%m%Y"
+		strp_format = "%@day%@month%@year"
 		start_date = DateTime.strptime(date, strp_format)
 
 		Event.create(
 			title: params[:title],
 			location: params[:location],
-			start_date: start_date,
-			end_date: start_date,
+			# start_date: start_date,
+			# end_date: start_date,
 			# CHANGE THIS TO END_DATE
-			details: params[:details],
+			# details: params[:details],
 		)
 		redirect_to '/calendar#show'
 	end
