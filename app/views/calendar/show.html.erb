@@ -23,31 +23,11 @@
     </section>
     <!-- Breadcumb area end -->
     <!-- <section class="calendar_area section_padding_100"> -->
-    <style> 
-    .test{
-        overflow: hidden;
-        height:750px;
-        
-    }
-    .alignleft{
-        align-content: left !important;
-    }
-    .simple-calendar table {
-
-        height: 700px !important;
-        /*width: 90% !important;*/
-        text-align: left !important;
-        .day {
-        height: 80px;
-        }
-    }
-    </style> 
     <section>
-        <div class="container" >  
+        <div class="container">
             <div class="row">
-                <div class="col-xs-11">
-                    <div >
-                        <div class="test">
+                <div class="col-xs-12">
+                    <div>
                         <%= month_calendar events: @events  do |date, events| %>
                             <%= date.day %>
                             <div>
@@ -61,7 +41,6 @@
                                 <% end %>
                             </div>
                         <% end %>
-                        </div>
                     </div>
                 </div>
             </div>
