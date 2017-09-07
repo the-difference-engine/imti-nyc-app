@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   post "/message" => 'pages#send_message'
   get "/template" => 'pages#template'
   get "/calendar" => 'calendar#show'
+  get "/calendar/new_event" => 'calendar#new'
+  post "/calendar" => 'calendar#create'
+
 
   get "/completed_applications" => 'applications#completed_applications'
   get "/download_applicants" => 'applications#download_spreadsheet'
