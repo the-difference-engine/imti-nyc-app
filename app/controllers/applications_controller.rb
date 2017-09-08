@@ -4,17 +4,15 @@ class ApplicationsController < ApplicationController
   end
 
   def new
-    @application = Application.new
+    @user = User.find_by(id: current_user.id)  
   end
 
   def create
-    @application = Application.new(application_params)
-    if @application.save
-      @application.update(application_status: "pending") #application is started but not paid for
-      flash[:success] = "Application saved."
-      redirect_to "/applications/#{@application.id}"
+    if current_user.update(user_params)
+      application = Application.create(application_status: "pending", user_id: current_user.id)
+      redirect_to application_path(application.id)
     else
-      flash[:danger] = @application.errors.full_messages
+      flash[:danger] = current_user.errors.full_messages
       render :new
     end
   end
@@ -52,19 +50,16 @@ class ApplicationsController < ApplicationController
   end
 
   def edit
+    @user = User.find_by(id: current_user.id)
     @application = Application.find(params[:id])
   end
 
   def update
     @application = Application.find(params[:id])
+    p "we're touching this"
     if current_user.update(user_params)
-      if @application.update(application_params)
-        flash[:success] = "Application updated."
-        redirect_to "/applications/#{@application.id}"
-      else
-        flash[:danger] = @application.errors.full_messages
-        render :edit
-      end
+      flash[:success] = "Application updated."
+      redirect_to "/applications/#{@application.id}"
     else
       flash[:danger] = current_user.errors.full_messages
       render :edit
@@ -72,7 +67,6 @@ class ApplicationsController < ApplicationController
   end
 
   def completed_applications
-
     if current_user.role == 'admin'
       @applications_finished = Application.where(application_status: 'finished').paginate(:page => params[:page], :per_page => 15)
       render 'completed_applications'
@@ -83,14 +77,10 @@ class ApplicationsController < ApplicationController
 
   private
 
-  def user_params # strong params - disables postman as a way to bypass the system
-    params.require(:user).permit(:first_name, :last_name, :email, :middle_initial)
-  end
-
-  def application_params
-    params.require(:application).permit(:phone_number, :street, :city,
+  def user_params
+    params.require(:user).permit(:last_name, :first_name, :middle_initial, :phone_number, :street, :city,
     :state, :zip_code, :country, :birth_place, :birth_date,
     :country_of_citizenship, :occupation, :name_of_spouse,
-    :ages_of_children).merge(user_id: current_user.id)
+    :ages_of_children)
   end
 end

@@ -1,7 +1,7 @@
 <div class="application">
   <p>SECTION A: PERSONAL DATA </p>
 
-  <%= bootstrap_form_for @application, :url => {:action => "update"} do |f| %>
+  <%= bootstrap_form_for @user, :url => {:action => "update"} do |f| %>
     <p><%= label_tag :last_name %></p>
     <p><%= text_field_tag :'user[last_name]', current_user.last_name %></p>
     <p><%= label_tag :first_name %></p>

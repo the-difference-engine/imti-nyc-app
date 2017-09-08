@@ -1,7 +1,7 @@
 <div class="application">
   <p>SECTION A: PERSONAL DATA </p>
 
-  <%= bootstrap_form_for(@application) do |f| %>
+  <%= bootstrap_form_for(@user, url: applications_path, method: :post) do |f| %>
     <%= f.text_field :phone_number %>
     <%= f.text_field :street %>
     <%= f.text_field :city %>

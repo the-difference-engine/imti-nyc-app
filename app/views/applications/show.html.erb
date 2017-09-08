@@ -18,19 +18,18 @@
   <p>First Name: <%= @application.user.first_name %></p>
   <p>Middle Initial: <%= @application.user.middle_initial %></p>
   <p>Email: <%= @application.user.email %></p>
-  <p>Phone Number: <%= @application.phone_number %></p>
-  <p>Street: <%= @application.street %></p>  
-  <p>City: <%= @application.city %></p>   
-  <p>State: <%= @application.state %></p>  
-  <p>Zip Code: <%= @application.zip_code %></p>  
-  <p>City: <%= @application.city %></p> 
-  <p>Country: <%= @application.country %></p> 
-  <p>Birth Place: <%= @application.birth_place %></p>
-  <p>Birth Date: <%= pretty_date(@application.birth_date) %></p>
-  <p>Country of Citzenship: <%= @application.country_of_citizenship %></p>
-  <p>Occupation: <%= @application.occupation %></p>
-  <p>Name of Spouse: <%= @application.name_of_spouse %></p>
-  <p>Ages of Children: <%= @application.ages_of_children %></p>
+  <p>Phone Number: <%= @application.user.phone_number %></p>
+  <p>Street: <%= @application.user.street %></p>  
+  <p>City: <%= @application.user.city %></p>   
+  <p>State: <%= @application.user.state %></p>  
+  <p>Zip Code: <%= @application.user.zip_code %></p>  
+  <p>Country: <%= @application.user.country %></p> 
+  <p>Birth Place: <%= @application.user.birth_place %></p>
+  <p>Birth Date: <%= pretty_date(@application.user.birth_date) %></p>
+  <p>Country of Citzenship: <%= @application.user.country_of_citizenship %></p>
+  <p>Occupation: <%= @application.user.occupation %></p>
+  <p>Name of Spouse: <%= @application.user.name_of_spouse %></p>
+  <p>Ages of Children: <%= @application.user.ages_of_children %></p>
 
   <p><%= link_to 'Edit Personal Data', "/applications/#{@application.id}/edit"%></p>
   <hr>

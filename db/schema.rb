@@ -10,37 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829005614) do
+ActiveRecord::Schema.define(version: 20170831235746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "alumnus", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "home_phone"
-    t.string   "mobile_phone"
-    t.string   "work_phone"
-    t.string   "street"
-    t.string   "city"
-    t.string   "state"
-    t.string   "country"
-    t.string   "zip_code"
-    t.datetime "birth_date"
-    t.integer  "graduation_year"
-    t.string   "occupation"
-    t.text     "bio"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
   create_table "applications", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "street"
-    t.string   "city"
-    t.string   "state"
-    t.string   "country"
-    t.string   "zip_code"
-    t.string   "phone_number"
     t.boolean  "payment_status"
     t.boolean  "background_check"
     t.string   "application_status"
@@ -48,14 +24,8 @@ ActiveRecord::Schema.define(version: 20170829005614) do
     t.string   "health_form"
     t.text     "personal_essay"
     t.string   "toefl_score"
-    t.string   "name_of_spouse"
-    t.string   "birth_place"
-    t.datetime "birth_date"
-    t.string   "country_of_citizenship"
-    t.string   "occupation"
-    t.string   "ages_of_children"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "charges", force: :cascade do |t|
@@ -88,16 +58,6 @@ ActiveRecord::Schema.define(version: 20170829005614) do
     t.integer  "attachment_file_size"
     t.string   "attachment_content_type"
     t.datetime "attachment_updated_at"
-  end
-
-  create_table "donations", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "comment"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.decimal  "amount",     precision: 8, scale: 2
   end
 
   create_table "educations", force: :cascade do |t|
@@ -187,6 +147,18 @@ ActiveRecord::Schema.define(version: 20170829005614) do
     t.integer  "role"
     t.integer  "local_school_id"
     t.integer  "course_id"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.string   "zip_code"
+    t.string   "phone_number"
+    t.string   "birth_place"
+    t.datetime "birth_date"
+    t.string   "country_of_citizenship"
+    t.string   "occupation"
+    t.string   "ages_of_children"
+    t.string   "name_of_spouse"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
