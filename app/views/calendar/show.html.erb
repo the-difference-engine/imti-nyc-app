@@ -29,14 +29,27 @@
                 <div class="col-xs-12">
                     <div>
                         <%= month_calendar events: @events  do |date, events| %>
-                            <%= date.day %>
+                            <h3 style="text-align: left;"><%= date.day %></h3>
+                            
                             <div>
                                 <% events.each do |event| %>
-                                    <%= event.title %>
-                                    <%= event.start_time %>
+                                    <p style="text-align: left;"><%= event.title %></p>
+                                    <p style="text-align: left;">
+                                        <!-- strp_format = "%A, %d %b %Y %l:%M %p" -->
+                                        <%= event.pretty_date_start %> to 
+                                        <%= event.pretty_date_end %>
+                                    </p>
+                                    
+                                        
+                                    
+                                    <p style="text-align: left;"><%= event.details %></p>
+                                    <hr>
                                     <% if event.start_time == date.day %>
-                                        <%= event.title %>
-                                        <%= event.start_time %>
+                                        <div>
+                                            <%= event.title %>
+                                            <%= event.pretty_date %>
+                                            <%# event.start_date.year %>
+                                        </div>
                                     <% end %>
                                 <% end %>
                             </div>
