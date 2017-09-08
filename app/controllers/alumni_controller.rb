@@ -1,49 +1,66 @@
 class AlumniController < ApplicationController
   def new
-    @alumnu = Alumnu.new
-    render "new.html.erb"
+    @user = User.find_by(id: current_user.id)
   end
 
   def create
-    @alumnu = Alumnu.new(alumnu_params)
-    if @alumnu.save
-      redirect_to "/alumni/#{@alumnu.id}"
+    @alum = current_user.update(user_params)
+    if @alum.update(user_params)
+      p "user info has been updated"
+      redirect_to alumni_path(@alum.id)
     else
-      flash[:danger] = @alumnu.errors.full_messages
+      flash[:danger] = current_user.errors.full_messages
       render "new.html.erb"
     end
   end
 
   def show
-    @alumnu = Alumnu.find_by(id: params[:id])
-    render "show.html.erb"
-  end
-
-  def edit
-    @alumnu = Alumnu.find_by(id: params[:id])
-    render "edit.html.erb"
-  end
-
-  def update
-    p params
-    @alumnu = Alumnu.find_by(id: params[:id])
-    @alumnu.update(alumnu_params)
-    @user = User.find_by(id: @alumnu.user_id)
-    @user.update(user_params)
-    if @alumnu.errors.count > 0 || @user.errors.count > 0
-      flash[:danger] = @alumnu.errors.full_messages + @user.errors.full_messages
-      render "edit.html.erb"
+    param_user = User.find_by(id: params[:id])
+    if param_user.role == 'alumni'
+      if current_user.id == param_user.id || current_user.role == 'admin'
+        @alum = param_user
+        render "show.html.erb"
+      else
+        redirect_to "/"
+        flash[:danger] = "You do not have access to this user's page."     
+      end
     else
-      flash[:success] = "Alumni info has been updated!"
-      redirect_to "/alumni/#{@alumnu.id}"
+      redirect_to "/"
+      flash[:danger] = "Page not found"
     end
   end
 
-  def alumnu_params
-    params.require(:alumnu).permit(:home_phone, :mobile_phone, :work_phone, :street, :city, :state, :country, :zip_code, :birth_date, :graduation_year, :occupation, :bio).merge(user_id: current_user.id)
+  def edit
+    param_user = User.find_by(id: params[:id])
+    if param_user.role == 'alumni'
+      if current_user.id == param_user.id || current_user.role == 'admin'
+        @alum = param_user
+        render "edit.html.erb"
+      else
+        redirect_to "/"
+        flash[:danger] = "You do not have access to this user's page."     
+      end
+    else
+      redirect_to "/"
+      flash[:danger] = "Page not found"
+    end
+  end
+
+  def update
+    @alum = User.find_by(id: params[:id])
+    if @alum.update(user_params)
+      flash[:success] = "Alumni info has been updated!"
+      redirect_to "/alumni/#{@alum.id}"
+    else
+      flash[:danger] = @alum.errors.full_messages
+      render "edit.html.erb"
+    end
   end
 
   def user_params
-    params.permit(:first_name, :middle_initial, :last_name, :email).merge(id: current_user.id)
+    params.require(:user).permit(:last_name, :first_name, :middle_initial, :phone_number, :street, :city,
+    :state, :zip_code, :country, :birth_place, :birth_date,
+    :country_of_citizenship, :occupation, :name_of_spouse,
+    :ages_of_children)
   end
 end
