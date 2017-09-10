@@ -1,4 +1,5 @@
 class AdminsController < ApplicationController
+  include AdminsHelper
 
   def new
     @admin = User.new
@@ -8,9 +9,13 @@ class AdminsController < ApplicationController
     password = rand(10 ** 10)
     p "hiiiiiiiiii"
     p admin_params
-    @admin = User.new(admin_params, password: password, password_confirmation: password, role: 0)
-    p @admin
+    @admin = User.new(admin_params)
+    @admin.password = password
+    @admin.password_confirmation = password
+    @admin.role = 0
+    # @admin(password: password, password_confirmation: password, role: 0)
     if @admin.save
+      send_email_mailgun
       redirect_to "/admins/new"
     else
       flash[:danger] = @admin.errors.full_messages
