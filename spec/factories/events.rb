@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :event do
-    title {Faker::RickAndMorty.character}	
-    location {Faker::RickAndMorty.location}
-    start_time {Faker::Date.between(2.days.ago, 2.days.from_now, Date.today)}
-    end_time {Faker::Date.between_except(3.days.from_now, 1.week.from_now, Date.today)}
-    details {Faker::RickAndMorty.quote}
+    title {Faker::Company.catch_phrase}	
+    location {Faker::GameOfThrones.city}
+    start_time {Faker::Time.between(DateTime.now - 1, DateTime.now)}
+    end_time {Faker::Time.between(DateTime.now + 1, DateTime.now)}
+    details {Faker::Company.bs}
   end
 end
