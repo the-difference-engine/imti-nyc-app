@@ -30,21 +30,14 @@
                     <div>
                         <%= month_calendar events: @events  do |date, events| %>
                             <h3 style="text-align: left;"><%= date.day %></h3>
-                            
                             <div>
                                 <% events.each do |event| %>
                                     <% if event.title %>
                                         <p style="text-align: left; text-decoration: underline;">Event Title:</p>
                                         <p style="text-align: left;"><%= event.title %></p>
-                                    <% end %>    
-                                        <!-- strp_format = "%A, %d %b %Y %l:%M %p" -->
-                                    <% if event.start_time %>
-                                        <p style="text-align: left; text-decoration: underline;"><underline><b>Time:</b></p> <p style="text-align: left;"><%= event.pretty_time(event.start_time) %>
                                     <% end %>
-                                    <% if event.end_time %>
-                                        to <%= event.pretty_time(event.end_time) %></p>
-                                    <% else %>
-                                        </p>
+                                    <% if event.start_time %>
+                                        <p style="text-align: left; text-decoration: underline;"><underline><b>Time:</b></p> <p style="text-align: left;"><%= event.pretty_time(event.start_time) %></p>
                                     <% end %>
                                     <% if event.location %>    
                                         <p style="text-align: left; text-decoration: underline;">Event Location:</p>
