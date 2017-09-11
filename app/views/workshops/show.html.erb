@@ -1,7 +1,7 @@
 <div class="container">
   <p>Title: <%= @workshop.name%></p>
   <p>Description: <%= @workshop.description%></p>
-  <p>Date: <%= @workshop.date%></p>
+  <p>Date: <%= @workshop.time%></p>
   <p>Price: <%= @workshop.price%></p>
   <h1>To register for this class please fill out this form.</h1>
   <%= form_tag '/registrants', method: :post do %>
@@ -32,10 +32,10 @@
       <%= hidden_field_tag :workshop_id, @workshop.id%>
       <%= submit_tag 'Create New registrant' %>
   <% end %>
-  <br> 
+  <br>
   <% if current_user && current_user.admin? %>
     <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
-    <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %> 
+    <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %>
       <%= submit_tag 'Remove this workshop' %>
     <% end %>
     <br>
