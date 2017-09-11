@@ -1,11 +1,6 @@
 class CalendarController < ApplicationController
   skip_before_action :authenticate_user!
 
-  def index
-  	@title = "Calendar"
-    @events = Event.all
-  end
-
   def show
     @title = "Calendar"
     @events = Event.all
@@ -30,5 +25,4 @@ class CalendarController < ApplicationController
     )
     redirect_to '/calendar'
   end
-
 end
