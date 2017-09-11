@@ -33,28 +33,28 @@
                             
                             <div>
                                 <% events.each do |event| %>
-                                    <p style="text-align: left;"><%= event.title %></p>
-                                    <p style="text-align: left;">
+                                    <% if event.title %>
+                                        <p style="text-align: left; text-decoration: underline;">Event Title:</p>
+                                        <p style="text-align: left;"><%= event.title %></p>
+                                    <% end %>    
                                         <!-- strp_format = "%A, %d %b %Y %l:%M %p" -->
-                                        <% if event.start_time %>
-                                            <p style="text-align: left;"><b>Start Time:</b> <%= event.pretty_date(event.start_time) %> </p>
-                                        <% end %>
-                                        <% if event.end_time %>
-                                            <p style="text-align: left;"><b>End Time:</b> <%= event.pretty_date(event.end_time) %></p>
-                                        <% end %>
-                                    </p>
-                                    
-                                        
-                                    
-                                    <p style="text-align: left;"><%= event.details %></p>
-                                    <hr>
-                                    <% if event.start_time == date.day %>
-                                        <div>
-                                            <%= event.title %>
-                                            <%= event.pretty_date %>
-                                            <%# event.start_date.year %>
-                                        </div>
+                                    <% if event.start_time %>
+                                        <p style="text-align: left; text-decoration: underline;"><underline><b>Time:</b></p> <p style="text-align: left;"><%= event.pretty_time(event.start_time) %>
                                     <% end %>
+                                    <% if event.end_time %>
+                                        to <%= event.pretty_time(event.end_time) %></p>
+                                    <% else %>
+                                        </p>
+                                    <% end %>
+                                    <% if event.location %>    
+                                        <p style="text-align: left; text-decoration: underline;">Event Location:</p>
+                                        <p style="text-align: left;"><%= event.location %></p>
+                                    <% end %>
+                                    <% if event.details %>    
+                                        <p style="text-align: left; text-decoration: underline;">Event Details:</p>
+                                        <p style="text-align: left;"><%= event.details %></p>
+                                    <% end %>
+                                    <hr>
                                 <% end %>
                             </div>
                         <% end %>
