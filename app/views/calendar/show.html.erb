@@ -36,8 +36,12 @@
                                     <p style="text-align: left;"><%= event.title %></p>
                                     <p style="text-align: left;">
                                         <!-- strp_format = "%A, %d %b %Y %l:%M %p" -->
-                                        <%= event.pretty_date(event.start_time) %> 
-                                        <%= event.pretty_date(event.end_time) %>
+                                        <% if event.start_time %>
+                                            <p style="text-align: left;"><b>Start Time:</b> <%= event.pretty_date(event.start_time) %> </p>
+                                        <% end %>
+                                        <% if event.end_time %>
+                                            <p style="text-align: left;"><b>End Time:</b> <%= event.pretty_date(event.end_time) %></p>
+                                        <% end %>
                                     </p>
                                     
                                         
