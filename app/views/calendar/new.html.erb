@@ -1,8 +1,7 @@
 <%= form_tag "/calendar", method: :post do %>
     <p>Event Title <input type="text" name="title"></p>
     <p>Event Location <input type="text" name="location"></p>
-    <p>Event Start Date <%= select_date() %></p>
-    <p>Event End Date <%= select_date() %></p>
+    <p>Event Date <%= select_date() %></p>
     <p>Event Details <input type="text" name="details"></p>
     <p><input type="submit" class="btn btn-info" value="Submit New Event"></p>
 <% end %>
