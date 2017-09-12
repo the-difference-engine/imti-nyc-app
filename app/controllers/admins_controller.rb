@@ -21,15 +21,13 @@ class AdminsController < ApplicationController
 
   def create
     password = rand(10 ** 10)
-    p "hiiiiiiiiii"
     p admin_params
     @admin = User.new(admin_params)
     @admin.password = password
     @admin.password_confirmation = password
     @admin.role = 0
-    # @admin(password: password, password_confirmation: password, role: 0)
     if @admin.save
-      send_email_mailgun
+      @admin.send_reset_password_instructions
       redirect_to "/admins/new"
     else
       flash[:danger] = @admin.errors.full_messages
@@ -39,7 +37,6 @@ class AdminsController < ApplicationController
 
   def assign_current_teacher
     application = Application.find_by(id: params[:application_id])
-    p "$"* 50
     p params[:status]
     application.update(application_status: params[:status])
 
