@@ -37,9 +37,9 @@ Course.destroy_all
 
 end
 
-(1..5).each do |x|
+(1..10).each do |x|
 
-  Workshop.create(id:x, name:Faker::Educator.course, description:Faker::Lorem.sentence, price:Faker::Commerce.price, time:Time.now)
+  Workshop.create(id:x, name:Faker::Educator.course, description:Faker::Lorem.sentence, price:Faker::Commerce.price, time:Time.now + rand(1..100).day)
 
   Course.create(id: x, name:Faker::Company.name, start_date:Time.now, end_date:Time.now + 1.day ,price:rand(1..100) , description:Faker::Company.catch_phrase ,lecturer:Faker::Name.first_name)
 end
