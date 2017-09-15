@@ -7,27 +7,27 @@
   <%= form_tag '/registrants', method: :post do %>
     <div>
       <%= label_tag :first_name %>
-      <%= text_field_tag :first_name, @registrant.first_name %>
+      <%= text_field_tag :first_name, @registrant.first_name, value: current_user.first_name %>
     </div>
     <div>
       <%= label_tag :last_name %>
-      <%= text_field_tag :last_name, @registrant.last_name %>
+      <%= text_field_tag :last_name, @registrant.last_name, value: current_user.last_name %>
     </div>
     <div>
       <%= label_tag :affiliation %>
-      <%= text_field_tag :affiliation, @registrant.affiliation %>
+      <%= text_field_tag :affiliation, @registrant.affiliation, value: current_user.local_school.name %>
     </div>
     <div>
       <%= label_tag :occupation %>
-      <%= text_field_tag :occupation, @registrant.occupation %>
+      <%= text_field_tag :occupation, @registrant.occupation, value: current_user.occupation %>
     </div>
     <div>
       <%= label_tag :email %>
-      <%= text_field_tag :email, @registrant.email%>
+      <%= text_field_tag :email, @registrant.email, value: current_user.email %>
     </div>
     <div>
       <%= label_tag :phone %>
-      <%= text_field_tag :phone, @registrant.phone%>
+      <%= text_field_tag :phone, @registrant.phone, value: current_user.phone_number%>
     </div>
       <%= hidden_field_tag :workshop_id, @workshop.id%>
       <%= submit_tag 'Create New registrant' %>
