@@ -30,7 +30,7 @@ class RegistrantsController < ApplicationController
     else
       flash[:success] = "Your import was succesful!"
     end
-    redirect_to workshop_path(params[:workshop_id]), notice: "Your import was succesful!"
+    redirect_to workshop_path(params[:workshop_id])
   end
 
   def edit
