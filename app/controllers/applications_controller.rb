@@ -72,6 +72,21 @@ class ApplicationsController < ApplicationController
     else
       redirect_to root_path
     end
+
+  end
+
+  def download_spreadsheet
+
+    book = Spreadsheet::Workbook.new
+    sheet1 = book.create_worksheet
+    sheet1.row(0).concat %w{First_Name Last_Name}
+    sheet1.row(1).push('marco','genova')
+    sheet1.row(2).push('marco','genova')
+    sheet1.row(3).push('marco','genova')
+
+    book.write './spreadsheet.csv'
+
+    redirect_to root_path
   end
 
   private
