@@ -43,14 +43,17 @@ class DonationsController < ApplicationController
     @donation = Donation.new(donation_params)
     @donation.uid = SecureRandom.uuid
 
-    @donation.first_name = current_user ? current_user.first_name : "anonymous"
-    @donation.last_name = current_user ? current_user.last_name : "anonymous"
-    @donation.user_id =  current_user  ? current_user.id : nil
+    # @donation.first_name = current_user ? params[:first_name] : "anonymous"
+    # @donation.last_name = current_user ? params[:last_name] : "anonymous"
+    # @donation.user_id =  current_user  ? current_user.id : nil
+    # @donation.first_name = current_user ? current_user.first_name : "anonymous"
+    # @donation.last_name = current_user ? current_user.last_name : "anonymous"
+    # @donation.user_id =  current_user  ? current_user.id : nil
 
     if @donation.amount.to_f  >= Donation::MINIMUN_AMOUNT
       @donation.save
   else
-    flash[:danger] = "Provide an amount greater than or equal to #{amount}."
+    flash[:danger] = "Provide an amount greater than or equal to #{Donation::MINIMUN_AMOUNT}."
     render 'new.html.erb'
     end
   end
