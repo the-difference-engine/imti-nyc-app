@@ -1,4 +1,4 @@
-<%= form_tag "/calendar", method: :post do %>
+<%= form_tag "/calendar_events/create", method: :post do %>
     <p>Event Title <input type="text" name="title"></p>
     <p>Event Location <input type="text" name="location"></p>
     <p>Event Date <%= select_date() %></p>

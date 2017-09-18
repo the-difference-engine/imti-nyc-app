@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'calendar_events/show'
+  get 'calendar_events/edit'
+  get 'calendar_events/new'
+  post 'calendar_events/create'
+  get 'calendar_events/update'
+  get 'calendar_events/delete'
+
   devise_for :users, path: '', controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
   resources :users, only: [:index, :update, :destroy]
   as :user do

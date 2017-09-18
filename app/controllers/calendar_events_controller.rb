@@ -1,19 +1,13 @@
-class CalendarController < ApplicationController
+class CalendarEventsController < ApplicationController
   skip_before_action :authenticate_user!
-
-  def index
-  	@title = "Calendar"
-    @events = Event.all
-  end
-
   def show
-    @title = "Calendar"
-    @events = Event.all
-    render 'show.html.erb'
   end
 
-  def new_event
-    render 'new'
+  def edit
+  end
+
+  def new
+    render 'new.html.erb'
   end
 
   def create
@@ -29,5 +23,11 @@ class CalendarController < ApplicationController
       details: params[:details]
     )
     redirect_to '/calendar'
+  end
+
+  def update
+  end
+
+  def delete
   end
 end
