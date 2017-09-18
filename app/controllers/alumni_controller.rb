@@ -6,7 +6,6 @@ class AlumniController < ApplicationController
   def create
     @alum = current_user.update(user_params)
     if @alum.update(user_params)
-      p "user info has been updated"
       redirect_to alumni_path(@alum.id)
     else
       flash[:danger] = current_user.errors.full_messages
@@ -22,7 +21,7 @@ class AlumniController < ApplicationController
         render "show.html.erb"
       else
         redirect_to "/"
-        flash[:danger] = "You do not have access to this user's page."     
+        flash[:danger] = "You do not have access to this user's page."
       end
     else
       redirect_to "/"
@@ -38,7 +37,7 @@ class AlumniController < ApplicationController
         render "edit.html.erb"
       else
         redirect_to "/"
-        flash[:danger] = "You do not have access to this user's page."     
+        flash[:danger] = "You do not have access to this user's page."
       end
     else
       redirect_to "/"

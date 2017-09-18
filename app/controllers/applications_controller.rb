@@ -4,7 +4,7 @@ class ApplicationsController < ApplicationController
   end
 
   def new
-    @user = User.find_by(id: current_user.id)  
+    @user = User.find_by(id: current_user.id)
   end
 
   def create
@@ -56,7 +56,6 @@ class ApplicationsController < ApplicationController
 
   def update
     @application = Application.find(params[:id])
-    p "we're touching this"
     if current_user.update(user_params)
       flash[:success] = "Application updated."
       redirect_to "/applications/#{@application.id}"
@@ -70,7 +69,7 @@ class ApplicationsController < ApplicationController
     if current_user.role == 'admin'
       @applications_finished = Application.where(application_status: 'finished').paginate(:page => params[:page], :per_page => 15)
       render 'completed_applications'
-    else 
+    else
       redirect_to root_path
     end
   end
