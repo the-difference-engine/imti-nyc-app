@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
 
   devise_for :users, path: '', controllers: {registrations: 'users/registrations', admins: 'admins', sessions: 'users/sessions'}
+  get 'calendar_events/show'
+  get 'calendar_events/edit'
+  get 'calendar_events/new'
+  post 'calendar_events/create'
+  get 'calendar_events/update'
+  get 'calendar_events/delete'
+
   resources :users, only: [:index, :update, :destroy]
   as :user do
     get '/schools/sign_up', to: 'users/registrations#new_school'
