@@ -77,16 +77,24 @@ class ApplicationsController < ApplicationController
 
   def download_spreadsheet
 
+    applications = Application.all.where(application_status: 'finished')
     book = Spreadsheet::Workbook.new
     sheet1 = book.create_worksheet
-    sheet1.row(0).concat %w{First_Name Last_Name}
-    sheet1.row(1).push('marco','genova')
-    sheet1.row(2).push('marco','genova')
-    sheet1.row(3).push('marco','genova')
+    sheet1.row(0).concat %w{First_Name Last_Name Phone_Number Email}
+    count = 1
 
-    book.write './spreadsheet.csv'
+    4.times { |i| sheet1.column(i).width = 20 }
 
-    redirect_to root_path
+    applications.each do |application|
+      user = application.user
+      sheet1.row(count).push(user.first_name, user.last_name, application.phone_number, user.email)
+      count+=1 
+    end
+
+    spreadsheet = StringIO.new 
+    book.write spreadsheet 
+    send_data spreadsheet.string, :filename => "applicantsInfo.xls", :type =>  "application/vnd.ms-excel"
+
   end
 
   private
