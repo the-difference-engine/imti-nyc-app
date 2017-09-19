@@ -1,2 +1,23 @@
-<h1>CalendarEvents#edit</h1>
-<p>Find me in app/views/calendar_events/edit.html.erb</p>
+<%= form_for @event, url: calendar_event_path(@event.id), method: :patch  do |f| %>
+	<p><%= f.label :title %>
+	<%= f.text_field :title %>
+	</p>
+
+	<p><%= f.label :location %>
+	<%= f.text_field :location %>
+	</p>
+
+	<p><%= f.label :details %>
+	<%= f.text_field :details %>
+	</p>
+
+    <p>
+    	<%= f.label :start_time %>
+    	<%= datetime_select :event, :start_time %>
+    </p>    
+    <p>
+    	<%= f.label :end_time %>
+    	<%= datetime_select :event, :end_time %>
+    </p>
+    <%= f.submit %>
+<% end %>
