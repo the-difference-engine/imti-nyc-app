@@ -43,8 +43,6 @@ gem 'rb-readline'
 
 gem "simple_calendar", "~> 2.0"
 
-gem "simple_calendar", "~> 2.0"
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 group :development, :test do
