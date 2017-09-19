@@ -1,7 +1,23 @@
-<%= form_tag "/calendar_events/create", method: :post do %>
-    <p>Event Title <input type="text" name="title"></p>
-    <p>Event Location <input type="text" name="location"></p>
-    <p>Event Date <%= select_date() %></p>
-    <p>Event Details <input type="text" name="details"></p>
-    <p><input type="submit" class="btn btn-info" value="Submit New Event"></p>
+<%= form_for @event, url: calendar_events_path, method: :post  do |f| %>
+	<p><%= f.label :title %>
+	<%= f.text_field :title %>
+	</p>
+
+	<p><%= f.label :location %>
+	<%= f.text_field :location %>
+	</p>
+
+	<p><%= f.label :details %>
+	<%= f.text_field :details %>
+	</p>
+
+    <p>
+    	<%= f.label :start_time %>
+    	<%= datetime_select :event, :start_time %>
+    </p>    
+    <p>
+    	<%= f.label :end_time %>
+    	<%= datetime_select :event, :end_time %>
+    </p>
+    <%= f.submit %>
 <% end %>

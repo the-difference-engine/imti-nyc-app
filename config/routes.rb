@@ -7,6 +7,13 @@ Rails.application.routes.draw do
   post 'calendar_events/create'
   get 'calendar_events/update'
   get 'calendar_events/delete'
+  # get 'calendar_events/edit'
+  # get 'calendar_events/new'
+  # get 'calendar_events/:id', to: 'calendar_events#show'
+  # post 'calendar_events/create'
+  # get 'calendar_events/update'
+  # get 'calendar_events/delete'
+  resources :calendar_events
 
   resources :users, only: [:index, :update, :destroy]
   as :user do

@@ -1,2 +1,10 @@
-<h1>CalendarEvents#show</h1>
-<p>Find me in app/views/calendar_events/show.html.erb</p>
+<p style="text-align: left"><%= @event.title %></p>
+<% if @event.location %>    
+    <p style="text-align: left">Location: <%= @event.location %></p>
+<% end %>
+<% if @event.details.present? %>    
+    <p style="text-align: left">Details: <%= @event.details %></p>
+<% end %>
+<p style="text-align: left"><%= @event.start_time.in_time_zone('Eastern Time (US & Canada)') %></p>
+<p style="text-align: left"><%= @event.end_time %></p>
+<%= link_to "Edit Event", edit_calendar_event_path(@event.id) %>
