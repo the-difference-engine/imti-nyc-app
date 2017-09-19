@@ -7,10 +7,6 @@ class CalendarController < ApplicationController
     render 'show.html.erb'
   end
 
-  def new_event
-    render 'new'
-  end
-
   def create
     date = "#{params[:date]['month']}/#{params[:date]['day']}/#{params[:date]['year']}"
     strp_format = "%m/%d/%Y"
