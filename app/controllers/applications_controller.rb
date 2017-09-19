@@ -77,7 +77,7 @@ class ApplicationsController < ApplicationController
 
   def download_spreadsheet
 
-    applications = Application.all.where(application_status: 'finished')
+    applications = Application.finished
     book = Spreadsheet::Workbook.new
     sheet1 = book.create_worksheet
     sheet1.row(0).concat %w{First_Name Last_Name Phone_Number Email}

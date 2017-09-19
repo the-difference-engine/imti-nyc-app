@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get "/calendar" => 'pages#calendar'
 
   get "/completed_applications" => 'applications#completed_applications'
-  post "/download_applicats" => 'applications#download_spreadsheet'
+  get "/download_applicants" => 'applications#download_spreadsheet'
 
   resources :applications, only: [:index, :new, :show, :create, :edit, :update] do
     put :payment
