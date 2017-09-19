@@ -8,7 +8,9 @@
       <th>Review Application</th>
     </tr>
 
-   <% @applications_finished.each do |application| %>
+  <%= button_to "Download Contact Info", "/download_applicats", :method => :post, :class => 'btn btn-primary'%>
+
+   <% @applications.each do |application| %>
       <tr> 
          <td> <%= application.user.first_name.capitalize %> </td>
          <td> <%= application.user.last_name.capitalize %></td>
@@ -34,5 +36,3 @@
 <div class="digg_pagination">
    <%= will_paginate @applications_finished %>
 </div>
-
-<%= link_to "Download", "/download", :method => :post %>
