@@ -21,10 +21,7 @@
  *= require css/et-line.css
  *= require rails_bootstrap_forms
  *= require_self
-
  *= require_tree .
-
-
  */
 
 .application {
@@ -49,5 +46,5 @@
 }
 
 .simple-calendar table {
-    position: static !important;
+    position: relative;
 }

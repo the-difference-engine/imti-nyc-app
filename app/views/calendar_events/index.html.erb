@@ -30,7 +30,7 @@
                             <h3 style="text-align: left;"><%= date.day %></h3>
                             <div>
                                 <% events.each do |event| %>
-                                    <p style="text-align: left"><%= event.title %></p>
+                                    <p style="text-align: left"><%= link_to(event.title, calendar_event_path(event.id)) %></p>
                                     <p style="text-align: left"><%= event.pretty_time(event.start_time) %></p>
                                     <% if event.location %>    
                                         <p style="text-align: left">Location: <%= event.location %></p>
