@@ -56,10 +56,6 @@ class WorkshopsController < ApplicationController
     # amount should be changed to workshop price multiplied by count
     @amount = count * @workshop.price.to_i
     # binding.pry
-    puts "=" *100
-    puts "#{@amount} @amount" 
-    puts "#{count} count"
-    puts "#{@workshop.price.to_i} workshoppirce"
     customer = Stripe::Customer.create(
       :email => current_user.email,
       :source  => params[:stripeToken]
@@ -125,7 +121,7 @@ class WorkshopsController < ApplicationController
   end
   private
 
-  def workshops_params
-    params.require(:workshop).permit(:name, :description, :price, :time)
-  end
+    def workshops_params
+      params.permit(:name, :description, :date, :price)
+    end
 end

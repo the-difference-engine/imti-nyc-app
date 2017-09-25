@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 20170914222350) do
     t.string   "description"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "payment_id"
+    t.string   "currency"
+    t.string   "card"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -65,9 +68,12 @@ ActiveRecord::Schema.define(version: 20170914222350) do
     t.string   "last_name"
     t.string   "email"
     t.string   "comment"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.decimal  "amount",     precision: 8, scale: 2
+    t.integer  "user_id"
+    t.boolean  "confirmed",                          default: false
+    t.string   "uid"
   end
 
   create_table "educations", force: :cascade do |t|

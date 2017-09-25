@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'mailgun-ruby', '~>1.1.6'
-gem 'stripe'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'bootstrap_form'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'

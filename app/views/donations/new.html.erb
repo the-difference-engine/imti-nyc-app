@@ -1,0 +1,88 @@
+<!-- Breadcumb area start -->
+    <section class="breadcumb_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="breadcumb_section">
+                        <!-- Breadcumb page title start -->
+                        <div class="page_title">
+                            <h3>Donate</h3>
+                        </div>
+                        <!-- Breadcumb page pagination start -->
+                        <div class="page_pagination">
+                            <ul>
+                                <li><%= link_to "Home", "/" %></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li>Donate</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcumb area end -->
+
+    <!-- ==================== Message Now Area Start ==================== -->
+    <section class="message_now_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <%= form_tag "/donations/confirmation", method: :post do %>
+                        <!-- Message Input Area Start -->
+                        <div>
+                        <p>Anonymous donation? <input type="checkbox" id="check" name="anonymous" ></p>
+                        </div>
+                        <div class="contact_input_area">
+                           <div id="success_fail_info"></div>
+                             <div class="row">
+                                <!-- Single Input Area Start --> 
+                            <div class= "supplied">
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <input type="text" name="first_name" class="form-control" id="first_name" placeholder="First Name" value="<%= @donation.first_name %>">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Last Name" value="<%= @donation.last_name %>">
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<%= @donation.email %>" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                     <div class="form-group">
+                                        <input name="amount" type="number" min="0.01" step="0.01" max="999,999.99" placeholder="Amount">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <textarea name="comment" id="message" class="form-control" cols="30" rows="10" placeholder="Comment" type="text"><%= @donation.comment %></textarea>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                        
+                        <button class=" submit btn btn-success">Donate</button>
+                    <% end %>
+                </div>
+                <!-- Single Input Area Start -->
+                          
+            </div>
+            <!-- .end row -->
+        </div>
+        <!-- .end container -->
+    </section>
+    <!-- ==================== Message Now Area Start ==================== -->
+
+    <!-- ==================== Map and Contact Area Start ==================== -->
+    <div class="map_contact_address_area">
+        <!-- Map Area Start -->
+        <div class="map_area" id="googleMap"></div>
+    </div>
+     
+    <!-- ==================== Map and Contact Area End ==================== -->
