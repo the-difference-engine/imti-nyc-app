@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
 
-  # get 'calendar_events/edit'
-  # get 'calendar_events/new'
-  # get 'calendar_events/:id', to: 'calendar_events#show'
-  # post 'calendar_events/create'
-  # get 'calendar_events/update'
-  # get 'calendar_events/delete'
-  resources :calendar_events
-
   devise_for :users, path: '', controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
   resources :users, only: [:index, :update, :destroy]
   as :user do
@@ -19,10 +11,8 @@ Rails.application.routes.draw do
   get "/contact" => 'pages#contact'
   post "/message" => 'pages#send_message'
   get "/template" => 'pages#template'
-  get "/calendar" => 'calendar#show'
-  get "/calendar/new_event" => 'calendar#new'
-  post "/calendar" => 'calendar#create'
 
+  resources :calendar_events
 
   get "/completed_applications" => 'applications#completed_applications'
   resources :applications, only: [:index, :new, :show, :create, :edit, :update] do
