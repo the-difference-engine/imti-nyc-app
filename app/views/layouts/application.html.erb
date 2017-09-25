@@ -114,7 +114,7 @@
                                 <nav>
                                     <ul id="nav">
                                         <li><%= link_to "Home", "/" %></li>
-                                        <% if current_user.role == "admin" %>
+                                        <% if current_user.try(:role) == "admin" %>
                                             <li><%= link_to "View Users", '/show_users' %></li>
 
                                         <% end %>

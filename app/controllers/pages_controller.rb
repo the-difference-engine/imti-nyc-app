@@ -18,7 +18,7 @@ class PagesController < ApplicationController
   end
 
   def send_message
-      send_email_mailgun
+    if send_email_mailgun
       send_email_confirmation
       flash[:success] = "Message has been sent"
     else
