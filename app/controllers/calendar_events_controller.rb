@@ -1,5 +1,12 @@
 class CalendarEventsController < ApplicationController
   skip_before_action :authenticate_user!
+
+  def index
+    @title = "Calendar"
+    @events = Event.all
+    render 'index.html.erb'
+  end
+
   def show
     @event = Event.find(params[:id])
   end
