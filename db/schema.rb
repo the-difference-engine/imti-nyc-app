@@ -60,16 +60,6 @@ ActiveRecord::Schema.define(version: 20170914222350) do
     t.datetime "attachment_updated_at"
   end
 
-  create_table "donations", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "comment"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.decimal  "amount",     precision: 8, scale: 2
-  end
-
   create_table "educations", force: :cascade do |t|
     t.integer  "application_id"
     t.string   "school"
