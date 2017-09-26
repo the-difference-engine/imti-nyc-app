@@ -10,7 +10,7 @@
 
   <%= button_to "Download Contact Info", "/download_applicants", :method => :get, :class => 'btn btn-primary'%>
 
-   <% @applications.each do |application| %>
+   <% @applications_finished.each do |application| %>
       <tr> 
          <td> <%= application.user.first_name.capitalize %> </td>
          <td> <%= application.user.last_name.capitalize %></td>
