@@ -1,5 +1,6 @@
 class CalendarEventsController < ApplicationController
   skip_before_action :authenticate_user!
+  before_filter :authorize_admin, except: [:index, :show]
 
   def index
     @title = "Calendar"
@@ -33,8 +34,6 @@ class CalendarEventsController < ApplicationController
           end_time:   Time.zone.local(event_params["end_time(1i)"].to_i, event_params["end_time(2i)"].to_i, 
                  event_params["end_time(3i)"].to_i, event_params["end_time(4i)"].to_i, 
                  event_params["end_time(5i)"].to_i),
-          # once we figure out how to add multi-day events, we can update end_time
-          # end_time: event_params[:end_time],
           details: event_params[:details]
           )
     redirect_to '/calendar'
@@ -55,8 +54,6 @@ class CalendarEventsController < ApplicationController
           end_time:   DateTime.new(event_params["end_time(1i)"].to_i, event_params["end_time(2i)"].to_i, 
                  event_params["end_time(3i)"].to_i, event_params["end_time(4i)"].to_i, 
                  event_params["end_time(5i)"].to_i),
-          # once we figure out how to add multi-day events, we can update end_time
-          # end_time: event_params[:end_time],
           details: event_params[:details]
           )
     redirect_to calendar_event_path(event.id)
@@ -66,4 +63,9 @@ class CalendarEventsController < ApplicationController
     Event.destroy(params[:id])
     redirect_to calendar_events_path
   end
+
+  private 
+    def authorize_admin
+      redirect_back fallback_location: calendar_events_path unless current_user.try(:admin?)
+    end
 end

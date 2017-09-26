@@ -7,5 +7,9 @@
 <% end %>
 <p style="text-align: left"><%= @event.start_time.in_time_zone('Eastern Time (US & Canada)') %></p>
 <p style="text-align: left"><%= @event.end_time %></p>
-<%= link_to "Edit Event", edit_calendar_event_path(@event.id) %>
-<%= link_to "Delete Event", calendar_event_path(@event.id), method: :delete, data: {confirm: "Are you sure?"} %>
+<div>
+    <% if current_user && current_user.admin? %>
+    	<%= link_to "Edit Event", edit_calendar_event_path(@event.id) %>
+		<%= link_to "Delete Event", calendar_event_path(@event.id), method: :delete, data: {confirm: "Are you sure?"} %>
+    <% end %>
+</div>

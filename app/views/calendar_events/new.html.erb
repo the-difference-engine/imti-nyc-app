@@ -11,13 +11,13 @@
 	<%= f.text_field :details %>
 	</p>
 
-    <p>
-    	<%= f.label :start_time %>
-    	<%= datetime_select :event, :start_time %>
-    </p>    
-    <p>
-    	<%= f.label :end_time %>
-    	<%= datetime_select :event, :end_time %>
-    </p>
-    <%= f.submit %>
+	<p>
+		<%= f.label :start_time %>
+		<%= datetime_select :event, :start_time %>
+	</p>    
+	<p>
+		<%= f.label :end_time %>
+		<%= datetime_select :event, :end_time %>
+	</p>
+	<%= f.submit %>
 <% end %>
