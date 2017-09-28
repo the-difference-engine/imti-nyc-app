@@ -9,14 +9,14 @@ class Ability
   end
 
   def local_school_admin_abilities
-    return unless user.local_school_admin?
+    return unless @user.local_school_admin?
 
     can :create, LocalSchool
     can [:read, :update], LocalSchool, id: @user.local_school_id
   end
 
   def admin_abilities
-    return unless user.admin?
+    return unless @user.admin?
 
     can :manage, :all
   end

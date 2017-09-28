@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   as :user do
     get '/schools/sign_up', to: 'users/registrations#new_school'
     post '/users/registrations/', to: 'users/registrations#import'
-    # get "/users/registrations/new", to: 'users/registrations#new_admin'
   end
   root :to => 'pages#index'
   get "/about" => 'pages#about'
