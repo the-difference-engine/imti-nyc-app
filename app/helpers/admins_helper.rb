@@ -1,7 +1,6 @@
 module AdminsHelper
   def send_email_mailgun
     mg_client = Mailgun::Client.new(ENV['MAILGUN_API_KEY'])
-    binding.pry
 
     message_params = {
        from: 'imtinyc@gmail.com',
@@ -15,6 +14,6 @@ module AdminsHelper
     message_id = result['id']
     message = result['message']
   end
-
+end
 
 

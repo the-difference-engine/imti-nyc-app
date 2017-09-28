@@ -13,6 +13,7 @@ class AdminsController < ApplicationController
   
 
   include AdminsHelper
+  authorize_resource(class: User)
 
 
   def new
@@ -21,7 +22,6 @@ class AdminsController < ApplicationController
 
   def create
     password = rand(10 ** 10)
-    p admin_params
     @admin = User.new(admin_params)
     @admin.password = password
     @admin.password_confirmation = password
@@ -37,7 +37,6 @@ class AdminsController < ApplicationController
 
   def assign_current_teacher
     application = Application.find_by(id: params[:application_id])
-    p params[:status]
     application.update(application_status: params[:status])
 
     if params[:status] == "approved"
