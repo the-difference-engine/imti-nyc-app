@@ -22,41 +22,25 @@ class CalendarEventsController < ApplicationController
   end
 
   def create
-    # TODO - change start and end time here.
-    event_params = params[:event]
-
-    Event.create(
-          title: event_params[:title],
-          location: event_params[:location],
-          start_time: Time.zone.local(event_params["start_time(1i)"].to_i, event_params["start_time(2i)"].to_i, 
-                 event_params["start_time(3i)"].to_i, event_params["start_time(4i)"].to_i, 
-                 event_params["start_time(5i)"].to_i),
-          end_time:   Time.zone.local(event_params["end_time(1i)"].to_i, event_params["end_time(2i)"].to_i, 
-                 event_params["end_time(3i)"].to_i, event_params["end_time(4i)"].to_i, 
-                 event_params["end_time(5i)"].to_i),
-          details: event_params[:details]
-          )
-    redirect_to '/calendar'
+    @event = Event.new(event_params)
+    if @event.save
+      redirect_to calendar_event_path(event.id)
+    else
+      flash[:danger] = @event.errors.full_messages
+      render :new
+    end
   end
 
   def update
-    event = Event.find(params[:id])
-    event_params = params[:event]
-    # binding.pry
+    @event = Event.find(params[:id])
+    if @event.update_attributes(event_params)
+      flash[:success] = "New Calendar Event Updated"
+      redirect_to calendar_event_path(@event.id)
+    else
+      flash[:danger] = @event.errors.full_messages
+      render :edit
+    end
 
-    Event.find(params[:id])
-         .update(
-          title: event_params[:title],
-          location: event_params[:location],
-          start_time: DateTime.new(event_params["start_time(1i)"].to_i, event_params["start_time(2i)"].to_i, 
-                 event_params["start_time(3i)"].to_i, event_params["start_time(4i)"].to_i, 
-                 event_params["start_time(5i)"].to_i),
-          end_time:   DateTime.new(event_params["end_time(1i)"].to_i, event_params["end_time(2i)"].to_i, 
-                 event_params["end_time(3i)"].to_i, event_params["end_time(4i)"].to_i, 
-                 event_params["end_time(5i)"].to_i),
-          details: event_params[:details]
-          )
-    redirect_to calendar_event_path(event.id)
   end
 
   def destroy
@@ -65,7 +49,11 @@ class CalendarEventsController < ApplicationController
   end
 
   private 
-    def authorize_admin
-      redirect_back fallback_location: calendar_events_path unless current_user.try(:admin?)
-    end
+  def authorize_admin
+    redirect_back fallback_location: calendar_events_path unless current_user.try(:admin?)
+  end
+
+  def event_params
+    params.require(:event).permit(:title, :details, :location, :start_time, :end_time)
+  end
 end
