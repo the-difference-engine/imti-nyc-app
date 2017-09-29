@@ -1,4 +1,6 @@
 class AdminsController < ApplicationController
+  include AdminsHelper
+  authorize_resource(class: User)
 
   def application_decision
     application = Application.find_by(id: params[:application_id])
@@ -10,11 +12,6 @@ class AdminsController < ApplicationController
 
     redirect_to "/completed_applications"
   end
-  
-
-  include AdminsHelper
-  authorize_resource(class: User)
-
 
   def new
     @admin = User.new
@@ -51,6 +48,5 @@ private
   def admin_params
     params.require(:user).permit(:email, :first_name, :middle_initial, :last_name)
   end
-
 
 end
