@@ -1,23 +1,18 @@
-<%= form_for @event, url: calendar_event_path(@event.id), method: :patch  do |f| %>
-	<p><%= f.label :title %>
-	<%= f.text_field :title %>
-	</p>
-
-	<p><%= f.label :location %>
-	<%= f.text_field :location %>
-	</p>
-
-	<p><%= f.label :details %>
-	<%= f.text_field :details %>
-	</p>
-
-	<p>
-		<%= f.label :start_time %>
-		<%= datetime_select :event, :start_time %>
-	</p>    
-	<p>
-		<%= f.label :end_time %>
-		<%= datetime_select :event, :end_time %>
-	</p>
-	<%= f.submit %>
-<% end %>
+<style>
+.btn-primary {
+    background-color: #394a70 !important;
+    border-color:color: #394a70 !important;
+    color: #fff !important;
+    font-size: 14px !important;
+}
+</style>
+<div class="application">
+  <%= bootstrap_form_for [@event], :url => {:action => "update"} do |f| %>
+	  <p><%= f.text_field :title %></p>
+	  <p><%= f.text_field :location %></p>
+	  <p><%= f.text_field :details %></p>
+	  <p><%= f.datetime_field :start_time, label: "Start Time (enter date and time)"%></p>
+	  <p><%= f.datetime_field :end_time, label: "End Time (enter date and time)" %></p>
+	  <p><%= f.submit "Update", :class => "btn btn-primary btn-default btn-lg", :role => "button" %></p>
+  <% end %>
+</div>
