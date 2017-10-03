@@ -24,7 +24,7 @@ class CalendarEventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to calendar_event_path(event.id)
+      redirect_to calendar_event_path(@event.id)
     else
       flash[:danger] = @event.errors.full_messages
       render :new
