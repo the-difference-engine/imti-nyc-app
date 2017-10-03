@@ -6,6 +6,19 @@ class Ability
 
     local_school_admin_abilities
     admin_abilities
+    applicant_abilities
+  end
+
+  def applicant_abilities
+    return unless @user.international_applicant? || @user.domestic_applicant?
+
+    can :manage, Application, user_id: @user.id
+    can :manage, Education, application_id: @user.application.id
+    can :manage, MontessoriTraining, application_id: @user.application.id
+    can :manage, WorkExperience, application_id: @user.application.id
+    can :manage, Reference, application_id: @user.application.id
+    can :manage, Document, application_id: @user.application.id
+
   end
 
   def local_school_admin_abilities

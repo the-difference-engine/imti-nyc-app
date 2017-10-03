@@ -1,4 +1,7 @@
 class ApplicationsController < ApplicationController
+  load_and_authorize_resource
+
+
   def index
     @application = current_user.application
   end
@@ -18,7 +21,6 @@ class ApplicationsController < ApplicationController
   end
 
   def show
-    @application = Application.find(params[:id])
     @amount = @application.user.domestic_applicant? ? 50 : 75;
     render :show
   end

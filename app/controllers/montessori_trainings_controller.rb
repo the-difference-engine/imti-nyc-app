@@ -1,4 +1,7 @@
 class MontessoriTrainingsController < ApplicationController
+  load_and_authorize_resource :application
+  load_and_authorize_resource :montessori_training, through: :application
+
   def index
     @application = Application.find(params[:application_id])
     @montessori_trainings = @application.montessori_trainings
