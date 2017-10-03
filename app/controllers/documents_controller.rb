@@ -1,5 +1,7 @@
 class DocumentsController < ApplicationController
   include DocumentsHelper
+  load_and_authorize_resource :application
+  load_and_authorize_resource :document, through: :application
 
   def index
     @application = Application.find(params[:application_id])

@@ -1,4 +1,6 @@
 class EducationsController < ApplicationController
+  load_and_authorize_resource :application
+  load_and_authorize_resource :educations, through: :application
   
   def index
     @application = Application.find(params[:application_id])

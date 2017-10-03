@@ -1,4 +1,7 @@
 class ReferencesController < ApplicationController
+  load_and_authorize_resource :application
+  load_and_authorize_resource :reference, through: :application
+
   def index
     @application = Application.find(params[:application_id])
     @references = @application.references

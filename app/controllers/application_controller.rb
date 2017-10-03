@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   before_action :workshop_footer 
   before_action :authenticate_user!, unless: :devise_controller?
 
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:warning] = exception.message
+    redirect_to main_app.root_url
+  end
+
   protected
 
   def configure_permitted_parameters

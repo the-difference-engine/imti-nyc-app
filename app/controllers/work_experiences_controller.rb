@@ -1,4 +1,7 @@
 class WorkExperiencesController < ApplicationController
+  load_and_authorize_resource :application
+  load_and_authorize_resource :work_experience, through: :application
+
   def index
     @application = Application.find(params[:application_id])
     @work_experiences = @application.work_experiences
