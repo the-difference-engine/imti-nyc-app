@@ -114,47 +114,29 @@
                                 <nav>
                                     <ul id="nav">
                                         <li><%= link_to "Home", "/" %></li>
-                                        <% if user_signed_in? %>
-                                            <% if current_user.role == "admin" %>
-                                              <li><%= link_to "View Users", '/show_users' %></li>
-                                              <li><%= link_to "Completed Applications", "/completed_applications" %></li>
-                                            <% else %>
-                                              <li><%= link_to "My Application", "/applications" %></li>
-                                            <% end %>
-                                        <% end%>
-                                        <% if current_user && current_user.admin? %>
+                                        <% if current_user && current_user.admin?%>
                                             <li><a href="#">Admin<i class="fa fa-caret-down" aria-hidden="true"></i></a>
                                             <ul class="sub-menu">
                                                 <li><%= link_to "View Users", '/users' %></li>
-                                                <li><%= link_to "View Courses", '/courses' %></li>
                                                 <li><%= link_to "Add New Admin", '/admins/new' %></li>
+                                                <li><%= link_to "Completed Applications", "/completed_applications" %></li>
                                             </ul>
                                         </li>
+                                        <% elsif user_signed_in? %>
+                                            <li><%= link_to "My Application", "/applications" %></li>
                                         <% end %>
                                         <li><a href="#">courses/workshops<i class="fa fa-caret-down" aria-hidden="true"></i></a>
                                             <ul class="sub-menu">
                                                 <li><%= link_to "Courses", '/courses' %></li>
                                                 <li><%= link_to "Workshops", '/workshops' %></li>
-                                                <li><%= link_to "Course Details" '#' %></li>
                                             </ul>
                                         </li>
                                         <li><a href="#">teacher<i class="fa fa-caret-down" aria-hidden="true"></i></a>
                                             <ul class="sub-menu">
                                                 <li><%= link_to "Teachers", "/teachers" %></li>
-                                                <li><%= link_to "Teacher Details", "#" %></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Event<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                            <ul class="sub-menu">
-                                                <li><%= link_to "Event Grid", "#" %></li>
-                                                <li><%= link_to "Event List", "#" %></li>
-                                                <li><%= link_to "Event Details", "#" %></li>
                                             </ul>
                                         </li>
                                         <li><%= link_to "Calendar", "/calendar" %></li>
-                                        <li><%= link_to "Contact", "/contact" %></li>
-                                        <li><%= link_to "About", "/about" %></li>
-
                                     </ul>
                                 </nav>
                             </div>
@@ -271,6 +253,10 @@
                         </div>
                         <!-- Links Start -->
                         <div class="links">
+                            <p><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                <%= link_to "About", "/about"%></p>
+                            <p><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                <%= link_to "Contact", "/contact"%></p>                                
                             <p><i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                 <%= link_to "All Our Courses", "/"%></p>
                             <p><i class="fa fa-angle-double-right" aria-hidden="true"></i>
