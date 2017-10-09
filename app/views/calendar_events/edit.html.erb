@@ -10,7 +10,7 @@
   <%= bootstrap_form_for [@event], :url => {:action => "update"} do |f| %>
 	  <p><%= f.text_field :title %></p>
 	  <p><%= f.text_field :location %></p>
-	  <p><%= f.text_field :details %></p>
+	  <p><%= f.text_area :details, rows: 5 %></p>
 	  <p><%= f.datetime_field :start_time, label: "Start Time (enter date and time)"%></p>
 	  <p><%= f.datetime_field :end_time, label: "End Time (enter date and time)" %></p>
 	  <p><%= f.submit "Update", :class => "btn btn-primary btn-default btn-lg", :role => "button" %></p>
