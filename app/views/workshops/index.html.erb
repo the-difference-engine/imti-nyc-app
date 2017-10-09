@@ -1,18 +1,18 @@
-<div class='container'>
-<h1>Hello Welcome to Our Workshop</h1>
-<% @workshops.each_slice(3) do |three_workshop| %>
 <!-- three_products is an array -->
 <!-- we want to put all three of them in the same row -->
 <!-- then we want to end that before the next group of three -->
-  <div class = "row">
-  <% three_workshop.each do |workshop| %>
-  <div class = "col-md-4">
-  <h4><a href="/workshops/<%=workshop.id %>"><%= workshop.name %></a></h4>
-  <p><%= workshop.description %></p>
-  <h5><%= number_to_currency workshop.price %></h5>
+<div class='container'>
+  <h1>Hello Welcome to Our Workshop</h1>
   
-  </div>
-  <% end %>
-  </div>
+  <% @workshops.each_slice(3) do |three_workshop| %>
+    <div class = "row">
+      <% three_workshop.each do |workshop| %>
+        <div class = "col-md-4">
+          <h4><a href="/workshops/<%=workshop.id %>"><%= workshop.name %></a></h4>
+          <p><%= workshop.description %></p>
+          <h5><%= number_to_currency workshop.price %></h5>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>
