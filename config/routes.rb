@@ -42,7 +42,6 @@ Rails.application.routes.draw do
   resources :school_profiles, only: [:index, :new, :create, :edit, :update] do
   end
 
-
   resources :local_schools, only: [:index, :new, :create, :edit, :update]
   post "/registrants/import", to: "registrants#import"
   resources :registrants
