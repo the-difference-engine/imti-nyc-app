@@ -1,33 +1,21 @@
-<style>
-	.btn-primary {
-	    background-color: #394a70 !important;
-	    border-color:color: #394a70 !important;
-	    color: #fff !important;
-	    font-size: 14px !important;
-	}
-</style>
 <hr>
 <section style="padding:10%">
-    <div class="row">
-        <div class="col-xs-12">
+	<div class="row">
+		<div class="col-xs-12">
 			<div style="font-size:16px !important;">
 				<div style="padding:10px">
 					<h3><%= @event.title %></h3>
 				</div>
 				<div style="padding:10px">
-					<% if @event.location %>  
-						  
-					    <h4>LOCATION:</h4>
-					    <p><%= @event.location %></p>
-
+					<% if @event.location %>
+						<h4>LOCATION:</h4>
+						<p><%= @event.location %></p>
 					<% end %>
 				</div>
 				<div style="padding:10px">
-					<% if @event.details.present? %>  
-
-					    <h4>DETAILS:</h4>
-					    <p><%= @event.details %></p>
-
+					<% if @event.details.present? %>
+						<h4>DETAILS:</h4>
+						<p><%= @event.details %></p>
 					<% end %>
 				</div>
 				<div style="padding:10px">
@@ -39,12 +27,12 @@
 					<p><%= @event.end_time.in_time_zone('Eastern Time (US & Canada)').strftime("%B %d, %Y  -  %l:%M %p") %></p>
 				</div>
 				<div style="padding:10px">
-				    <% if current_user && current_user.admin? %>
-				    	<%= link_to "Edit Event", edit_calendar_event_path(@event.id), { :class => "btn btn-primary btn-default btn-lg", :role => "button"} %>
+					<% if current_user && current_user.admin? %>
+						<%= link_to "Edit Event", edit_calendar_event_path(@event.id), { :class => "btn btn-primary btn-default btn-lg", :role => "button"} %>
 						<%= link_to "Delete Event", calendar_event_path(@event.id), method: :delete, data: {confirm: "Are you sure?"}, :class => "btn btn-primary btn-default btn-lg", :role => "button" %>
-				    <% end %>
+					<% end %>
 				</div>
 			</div>
 		</div>
-	</div>		
+	</div>
 </section>
