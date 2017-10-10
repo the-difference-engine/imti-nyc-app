@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates :first_name, :last_name, :email, presence: true      
+  validates :first_name, :last_name, :email, presence: true
   has_one :application
   belongs_to :local_school, optional: true
   belongs_to :course, optional: true
@@ -44,5 +44,21 @@ class User < ApplicationRecord
 
   def local_school_user?
     local_school_admin? || local_school_teacher?
+  end
+
+  def self.send_pending_app_email
+    pending_apps = User.joins(:application).where.not(applications: {application_status: 'finished'})
+    inactive_pending_apps = pending_apps.where('last_sign_in_at <= ?', 7.days.ago)
+    inactive_pending_apps.each do |user|
+      mg_client = Mailgun::Client.new(ENV['MAILGUN_API_KEY'])
+
+      message_params = {from: 'imtinyc@gmail.com',
+                        # to:   "#{email}",
+                        to:   "janicewong13@gmail.com",
+                        subject: "It's 2pm!!!!!!!",
+                        text:    "nuuuuuuuuuu msg"}
+
+      result = mg_client.send_message('sandbox4f9920610a894b81b82f6bc37e90f1a0.mailgun.org', message_params).to_h!
+    end
   end
 end

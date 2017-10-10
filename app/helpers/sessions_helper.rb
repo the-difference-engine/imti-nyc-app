@@ -1,5 +1,5 @@
 module SessionsHelper
-  def send_email_mailgun
+  def send_admin_email_mailgun
 
     mg_client = Mailgun::Client.new(ENV['MAILGUN_API_KEY'])
 
@@ -14,5 +14,5 @@ module SessionsHelper
 
     message_id = result['id']
     message = result['message']
-  end 
+  end
 end

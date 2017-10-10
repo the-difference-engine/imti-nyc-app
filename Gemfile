@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'whenever', :require => false
 gem 'mailgun-ruby', '~>1.1.6'
 gem 'stripe'
 gem 'bootstrap_form'
