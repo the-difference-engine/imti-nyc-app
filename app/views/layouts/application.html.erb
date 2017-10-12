@@ -126,14 +126,12 @@
                                         <% end%>
                                         <% if current_user && current_user.admin? %>
                                             <li><a href="#">Admin<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                            <ul class="sub-menu">
-                                                <li><%= link_to "View Users", '/users' %></li>
-                                                <li><%= link_to "Add New Admin", '/admins/new' %></li>
-                                                <li><%= link_to "Completed Applications", "/completed_applications" %></li>
-                                            </ul>
-                                        </li>
-                                        <% elsif user_signed_in? %>
-                                            <li><%= link_to "My Application", "/applications" %></li>
+                                              <ul class="sub-menu">
+                                                  <li><%= link_to "View Users", '/users' %></li>
+                                                  <li><%= link_to "Add New Admin", '/admins/new' %></li>
+                                                  <li><%= link_to "Completed Applications", "/completed_applications" %></li>
+                                              </ul>
+                                            </li>
                                         <% end %>
                                         <li><a href="#">courses/workshops<i class="fa fa-caret-down" aria-hidden="true"></i></a>
                                             <ul class="sub-menu">
@@ -146,7 +144,6 @@
                                                 <li><%= link_to "Teachers", "/teachers" %></li>
                                             </ul>
                                         </li>
-                                        <li><%= link_to "Calendar", "/calendar" %></li>
                                         <li><a href="#">Event<i class="fa fa-caret-down" aria-hidden="true"></i></a>
                                             <ul class="sub-menu">
                                                 <li><%= link_to "Event Grid", "#" %></li>
