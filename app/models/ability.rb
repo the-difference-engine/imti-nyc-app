@@ -28,7 +28,6 @@ class Ability
       can :manage, Reference, application_id: @user.application.id
       can :manage, Document, application_id: @user.application.id
     end
-  end
 
   def local_school_admin_abilities
     return unless @user.local_school_admin?
