@@ -21,7 +21,9 @@
   <p>Phone Number: <%= @application.user.phone_number %></p>
   <p>Street: <%= @application.user.street %></p>  
   <p>City: <%= @application.user.city %></p>   
-  <p>State: <%= @application.user.state %></p>  
+  <% if @user.role == "domestic_applicant" %>
+      <%= f.text_field :state %>
+  <% end %>
   <p>Zip Code: <%= @application.user.zip_code %></p>  
   <p>Country: <%= @application.user.country %></p> 
   <p>Birth Place: <%= @application.user.birth_place %></p>

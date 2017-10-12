@@ -4,7 +4,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates :first_name, :last_name, :email, presence: true
+
+  validates :first_name, :last_name, :email, presence: true   
+  validates :street, :city, :country, presence: true, on: :update
+  validates :zip_code, :state, presence: true, on: :update, if: :domestic_applicant?
   has_one :application
   belongs_to :local_school, optional: true
   belongs_to :course, optional: true
