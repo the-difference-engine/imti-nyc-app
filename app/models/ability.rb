@@ -9,6 +9,12 @@ class Ability
     applicant_abilities
   end
 
+  def current_teacher_abilities
+    return unless @user.current_teacher?
+
+    can :view, Application, Course, CalendarEvent, Teachers
+  end
+
   def applicant_abilities
     return unless @user.international_applicant? || @user.domestic_applicant?
 
