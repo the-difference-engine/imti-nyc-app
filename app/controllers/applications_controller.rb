@@ -89,7 +89,7 @@ class ApplicationsController < ApplicationController
 
     applications.each do |application|
       user = application.user
-      sheet1.row(count).push(user.first_name, user.last_name, application.phone_number, user.email)
+      sheet1.row(count).push(user.first_name, user.last_name, user.phone_number, user.email)
       count+=1 
     end
 
