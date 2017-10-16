@@ -7,7 +7,7 @@ class ApplicationsController < ApplicationController
   end
 
   def new
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
   end
 
   def create
@@ -16,6 +16,7 @@ class ApplicationsController < ApplicationController
       redirect_to application_path(application.id)
     else
       flash[:danger] = current_user.errors.full_messages
+      @user = current_user
       render :new
     end
   end
