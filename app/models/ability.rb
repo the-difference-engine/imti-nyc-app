@@ -17,7 +17,7 @@ class Ability
 
   def applicant_abilities
     return unless @user.international_applicant? || @user.domestic_applicant?
-
+    can :read, Event
     can :manage, Application, user_id: @user.id
     if @user.application.present?
       can :manage, Education, application_id: @user.application.id
@@ -25,7 +25,11 @@ class Ability
       can :manage, WorkExperience, application_id: @user.application.id
       can :manage, Reference, application_id: @user.application.id
       can :manage, Document, application_id: @user.application.id
+      if @user.role == "current_teacher"
+        can :read, Course
+      end
     end
+
   end
 
   def local_school_admin_abilities
