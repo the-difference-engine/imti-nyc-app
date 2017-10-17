@@ -1,0 +1,7 @@
+  <%= bootstrap_form_for(@workshop) do |f| %>
+    <%= f.text_field :name%>
+    <%= f.text_field :description %>
+    <%= f.text_field :price %>
+    <%= f.datetime_select :time %>
+    <%= f.submit :save %>
+  <% end %>
