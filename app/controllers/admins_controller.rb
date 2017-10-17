@@ -24,7 +24,7 @@ class AdminsController < ApplicationController
     @admin.password_confirmation = password
     @admin.role = 0
     if @admin.save
-      # @admin.send_reset_password_instructions
+      @admin.send_reset_password_instructions
       redirect_to "/admins"
     else
       flash[:danger] = @admin.errors.full_messages
@@ -38,7 +38,9 @@ class AdminsController < ApplicationController
   end
 
   def destroy
-
+    User.find(params[:id]).destroy
+    flash[:success] = "Admin Deleted"
+    redirect_to "/admins"
   end
 
   def assign_current_teacher
