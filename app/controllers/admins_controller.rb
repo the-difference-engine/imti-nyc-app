@@ -24,12 +24,21 @@ class AdminsController < ApplicationController
     @admin.password_confirmation = password
     @admin.role = 0
     if @admin.save
-      @admin.send_reset_password_instructions
-      redirect_to "/admins/new"
+      # @admin.send_reset_password_instructions
+      redirect_to "/admins"
     else
       flash[:danger] = @admin.errors.full_messages
       render "/admins/new"
     end
+  end
+
+  def index
+    @admins = User.where(role: 0).sort_by{|user| user.last_name}
+    render "index"
+  end
+
+  def destroy
+
   end
 
   def assign_current_teacher
