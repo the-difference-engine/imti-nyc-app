@@ -54,7 +54,7 @@ class User < ApplicationRecord
 
       message_params = {from: 'imtinyc@gmail.com',
                         # to:   "#{email}",
-                        to:   "janicewong13@gmail.com",
+                        to:   "imtinyc@gmail.com",
                         subject: "It's 2pm!!!!!!!",
                         text:    "nuuuuuuuuuu msg"}
 

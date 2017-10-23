@@ -5,7 +5,7 @@ module SessionsHelper
 
     message_params =  {
                        from: 'imtinyc@gmail.com',
-                       to:   'jamieronin@gmail.com',
+                       to:   'imtinyc@gmail.com',
                        subject: "The user #{current_user.first_name} #{current_user.last_name} hasn't finished the application",
                        text:    "The user #{current_user.first_name} #{current_user.last_name} hasn't finished the application. You can email them at: #{current_user.email}"
                       }

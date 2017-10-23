@@ -3,7 +3,7 @@ module PagesHelper
     mg_client = Mailgun::Client.new(ENV['MAILGUN_API_KEY'])
     message_params = {
       from: 'imtinyc@gmail.com',
-      to:   'jamieronin@gmail.com',
+      to:   'imtinyc@gmail.com',
       subject: params[:subject],
       html:  "
       <p>Name: #{params[:name]}</p>
@@ -21,7 +21,7 @@ module PagesHelper
     message_params = {
       from: 'imtinyc@gmail.com',
       #  Will replace to: email to params[:email] once in production
-      to:   'jamieronin@gmail.com',
+      to:   'imtinyc@gmail.com',
       subject: params[:subject],
       html:  "
       <p>Hello #{params[:name]}</p>

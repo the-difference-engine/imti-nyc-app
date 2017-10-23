@@ -4,7 +4,7 @@ module AdminsHelper
 
     message_params = {
        from: 'imtinyc@gmail.com',
-       to:   'dovybluming@gmail.com',
+       to:   'imtinyc@gmail.com',
        subject: "Create Password",
        text:  "Welcome new admin! Your account account has been created.  Please use the link below to set your password."
       }
@@ -15,5 +15,3 @@ module AdminsHelper
     message = result['message']
   end
 end
-
-
