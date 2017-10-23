@@ -122,6 +122,9 @@
                                             <% end %>
                                         <% end%>
                                         <% if can? :read, User %>
+                                            <li><%= link_to "My Portfolio", "/alumni/#{current_user.id}" %></li>
+                                        <% end %>
+                                        <% if current_user && current_user.admin? %>
                                             <li><a href="#">Admin<i class="fa fa-caret-down" aria-hidden="true"></i></a>
                                               <ul class="sub-menu">
                                                   <li><%= link_to "View Users", '/users' %></li>
