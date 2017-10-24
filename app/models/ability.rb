@@ -8,6 +8,7 @@ class Ability
     admin_abilities
     applicant_abilities
     current_teacher_abilities
+    alumni_abilities
   end
 
   def current_teacher_abilities
@@ -42,6 +43,13 @@ class Ability
 
     can :manage, :all
   end
+
+  def alumni_abilities
+    return unless @user.alumni?
+
+    can :read, User, id: @user.id
+  end
+
 end
 
 
