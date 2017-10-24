@@ -7,12 +7,14 @@ class Ability
     local_school_admin_abilities
     admin_abilities
     applicant_abilities
+    current_teacher_abilities
   end
 
   def current_teacher_abilities
     return unless @user.current_teacher?
 
-    can :view, Application, Course, CalendarEvent, Teachers
+    can :view, Application, Course, CalendarEvent, Teacher
+    can :read, :teachers
   end
 
   def applicant_abilities
