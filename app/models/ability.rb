@@ -27,11 +27,7 @@ class Ability
       can :manage, WorkExperience, application_id: @user.application.id
       can :manage, Reference, application_id: @user.application.id
       can :manage, Document, application_id: @user.application.id
-      if @user.role == "current_teacher"
-        can :read, Course
-      end
     end
-
   end
 
   def local_school_admin_abilities
