@@ -66,8 +66,6 @@ ActiveRecord::Schema.define(version: 20170914222350) do
     t.string   "email"
     t.decimal  "amount",     precision: 10, scale: 2
     t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.text     "comment"
   end
 
   create_table "educations", force: :cascade do |t|
