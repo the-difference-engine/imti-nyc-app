@@ -1,4 +1,9 @@
 <script src="https://js.stripe.com/v3/"></script>
+<% if @charge_uid.present? %>
+  <p>Please keep this for your records!</p>
+  <p>If you did not include an email - this is your only opportunity to record this transaction</p>
+  <p>Receipt confirmation number: <%= @charge_uid %>
+<% end %>
 
 <div class="container">
   <%= form_tag('/donations', id: 'payment-form') do %>

@@ -62,11 +62,6 @@ ActiveRecord::Schema.define(version: 20171027113320) do
     t.datetime "attachment_updated_at"
   end
 
-  create_table "donations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "educations", force: :cascade do |t|
     t.integer  "application_id"
     t.string   "school"

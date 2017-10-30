@@ -70,11 +70,7 @@ class WorkshopsController < ApplicationController
       :description => "Workshop cost",
       :currency    => 'usd'
       )
-<<<<<<< HEAD
-    new_charge = current_user.charges.create(uid: charge.id, amount: @amount, description: charge.description, customer_id: customer.id)
-=======
     new_charge = current_user.charges.create(uid: charge.id, amount: @amount, description: charge.description, customer_id: customer.id, charge_type: 'workshop')
->>>>>>> Users can donate and donate anonymously
 
     flash[:success] = "Thank you for your payment."
     redirect_to workshop_path(params[:workshop_id])
@@ -86,31 +82,18 @@ class WorkshopsController < ApplicationController
 
   def calc_count_in_payment(registrant_workshops)
     count = 0
-<<<<<<< HEAD
-    puts "calc count" + "==" * 100
-    # checks if current user is local school admin
-    if current_user.local_school_id
-      puts "local school?" + "==" * 100
-=======
     puts "calc count" + "=="*100
     # checks if current user is local school admin
     if current_user.local_school_id
       puts "local school?" + "=="*100
->>>>>>> Users can donate and donate anonymously
       registrant_workshops.each do |registrant_workshop|
         # where the local school id matches
         registrant = Registrant.find_by(id: registrant_workshop.registrant_id)
         # counts number of registrants from current user's local school that have a payment status of false
 
-<<<<<<< HEAD
-        # puts registrant_workshop.payment_status + "=="*100
-        if registrant.local_school_id == current_user.local_school_id && !registrant_workshop.payment_status
-          puts "==" * 100
-=======
           # puts registrant_workshop.payment_status + "=="*100
         if registrant.local_school_id == current_user.local_school_id && !registrant_workshop.payment_status
           puts "=="*100
->>>>>>> Users can donate and donate anonymously
           registrant_workshop.update(payment_status: true)
           count += 1
         end
