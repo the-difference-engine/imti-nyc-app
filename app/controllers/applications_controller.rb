@@ -1,7 +1,6 @@
 class ApplicationsController < ApplicationController
   load_and_authorize_resource
 
-
   def index
     @application = current_user.application
   end
@@ -42,7 +41,7 @@ class ApplicationsController < ApplicationController
       :currency    => 'usd'
       )
 
-    new_charge = current_user.charges.create(uid: charge.id, amount: amount, description: charge.description, customer_id: customer.id)
+    new_charge = current_user.charges.create(uid: charge.id, amount: amount, description: charge.description, customer_id: customer.id, charge_type: 'application')
     application.update(payment_status: true)
     application.update(application_status: "finished")
     flash[:success] = "Thank you for your payment."
@@ -92,11 +91,11 @@ class ApplicationsController < ApplicationController
     applications.each do |application|
       user = application.user
       sheet1.row(count).push(user.first_name, user.last_name, user.phone_number, user.email)
-      count+=1 
+      count+=1
     end
 
-    spreadsheet = StringIO.new 
-    book.write spreadsheet 
+    spreadsheet = StringIO.new
+    book.write spreadsheet
     send_data spreadsheet.string, :filename => "applicantsInfo.xls", :type =>  "application/vnd.ms-excel"
 
   end
