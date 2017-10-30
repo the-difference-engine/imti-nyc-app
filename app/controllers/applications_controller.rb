@@ -23,7 +23,7 @@ class ApplicationsController < ApplicationController
 
   def show
     @amount = @application.user.domestic_applicant? ? 50 : 75;
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
     render :show
   end
 
