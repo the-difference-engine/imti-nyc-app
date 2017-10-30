@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   resources :charges
   resources :courses
   resources :course_registrations
+  resources :donations, only: [:index, :create]
   resources :teachers, only: [:index]
   resources :alumni
 

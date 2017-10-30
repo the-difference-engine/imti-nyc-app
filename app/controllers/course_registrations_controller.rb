@@ -20,7 +20,7 @@ class CourseRegistrationsController < ApplicationController
       :currency    => 'usd'
       )
 
-    @new_charge = current_user.charges.create(uid: charge.id, amount: charge.amount / 100, description: charge.description, customer_id: customer.id)
+    @new_charge = current_user.charges.create(uid: charge.id, amount: charge.amount / 100, description: charge.description, customer_id: customer.id, charge_type: 'course')
     current_user.update(course_id: course.id)
     send_email_mailgun
     render 'show'
