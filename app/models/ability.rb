@@ -47,7 +47,7 @@ class Ability
   def alumni_abilities
     return unless @user.alumni?
 
-    can :read, User, id: @user.id
+    can :alumni, User, id: @user.id
   end
 
 end
