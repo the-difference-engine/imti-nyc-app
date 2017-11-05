@@ -4,54 +4,34 @@
   <p>Date: <%= @workshop.time%></p>
   <p>Price: <%= number_to_currency(@workshop.price) %></p>
   <h1>To register for this class please fill out this form.</h1>
-  <%= form_tag '/registrants', method: :post do %>
-    <div>
-      <%= label_tag :first_name %>
-      <%= text_field_tag :first_name, @registrant.first_name, value: @user.first_name %>
-    </div>
-    <div>
-      <%= label_tag :last_name %>
-      <%= text_field_tag :last_name, @registrant.last_name, value: @user.last_name %>
-    </div>
-    <div>
-      <%= label_tag :affiliation %>
-      <% if @user.local_school %>
-        <%= text_field_tag :affiliation, @registrant.affiliation, value: @user.local_school.name %>
-      <% else %>
-        <%= text_field_tag :affiliation, @registrant.affiliation %>
-      <% end %>
-    </div>
-    <div>
-      <%= label_tag :occupation %>
-      <%= text_field_tag :occupation, @registrant.occupation, value: @user.occupation %>
-    </div>
-    <div>
-      <%= label_tag :email %>
-      <%= text_field_tag :email, @registrant.email, value: @user.email %>
-    </div>
-    <div>
-      <%= label_tag :phone %>
-      <%= text_field_tag :phone, @registrant.phone, value: @user.phone_number%>
-    </div>
+  <div class="col-md-6">
+    <%= bootstrap_form_tag url: '/registrants' do |f| %>
+      <%= f.text_field :first_name %>
+      <%= f.text_field :last_name %>
+      <%= f.text_field :affiliation %>
+      <%= f.text_field :occupation %>
+      <%= f.email_field :email %>
+      <%= f.text_field :phone %>
       <%= hidden_field_tag :workshop_id, @workshop.id%>
-      <%= submit_tag 'Register' %>
-  <% end %>
+      <%= f.submit 'Register' %>
+    <% end %>
+  </div>
   <br>
   <% if current_user && current_user.admin? %>
     <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
-    <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %>
-      <%= submit_tag 'Remove this workshop' %>
+    <%= bootstrap_form_tag url: "/workshops/#{@workshop.id}", method: :delete do |f| %>
+      <%= f.submit 'Remove this workshop' %>
     <% end %>
     <br>
   <% end %>
   <% if current_user && current_user.local_school_admin? %>
     <h1>Bulk Import</h1>
     <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
-    <%= form_tag "/registrants/import", method: :post, multipart: true do %>
-        <%= file_field_tag :file %>
-        <%= hidden_field_tag :workshop_id, @workshop.id%>
-        <%= hidden_field_tag :local_school_id, current_user.local_school_id %>
-        <%= submit_tag "Import" %>
+    <%= bootstrap_form_tag url: "/registrants/import", method: :post, multipart: true do |f| %>
+      <%= f.file_field :file %>
+      <%= hidden_field_tag :workshop_id, @workshop.id%>
+      <%= hidden_field_tag :local_school_id, current_user.local_school_id %>
+      <%= f.submit "Import" %>
     <% end %>
   <% end %>
 </div>
@@ -60,3 +40,5 @@
   stripeForm.setStripe()
   stripeForm.createForm()
 </script>
+
+<br>
