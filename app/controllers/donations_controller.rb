@@ -40,7 +40,7 @@ class DonationsController < ApplicationController
     end
 
     @charge_uid = stripe_charge.id
-    send_confirmation_email(@charge_uid) if email.present?
+    send_confirmation_email(@charge_uid, amount) if email.present?
 
     flash[:success] = "Thanks you for your donation!"
     redirect_to donations_path
@@ -48,7 +48,7 @@ class DonationsController < ApplicationController
 
   private
 
-  def send_confirmation_email(charge_uid)
+  def send_confirmation_email(charge_uid, amount)
     mg_client = Mailgun::Client.new(ENV['MAILGUN_API_KEY'])
 
     message_params = {
