@@ -43,7 +43,7 @@ class DonationsController < ApplicationController
     send_confirmation_email(@charge_uid, amount) if email.present?
 
     flash[:success] = "Thanks you for your donation!"
-    redirect_to donations_path
+    redirect_to controller: 'donations', action: 'index', receipt: @charge_uid
   end
 
   private

@@ -1,11 +1,11 @@
 <script src="https://js.stripe.com/v3/"></script>
-<% if @charge_uid.present? %>
-  <p>Please keep this for your records!</p>
-  <p>If you did not include an email - this is your only opportunity to record this transaction</p>
-  <p>Receipt confirmation number: <%= @charge_uid %>
-<% end %>
 
 <div class="container">
+  <% if params[:receipt].present? %>
+    <p>Please keep this for your records!</p>
+    <p>If you did not include an email - this is your only opportunity to record this transaction</p>
+    <p>Receipt confirmation number: <%= params[:receipt] %>
+  <% end %>
   <%= form_tag('/donations', id: 'payment-form') do %>
     <div class="form-group">
       <div class="form-row">
