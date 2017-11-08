@@ -27,7 +27,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def set_school
     return unless resource.local_school_admin?
-    school = LocalSchool.create(name: params[:school_name])
+    school = LocalSchool.create(name: params[:school_name], contact_name: resource.full_name)
     resource.update(local_school_id: school.id)
   end
 

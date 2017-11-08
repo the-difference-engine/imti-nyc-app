@@ -7,7 +7,6 @@ class LocalSchool < ApplicationRecord
   validates :code, uniqueness: true, allow_nil: true
   validates :name, presence: true
   validates :contact_name, presence: true
-  validates :school_address, presence: true
 
   private
 

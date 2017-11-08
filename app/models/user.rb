@@ -5,8 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :first_name, :last_name, :email, presence: true   
-  validates :street, :city, :country, presence: true, on: :update
+  validates :first_name, :last_name, :email, presence: true
+  validates :street, :city, :country, presence: true, on: :update, unless: :local_school_admin?
   validates :zip_code, :state, presence: true, on: :update, if: :domestic_applicant?
   has_one :application
   belongs_to :local_school, optional: true
@@ -43,6 +43,10 @@ class User < ApplicationRecord
     spreadsheet.each do |row|
       User.create(first_name: row[0], last_name: row[1], email: ActionView::Base.full_sanitizer.sanitize(row[2]), password: row[3], password_confirmation: row[4])
     end
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 
   def local_school_user?
