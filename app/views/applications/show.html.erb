@@ -22,7 +22,7 @@
   <p>Street: <%= @application.user.street %></p>  
   <p>City: <%= @application.user.city %></p>   
   <% if @user.role == "domestic_applicant" %>
-      <%= f.text_field :state %>
+      <p>State: <%= @application.user.state %> </p>
   <% end %>
   <p>Zip Code: <%= @application.user.zip_code %></p>  
   <p>Country: <%= @application.user.country %></p> 
@@ -34,16 +34,7 @@
   <p>Ages of Children: <%= @application.user.ages_of_children %></p>
 
   <p><%= link_to 'Edit Personal Data', "/applications/#{@application.id}/edit"%></p>
-  <hr>
-
-  <h3>Other Application Sections</h3>
-  <p>Please double check all sections below to ensure that your application is accurate.</p>
-  <h4><a href="/applications/<%= @application.id %>/educations">B. Education</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/montessori_trainings">C. Montessori Trainings</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/work_experiences">D. Work Experience</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/references">E. References</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/documents">F. Documents</a></h4>
-  <hr>
+  <%= render partial: '/shared/other_application_section' %>
 <% unless current_user.role == "admin" %>
 
   <h3>Pay Application Fee and Submit Application</h3>
