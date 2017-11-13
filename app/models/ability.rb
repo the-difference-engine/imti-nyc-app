@@ -11,6 +11,12 @@ class Ability
     alumni_abilities
   end
 
+  def public_abilities
+
+    can :view, CalendarEvent
+    
+  end
+
   def current_teacher_abilities
     return unless @user.current_teacher?
 
