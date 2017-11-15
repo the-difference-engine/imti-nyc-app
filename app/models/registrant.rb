@@ -15,6 +15,9 @@ class Registrant < ApplicationRecord
   end
 
   def self.import(file, workshop_id, local_school_id)
+    # if file == nil
+    #   return "Please select file"
+    # end
     spreadsheet = open_spreadsheet(file)
     if spreadsheet == nil
       return "Invalid File"
