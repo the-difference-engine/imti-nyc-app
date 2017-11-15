@@ -24,16 +24,11 @@ class RegistrantsController < ApplicationController
   end
 
   def import
-    if params[:file]
-      registrants = Registrant.import(params[:file], params[:workshop_id], params[:local_school_id])
-    # else
-    #   flash[:danger] = "Please upload file"
+    return_message = registrants = Registrant.import(params[:file], params[:workshop_id], params[:local_school_id])
+    flash[:danger] = "#{return_message}"
+    if return_message == nil
+      flash[:success] = "Your import was successful!"
     end
-    # if registrants == "Invalid File"
-    #   flash[:danger] = "Invalid File Type"
-    # elsif params[:file]
-    #   flash[:success] = "Your import was succesful!"
-    # end
     redirect_to workshop_path(params[:workshop_id])
   end
 
