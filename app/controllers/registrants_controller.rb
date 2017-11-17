@@ -25,8 +25,10 @@ class RegistrantsController < ApplicationController
 
   def import
     return_message = registrants = Registrant.import(params[:file], params[:workshop_id], params[:local_school_id])
-    flash[:danger] = "#{return_message}"
-    if return_message == nil
+    unless return_message == "success"
+      flash[:danger] = "#{return_message}"
+    end
+    if return_message == "success"
       flash[:success] = "Your import was successful!"
     end
     redirect_to workshop_path(params[:workshop_id])
