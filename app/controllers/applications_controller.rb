@@ -23,9 +23,6 @@ class ApplicationsController < ApplicationController
   def show
     @amount = @application.user.domestic_applicant? ? 50 : 75;
     @user = current_user
-
-    @education = Education.find_by(application_id: @application.id)
-
     render :show
   end
 
