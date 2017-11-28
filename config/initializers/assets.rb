@@ -12,4 +12,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( style.css )
 Rails.application.config.assets.precompile += %w( css/responsive.css )
 Rails.application.config.assets.precompile += %w( css/color-changer.css )
-Rails.application.config.assets.precompile += %w( jquery2.js jquery_ujs)
+Rails.application.config.assets.precompile += %w( jquery2.js jquery_ujs stripe)

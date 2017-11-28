@@ -12,7 +12,7 @@ class RegistrantsController < ApplicationController
     if @registrant.save
       RegistrantWorkshop.create(registrant_id: @registrant.id, workshop_id: params[:workshop_id])
       flash[:success] = "Registrant has been created"
-      redirect_to workshop_path(params[:workshop_id])
+      redirect_to controller: 'workshops', action: 'payment', id: params[:workshop_id], resource: @registrant.id
     else
       @workshop = Workshop.find_by(id: params[:workshop_id])
       if current_user && current_user.local_school_admin?
@@ -27,10 +27,11 @@ class RegistrantsController < ApplicationController
     registrants = Registrant.import(params[:file], params[:workshop_id], params[:local_school_id])
     if registrants == "Invalid File"
       flash[:danger] = "Invalid File Type"
+      redirect_to workshop_path(params[:workshop_id])
     else
       flash[:success] = "Your import was succesful!"
+      redirect_to payment_workshop_path(params[:workshop_id])
     end
-    redirect_to workshop_path(params[:workshop_id])
   end
 
   def edit

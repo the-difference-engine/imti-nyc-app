@@ -2,7 +2,7 @@
   <p>Title: <%= @workshop.name%></p>
   <p>Description: <%= @workshop.description%></p>
   <p>Date: <%= @workshop.time%></p>
-  <p>Price: <%= @workshop.price%></p>
+  <p>Price: <%= number_to_currency(@workshop.price) %></p>
   <h1>To register for this class please fill out this form.</h1>
   <%= form_tag '/registrants', method: :post do %>
     <div>
@@ -34,7 +34,7 @@
       <%= text_field_tag :phone, @registrant.phone, value: @user.phone_number%>
     </div>
       <%= hidden_field_tag :workshop_id, @workshop.id%>
-      <%= submit_tag 'Create New registrant' %>
+      <%= submit_tag 'Register' %>
   <% end %>
   <br>
   <% if current_user && current_user.admin? %>
@@ -45,80 +45,18 @@
     <br>
   <% end %>
   <% if current_user && current_user.local_school_admin? %>
-      <h1>Bulk Import</h1>
-        <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
-        <%= form_tag "/registrants/import", method: :post, multipart: true do %>
-            <%= file_field_tag :file %>
-            <%= hidden_field_tag :workshop_id, @workshop.id%>
-            <%= hidden_field_tag :local_school_id, current_user.local_school_id %>
-            <%= submit_tag "Import" %>
-        <% end %>
-    <br>
-    <h1>Current Registrants:</h1>
-    <table class="table-condensed">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Affiliation</th>
-          <th>Occupation</th>
-          <th>Phone Number</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @registrants.each do |registrant| %>
-          <tr>
-            <td><%= registrant.first_name %></td>
-            <td><%= registrant.last_name %></td>
-            <td><%= registrant.email %></td>
-            <td><%= registrant.affiliation %></td>
-            <td><%= registrant.occupation %></td>
-            <td><%= registrant.phone %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <h1>Bulk Import</h1>
+    <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
+    <%= form_tag "/registrants/import", method: :post, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= hidden_field_tag :workshop_id, @workshop.id%>
+        <%= hidden_field_tag :local_school_id, current_user.local_school_id %>
+        <%= submit_tag "Import" %>
+    <% end %>
   <% end %>
-
-<% if !@amount.eql?(0.0) %>
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payModal">
-    Pay Workshop Fee
-  </button>
-<% end %>
-
-  <!-- Modal -->
-  <div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Credit card information</h4>
-        </div>
-        <div class="modal-body">
-          <%= form_tag workshop_payment_path(@workshop), method: :put, id: "payment-form" do %>
-          <div class="form-row">
-            <label for="card-element">
-              Please enter your Credit or Debit card information:
-            </label>
-            <p>Total Charge: $<%= @amount %></p>
-            <div id="card-element">
-              <!-- a Stripe Element will be inserted here. -->
-            </div>
-
-            <!-- Used to display Element errors -->
-            <div id="card-errors" role="alert"></div>
-          </div>
-          <input type="hidden" name="workshop_id" value="<%= @workshop.id %>">
-
-          <button class="btn btn-primary">Submit Payment</button>
-          <!-- </form> -->
-          <% end %>
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div>
+
+<script>
+  stripeForm.setStripe()
+  stripeForm.createForm()
+</script>

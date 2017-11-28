@@ -15,8 +15,7 @@ var stripeForm = (function(){
 	  }
 	};
 
-	// Create an instance of the card Element
-	var createCard = function() {
+	var createForm = function() {
 		var card = elements.create('card', {style: style});
 
 		// Add an instance of the card Element into the `card-element` <div>
@@ -30,9 +29,6 @@ var stripeForm = (function(){
 		    displayError.textContent = '';
 		  }
 		});
-	}
-
-	var createForm = function() {
 		// Create a token or display an error when the form is submitted.
 		var form = document.getElementById('payment-form');
 		form.addEventListener('submit', function(event) {
@@ -57,7 +53,12 @@ var stripeForm = (function(){
 	  hiddenInput.setAttribute('type', 'hidden');
 	  hiddenInput.setAttribute('name', 'stripeToken');
 	  hiddenInput.setAttribute('value', token.id);
+		var hiddenResource = document.createElement('input');
+		hiddenResource.setAttribute('type', 'hidden');
+		hiddenResource.setAttribute('name', 'resource_id');
+		hiddenResource.setAttribute('value', $('#resource_id').val());
 	  form.appendChild(hiddenInput);
+		form.appendChild(hiddenResource);
 
 	  // Submit the form
 	  form.submit();
@@ -65,7 +66,6 @@ var stripeForm = (function(){
 
 	return {
 		setStripe: setStripe,
-		createCard: createCard,
 		createForm: createForm
 	}
 })();
