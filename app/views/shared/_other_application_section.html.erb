@@ -1,13 +1,27 @@
-  <hr>
   <h3>Other Application Sections</h3>
   <p>Please double check all sections below to ensure that your application is accurate.</p>
   <h4><a href="/applications/<%= @application.id %>/educations">B. Education</a> 
-    <% if @education.presence %>
+    <% if @application.educations.presence %>
       <span class="glyphicon glyphicon-ok">
     <% end %>
   </h4> 
-  <h4><a href="/applications/<%= @application.id %>/montessori_trainings">C. Montessori Trainings</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/work_experiences">D. Work Experience</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/references">E. References</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/documents">F. Documents</a></h4>
-  <hr>
+  <h4><a href="/applications/<%= @application.id %>/montessori_trainings">C. Montessori Trainings</a>
+    <% if @application.montessori_trainings.presence %>
+      <span class="glyphicon glyphicon-ok">
+    <% end %>
+  </h4>
+  <h4><a href="/applications/<%= @application.id %>/work_experiences">D. Work Experience</a>
+    <% if @application.work_experiences.presence %>
+      <span class="glyphicon glyphicon-ok">
+    <% end %>    
+  </h4>
+  <h4><a href="/applications/<%= @application.id %>/references">E. References</a>
+    <% if @application.references.presence %>
+      <span class="glyphicon glyphicon-ok">
+    <% end %>
+  </h4>
+  <h4><a href="/applications/<%= @application.id %>/documents">F. Documents</a>
+    <% if @application.documents.count == 6 %>
+      <span class="glyphicon glyphicon-ok">
+    <% end %>
+  </h4>

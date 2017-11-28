@@ -34,7 +34,9 @@
   <p>Ages of Children: <%= @application.user.ages_of_children %></p>
 
   <p><%= link_to 'Edit Personal Data', "/applications/#{@application.id}/edit"%></p>
-  <%= render partial: '/shared/other_application_section' %>
+  <hr>
+    <%= render partial: '/shared/other_application_section' %>
+  <hr>
 <% unless current_user.role == "admin" %>
 
   <h3>Pay Application Fee and Submit Application</h3>
