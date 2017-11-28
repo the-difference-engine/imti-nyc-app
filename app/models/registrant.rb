@@ -28,4 +28,6 @@ class Registrant < ApplicationRecord
       return "success"
     end
   end
+
+  
 end
