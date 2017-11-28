@@ -13,13 +13,7 @@
     <p><%= link_to 'Edit montessori training', "/applications/#{@application.id}/montessori_trainings/#{montessori_training.id}/edit"%>
     <hr>
   <% end %>
-
-  <h3>Other Application Sections</h3>
-  <p>Please double check all sections below to ensure that your application is accurate.</p>
-  <h4><a href="/applications/<%= @application.id %>">A. My Personal Data, Pay Application Fee & Submit</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/educations">B. Education</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/montessori_trainings">C. Montessori Trainings</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/work_experiences">D. Work Experience</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/references">E. References</a></h4>
-  <h4><a href="/applications/<%= @application.id %>/documents">F. Documents</a></h4>
+  
+  <%= render partial: '/shared/other_application_section' %>
+  
 </div>
