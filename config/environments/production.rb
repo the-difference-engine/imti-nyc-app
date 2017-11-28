@@ -66,6 +66,20 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL'] }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV["MAILGUN_API_KEY"] ,
+    domain: 'sandbox4f9920610a894b81b82f6bc37e90f1a0.mailgun.org',
+  }
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => "sandbox4f9920610a894b81b82f6bc37e90f1a0.mailgun.org",
+    :user_name => "postmaster@MYDOMAIN.mailgun.org",
+    :password => "2%oiE3!QR9jB"
+  }
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
