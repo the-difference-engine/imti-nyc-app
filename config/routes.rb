@@ -47,7 +47,10 @@ Rails.application.routes.draw do
   resources :registrants
 
   resources :workshops do
-    put :payment
+    member do
+      put :pay
+      get :payment
+    end
   end
   resources :charges
   resources :courses

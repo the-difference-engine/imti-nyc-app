@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027113320) do
+ActiveRecord::Schema.define(version: 20171110125004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,13 +31,14 @@ ActiveRecord::Schema.define(version: 20171027113320) do
   create_table "charges", force: :cascade do |t|
     t.string   "uid"
     t.integer  "user_id"
-    t.decimal  "amount",      precision: 8, scale: 2
+    t.decimal  "amount",        precision: 8, scale: 2
     t.string   "customer_id"
     t.string   "description"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "charge_type"
     t.string   "email"
+    t.integer  "registrant_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -130,9 +131,10 @@ ActiveRecord::Schema.define(version: 20171027113320) do
     t.string   "occupation"
     t.string   "email"
     t.string   "phone"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "local_school_id"
+    t.boolean  "paid",            default: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -191,7 +193,7 @@ ActiveRecord::Schema.define(version: 20171027113320) do
     t.datetime "updated_at",  null: false
     t.string   "name"
     t.string   "description"
-    t.string   "price"
+    t.integer  "price"
     t.datetime "time"
   end
 
