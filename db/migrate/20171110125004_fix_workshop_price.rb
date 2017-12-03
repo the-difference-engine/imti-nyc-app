@@ -1,5 +1,7 @@
+
 class FixWorkshopPrice < ActiveRecord::Migration[5.0]
   def up
+<<<<<<< HEAD
     remove_column :workshops, :price
     add_column :workshops, :price, :decimal, precision: 15, scale: 2
     add_column :charges, :registrant_id, :integer

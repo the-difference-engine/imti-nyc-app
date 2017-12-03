@@ -21,6 +21,13 @@ class WorkshopsController < ApplicationController
     @user = current_user.presence || User.new
     @registrant = Registrant.new
     @registrants = find_registrants(@workshop.id)
+    if user_signed_in? && current_user.local_school_admin?
+      @resource = current_user
+      @amount = @workshop.price * @registrants.count
+    else
+      @resource = Registrant.find_by(id: params[:resource])
+      @amount = @workshop.price
+    end
     render 'show.html.erb'
   end
 
