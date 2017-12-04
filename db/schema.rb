@@ -20,6 +20,10 @@ ActiveRecord::Schema.define(version: 20171110125004) do
     t.boolean  "payment_status"
     t.boolean  "background_check"
     t.string   "application_status"
+    t.string   "resume"
+    t.string   "health_form"
+    t.text     "personal_essay"
+    t.string   "toefl_score"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
