@@ -9,12 +9,11 @@ class Ability
     applicant_abilities
     current_teacher_abilities
     alumni_abilities
+    public_abilities
   end
 
   def public_abilities
-
     can :view, CalendarEvent
-    
   end
 
   def current_teacher_abilities
@@ -57,5 +56,3 @@ class Ability
   end
 
 end
-
-
