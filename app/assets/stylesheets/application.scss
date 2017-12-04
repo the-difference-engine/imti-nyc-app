@@ -24,6 +24,10 @@
  *= require_tree .
  */
 
+label.required:after {
+  content:" *";
+}
+
 .application {
   position: relative;
   top: 150px;
