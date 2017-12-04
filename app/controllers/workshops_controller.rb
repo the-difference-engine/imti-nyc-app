@@ -23,6 +23,7 @@ class WorkshopsController < ApplicationController
     @registrants = find_registrants(@workshop.id)
     if user_signed_in? && current_user.local_school_admin?
       @resource = current_user
+      @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id)
       @amount = @workshop.price * @registrants.count
     else
       @resource = Registrant.find_by(id: params[:resource])

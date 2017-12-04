@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container">
   <p>Date: <%= @workshop.time%></p>
   <p>Price: <%= number_to_currency(@workshop.price) %></p>
@@ -40,62 +41,120 @@
       <%= hidden_field_tag :workshop_id, @workshop.id%>
       <%= hidden_field_tag :local_school_id, current_user.local_school_id %>
       <%= f.submit "Import" %>
-    <% end %>
-  <% end %>
-</div>
-
-<div class="container">
-  <h3>Thank you, <%= @resource.first_name %> for signing up for <%= @workshop.name %>!</h3>
-  <h4>To complete your registration, please submit your payment below</h4>
-  <h5>Amount owed: <%= number_to_currency(@amount) %></h5>
-
-  <% if @resource.is_a?(User) %>
-    <%# each through registrants in a table to show them %>
-    <table class="table-condensed">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Affiliation</th>
-          <th>Occupation</th>
-          <th>Phone Number</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @registrants.each do |registrant| %>
-          <tr>
-            <td><%= registrant.first_name %></td>
-            <td><%= registrant.last_name %></td>
-            <td><%= registrant.email %></td>
-            <td><%= registrant.affiliation %></td>
-            <td><%= registrant.occupation %></td>
-            <td><%= registrant.phone %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
-
-  <%= form_tag pay_workshop_path(@workshop), method: :put, id: "payment-form" do %>
-    <div class="form-group">
-      <label for="card-element">
-        Please enter your Credit or Debit card information:
-      </label>
-      <p>Total Charge: $<%= @amount %></p>
-      <div id="card-element">
-        <!-- a Stripe Element will be inserted here. -->
+=======
+<div class="modal-body row">
+  <div class="container col-md-6">
+    <p>Title: <%= @workshop.name%></p>
+    <p>Description: <%= @workshop.description%></p>
+    <p>Date: <%= @workshop.time%></p>
+    <p>Price: <%= number_to_currency(@workshop.price) %></p>
+    <h1>To register for this class please fill out this form.</h1>
+    <%= form_tag '/registrants', method: :post do %>
+      <div>
+        <%= label_tag :first_name %>
+        <%= text_field_tag :first_name, @registrant.first_name, value: @user.first_name %>
       </div>
+      <div>
+        <%= label_tag :last_name %>
+        <%= text_field_tag :last_name, @registrant.last_name, value: @user.last_name %>
+      </div>
+      <div>
+        <%= label_tag :affiliation %>
+        <% if @user.local_school %>
+          <%= text_field_tag :affiliation, @registrant.affiliation, value: @user.local_school.name %>
+        <% else %>
+          <%= text_field_tag :affiliation, @registrant.affiliation %>
+        <% end %>
+      </div>
+      <div>
+        <%= label_tag :occupation %>
+        <%= text_field_tag :occupation, @registrant.occupation, value: @user.occupation %>
+      </div>
+      <div>
+        <%= label_tag :email %>
+        <%= text_field_tag :email, @registrant.email, value: @user.email %>
+      </div>
+      <div>
+        <%= label_tag :phone %>
+        <%= text_field_tag :phone, @registrant.phone, value: @user.phone_number%>
+      </div>
+        <%= hidden_field_tag :workshop_id, @workshop.id%>
+        <%= submit_tag 'Register' %>
+    <% end %>
+    <br>
+    <% if current_user && current_user.admin? %>
+      <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
+      <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %>
+        <%= submit_tag 'Remove this workshop' %>
+      <% end %>
+      <br>
+>>>>>>> pages successfully merged in content
+    <% end %>
+    <% if current_user && current_user.local_school_admin? %>
+      <h1>Bulk Import</h1>
+      <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
+      <%= form_tag "/registrants/import", method: :post, multipart: true do %>
+          <%= file_field_tag :file %>
+          <%= hidden_field_tag :workshop_id, @workshop.id%>
+          <%= hidden_field_tag :local_school_id, current_user.local_school_id %>
+          <%= submit_tag "Import" %>
+      <% end %>
+    <% end %>
+  </div>
 
-      <!-- Used to display Element errors -->
-      <div id="card-errors" role="alert"></div>
-    </div>
-    <input type="hidden" id="resource_id" value="<%= @resource.id %>">
+  <div class="container col-md-6">
+    <h3>Thank you, <%= @resource.first_name %> for signing up for <%= @workshop.name %>!</h3>
+    <h4>To complete your registration, please submit your payment below</h4>
+    <h5>Amount owed: <%= number_to_currency(@amount) %></h5>
 
-    <div class="form-group">
-      <button class="btn btn-primary">Pay Now</button>
-    </div>
-  <% end %>
+    <% if @resource.is_a?(User) %>
+      <%# each through registrants in a table to show them %>
+      <table class="table-condensed">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Affiliation</th>
+            <th>Occupation</th>
+            <th>Phone Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @registrants.each do |registrant| %>
+            <tr>
+              <td><%= registrant.first_name %></td>
+              <td><%= registrant.last_name %></td>
+              <td><%= registrant.email %></td>
+              <td><%= registrant.affiliation %></td>
+              <td><%= registrant.occupation %></td>
+              <td><%= registrant.phone %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <%= form_tag pay_workshop_path(@workshop), method: :put, id: "payment-form" do %>
+      <div class="form-group">
+        <label for="card-element">
+          Please enter your Credit or Debit card information:
+        </label>
+        <p>Total Charge: $<%= @amount %></p>
+        <div id="card-element">
+          <!-- a Stripe Element will be inserted here. -->
+        </div>
+
+        <!-- Used to display Element errors -->
+        <div id="card-errors" role="alert"></div>
+      </div>
+      <input type="hidden" id="resource_id" value="<%= @resource.id %>">
+
+      <div class="form-group">
+        <button class="btn btn-primary">Pay Now</button>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 
