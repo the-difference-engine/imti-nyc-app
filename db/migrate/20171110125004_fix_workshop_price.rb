@@ -1,6 +1,6 @@
 class FixWorkshopPrice < ActiveRecord::Migration[5.0]
   def up
-    change_column :workshops, :price, 'integer USING CAST(price AS integer)'
+    change_column :workshops, :price, 'integer USING CAST(price AS float)'
     add_column :charges, :registrant_id, :integer
     add_column :registrants, :paid, :boolean, default: false
   end
