@@ -115,7 +115,6 @@
                             <div class="mainmenu">
                                 <nav>
                                     <ul id="nav">
-                                        <li><%= current_user.role %></li>
                                         <li><%= link_to "Home", "/" %></li>
                                         <% if user_signed_in? %>
                                             <% if can? :read, Application and !current_user.admin? %>
