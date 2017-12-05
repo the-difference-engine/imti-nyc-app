@@ -14,8 +14,7 @@ class Ability
   def current_teacher_abilities
     return unless @user.current_teacher?
 
-    can :view, Application, Course, CalendarEvent, Teacher
-    can :read, :teachers
+    can :view, Application, Course
   end
 
   def applicant_abilities
