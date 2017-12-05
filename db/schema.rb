@@ -189,12 +189,12 @@ ActiveRecord::Schema.define(version: 20171110125004) do
   end
 
   create_table "workshops", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "name"
     t.string   "description"
-    t.integer  "price"
     t.datetime "time"
+    t.decimal  "price",       precision: 15, scale: 2
   end
 
 end
