@@ -101,67 +101,48 @@
       <% end %>
     <% end %>
   </div>
+  <% if @user.role == "local_school_admin" %>
+    <div class="container col-md-6">
+      <h3><%= @user.first_name %>, the following people are registered for <%= @workshop.name %>!</h3>
+      <h4>To complete your registration, please submit your payment below</h4>
+      <h5>Amount owed: <%= number_to_currency(@amount) %></h5>
 
-  <div class="container col-md-6">
-    <h3>Thank you, <%= @resource.first_name %> for signing up for <%= @workshop.name %>!</h3>
-    <h4>To complete your registration, please submit your payment below</h4>
-    <h5>Amount owed: <%= number_to_currency(@amount) %></h5>
-
-    <% if @resource.is_a?(User) %>
-      <%# each through registrants in a table to show them %>
-      <table class="table-condensed">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Affiliation</th>
-            <th>Occupation</th>
-            <th>Phone Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @registrants.each do |registrant| %>
+      <% if @resource.is_a?(User) %>
+        <%# each through registrants in a table to show them %>
+        <table class="table-condensed">
+          <thead>
             <tr>
-              <td><%= registrant.first_name %></td>
-              <td><%= registrant.last_name %></td>
-              <td><%= registrant.email %></td>
-              <td><%= registrant.affiliation %></td>
-              <td><%= registrant.occupation %></td>
-              <td><%= registrant.phone %></td>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Affiliation</th>
+              <th>Occupation</th>
+              <th>Phone Number</th>
+              <th>Payment Status</th>              
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
+          </thead>
+          <tbody>
+            <% @registrants.each do |registrant| %>
+              <tr>
+                <td><%= registrant.first_name %></td>
+                <td><%= registrant.last_name %></td>
+                <td><%= registrant.email %></td>
+                <td><%= registrant.affiliation %></td>
+                <td><%= registrant.occupation %></td>
+                <td><%= registrant.phone %></td>
+                <td><%= registrant.payment_status %></td>                
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
 
-    <%= form_tag pay_workshop_path(@workshop), method: :put, id: "payment-form" do %>
-      <div class="form-group">
-        <label for="card-element">
-          Please enter your Credit or Debit card information:
-        </label>
-        <p>Total Charge: $<%= @amount %></p>
-        <div id="card-element">
-          <!-- a Stripe Element will be inserted here. -->
-        </div>
-
-        <!-- Used to display Element errors -->
-        <div id="card-errors" role="alert"></div>
-      </div>
-      <input type="hidden" id="resource_id" value="<%= @resource.id %>">
-
-      <div class="form-group">
-        <button class="btn btn-primary">Pay Now</button>
-      </div>
-    <% end %>
-  </div>
+      
+    </div>
+  <% end %>
 </div>
 
 
-<script>
-  stripeForm.setStripe()
-  stripeForm.createForm()
-</script>
 
 
 
