@@ -56,7 +56,6 @@ Rails.application.routes.draw do
   resources :courses
   resources :course_registrations
   resources :donations, only: [:index, :create]
-  resources :teachers, only: [:index]
   resources :alumni
 
   get '/show_users', to: 'admins#show_users'

@@ -115,6 +115,7 @@
                             <div class="mainmenu">
                                 <nav>
                                     <ul id="nav">
+                                        <li><%= current_user.role %></li>
                                         <li><%= link_to "Home", "/" %></li>
                                         <% if user_signed_in? %>
                                             <% if can? :read, Application and !current_user.admin? %>
@@ -133,29 +134,26 @@
                                               </ul>
                                             </li>
                                         <% end %>
-                                        <li><a href="#">courses/workshops<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                            <ul class="sub-menu">
-                                              <% if can? :read, Course  %>
-                                                <li><%= link_to "Courses", '/courses' %></li>
-                                              <% end %>
-                                                <li><%= link_to "Workshops", '/workshops' %></li>
-                                            </ul>
-                                        </li>
-                                        <% if can? :read, :teachers  %>
-                                          <li><a href="#">teacher<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                              <ul class="sub-menu">
-                                                  <li><%= link_to "Teachers", "/teachers" %></li>
-                                              </ul>
-                                          </li>
+                                        <% if can? :read, Course  %>
+                                            <li><a href="#">courses/workshops<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                                <ul class="sub-menu">
+                                                    <li><%= link_to "Courses", '/courses' %></li>
+                                                    <li><%= link_to "Workshops", '/workshops' %></li>
+                                                </ul>
+                                            </li>
+                                        <% else %>
+                                            <li><%= link_to "Workshops", '/workshops' %></li>
                                         <% end %>
-                                        <li><a href="#">Calendar<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                            <ul class="sub-menu">
-                                                <li><%= link_to "View Calendar", calendar_events_path %></li>
-                                                <% if can? :create, Event  %>
-                                                  <li><%= link_to "Add Event", new_calendar_event_path %></li>
-                                                <% end %>
-                                            </ul>
-                                        </li>
+                                        <% if can? :create, Event  %>
+                                            <li><a href="#">Calendar<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                                <ul class="sub-menu">
+                                                    <li><%= link_to "View Calendar", calendar_events_path %></li>
+                                                    <li><%= link_to "Add Event", new_calendar_event_path %></li>
+                                                </ul>
+                                            </li>
+                                        <% else %>
+                                            <li><%= link_to "View Calendar", calendar_events_path %></li>
+                                        <% end %>
                                     </ul>
                                 </nav>
                             </div>
