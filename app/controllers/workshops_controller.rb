@@ -43,59 +43,57 @@ class WorkshopsController < ApplicationController
   end
 
   def payment
-    registrant_workshop = RegistrantWorkshop.where(workshop_id: params[:workshop_id])
     @workshop = Workshop.find_by(id: params[:id])
-
-    count = calc_count_in_payment(registrant_workshop)
-    # amount should be changed to workshop price multiplied by count
-    @amount = count * @workshop.price.to_i
-    puts "#{@amount} @amount"
-    puts "#{count} count"
-    puts "#{@workshop.price.to_i} workshoppirce"
-    customer = Stripe::Customer.create(
-      :email => current_user.email,
-      :source  => params[:stripeToken]
-      )
-
-    charge = Stripe::Charge.create(
-      :customer    => customer.id,
-      :amount      => @amount * 100,
-      :description => "Workshop cost",
-      :currency    => 'usd'
-      )
-    new_charge = current_user.charges.create(uid: charge.id, amount: @amount, description: charge.description, customer_id: customer.id, charge_type: 'workshop')
-
-    flash[:success] = "Thank you for your payment."
-    redirect_to workshop_path(params[:workshop_id])
-
-    rescue Stripe::CardError => e
-    flash[:error] = e.message
-    redirect_to "/workshops/#{params[:workshop_id]}"
+    if user_signed_in? && current_user.local_school_admin?
+      @resource = current_user
+      @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id).where('registrant_workshops.payment_status => false')
+      @amount = @workshop.price * @registrants.count
+    else
+      @resource = Registrant.find_by(id: params[:resource])
+      @amount = @workshop.price
+    end
+    redirect_to workshop_path(params[:id]) and return unless @resource.present?
   end
 
-  def calc_count_in_payment(registrant_workshops)
-    count = 0
-    puts "calc count" + "=="*100
-    # checks if current user is local school admin
-    if current_user.local_school_id
-      puts "local school?" + "=="*100
-      registrant_workshops.each do |registrant_workshop|
-        # where the local school id matches
-        registrant = Registrant.find_by(id: registrant_workshop.registrant_id)
-        # counts number of registrants from current user's local school that have a payment status of false
-
-          # puts registrant_workshop.payment_status + "=="*100
-        if registrant.local_school_id == current_user.local_school_id && !registrant_workshop.payment_status
-          puts "=="*100
-          registrant_workshop.update(payment_status: true)
-          count += 1
-        end
-      end
-      # current user is not affiliated with local school
+  def pay
+    workshop = Workshop.find_by(id: params[:id])
+    if user_signed_in? && current_user.local_school_admin?
+      registrants = workshop.registrants.where(local_school_id: current_user.local_school_id)
+      amount = registrants.count * workshop.price.to_i
+      resource = current_user
     else
-      count += 1
+      amount = workshop.price
+      resource = Registrant.find_by(id: params[:resource_id])
     end
-    count
+
+    customer = Stripe::Customer.create(
+      email: resource.email,
+      source: params[:stripeToken]
+    )
+
+    charge = Stripe::Charge.create(
+      customer:    customer.id,
+      amount:      amount * 100,
+      description: "Workshop cost",
+      currency:    'usd'
+    )
+
+    imti_charge = Charge.new(uid: charge.id, amount: amount, description: charge.description, customer_id: customer.id, charge_type: 'workshop')
+    if resource.is_a?(User)
+      registrants.update_all(paid: true)
+      imti_charge.user_id = resource.id
+    else
+      resource.update(paid: true)
+      imti_charge.registrant_id = resource.id
+    end
+    imti_charge.save
+
+    flash[:success] = "Thank you for your payment."
+    redirect_to workshop_path(workshop.id)
+
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to workshop_path(workshop.id)
   end
 
   def calc_count_in_show(registrant_workshop)
