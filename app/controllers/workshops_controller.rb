@@ -46,8 +46,13 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.find_by(id: params[:id])
     if user_signed_in? && current_user.local_school_admin?
       @resource = current_user
-      @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id).where('registrant_workshops.payment_status => false')
-      @amount = @workshop.price * @registrants.count
+      @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id)
+      registrant_ids = []
+      @registrants.each do |registrant|
+        registrant_ids << registrant.id.to_s
+      end
+      @registrant_paid = RegistrantWorkshop.where('registrant_id = ? AND workshop_id = ? AND payment_status = ?', registrant_ids, @workshop.id, false)
+      @amount = @workshop.price * @registrant_paid.count
     else
       @resource = Registrant.find_by(id: params[:resource])
       @amount = @workshop.price
