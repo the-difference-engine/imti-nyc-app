@@ -15,38 +15,21 @@
     <br>
     <h1>To register for this class please fill out this form.</h1>
     <div>
-      <%= form_tag '/registrants', method: :post do %>
-        <div>
-          <%= label_tag :first_name %>
-          <%= text_field_tag :first_name, @registrant.first_name, value: @user.first_name %>
-        </div>
-        <div>
-          <%= label_tag :last_name %>
-          <%= text_field_tag :last_name, @registrant.last_name, value: @user.last_name %>
-        </div>
-        <div>
-          <%= label_tag :affiliation %>
-          <% if @user.local_school %>
-            <%= text_field_tag :affiliation, @registrant.affiliation, value: @user.local_school.name %>
-          <% else %>
-            <%= text_field_tag :affiliation, @registrant.affiliation %>
-          <% end %>
-        </div>
-        <div>
-          <%= label_tag :occupation %>
-          <%= text_field_tag :occupation, @registrant.occupation, value: @user.occupation %>
-        </div>
-        <div>
-          <%= label_tag :email %>
-          <%= text_field_tag :email, @registrant.email, value: @user.email %>
-        </div>
-        <div>
-          <%= label_tag :phone %>
-          <%= text_field_tag :phone, @registrant.phone, value: @user.phone_number%>
-        </div>
-          <%= hidden_field_tag :workshop_id, @workshop.id%>
-          <%= submit_tag 'Register' %>
+      <%= bootstrap_form_tag url: '/registrants' do |f| %>
+        <%= f.text_field :first_name %>
+        <%= f.text_field :last_name %>
+        <% if @user.local_school %>
+          <%= hidden_field_tag :affiliation, @user.local_school_id%>
+        <% else %>
+          <%= f.text_field :affiliation %>
+        <% end %>
+        <%= f.text_field :occupation %>
+        <%= f.email_field :email %>
+        <%= f.text_field :phone %>
+        <%= hidden_field_tag :workshop_id, @workshop.id%>
+        <%= f.submit 'Register' %>
       <% end %>
+
     </div>
     <br>
     <% if current_user && current_user.local_school_admin? %>
@@ -55,7 +38,7 @@
       <%= form_tag "/registrants/import", method: :post, multipart: true do %>
           <%= file_field_tag :file %>
           <%= hidden_field_tag :workshop_id, @workshop.id%>
-          <%= hidden_field_tag :local_school_id, current_user.local_school_id %>
+          <%= hidden_field_tag :local_school_id, current_user.local_school.name %>
           <%= submit_tag "Import" %>
       <% end %>
     <% end %>

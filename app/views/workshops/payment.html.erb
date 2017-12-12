@@ -25,7 +25,7 @@
             <td><%= registrant.first_name %></td>
             <td><%= registrant.last_name %></td>
             <td><%= registrant.email %></td>
-            <td><%= registrant.affiliation %></td>
+            <td><%= registrant.local_school.name %></td>
             <td><%= registrant.occupation %></td>
             <td><%= registrant.phone %></td>
             <td><% if registrant.paid == false %>
