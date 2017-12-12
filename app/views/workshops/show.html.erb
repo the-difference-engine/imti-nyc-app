@@ -1,95 +1,54 @@
-<<<<<<< HEAD
-<div class="container">
-  <p>Date: <%= @workshop.time%></p>
-  <p>Price: <%= number_to_currency(@workshop.price) %></p>
-  <p>Date: <%= pretty_date(@workshop.time)%></p>
-  <p>Price: $<%= @workshop.price%></p>
-
-  <% if current_user && current_user.admin? %>
-    <%= button_to 'Edit Workshop', "/workshops/#{@workshop.id}/edit", method: :get, class: "btn btn-default" %>
-    <br>
-    <%= button_to "Remove Workshop", "/workshops/#{@workshop.id}", method: :delete, class: "btn btn-danger" %>
-  <% end %>
-  <br>
-
-  <h1>To register for this class please fill out this form.</h1>
-  <div class="col-md-6">
-    <%= bootstrap_form_tag url: '/registrants' do |f| %>
-      <%= f.text_field :first_name %>
-      <%= f.text_field :last_name %>
-      <%= f.text_field :affiliation %>
-      <%= f.text_field :occupation %>
-      <%= f.email_field :email %>
-      <%= f.text_field :phone %>
-      <%= hidden_field_tag :workshop_id, @workshop.id%>
-      <%= f.submit 'Register' %>
-    <% end %>
-  </div>
-  <br>
-  <% if current_user && current_user.admin? %>
-    <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
-    <%= bootstrap_form_tag url: "/workshops/#{@workshop.id}", method: :delete do |f| %>
-      <%= f.submit 'Remove this workshop' %>
-    <% end %>
-    <br>
-  <% end %>
-  <% if current_user && current_user.local_school_admin? %>
-    <h1>Bulk Import</h1>
-    <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
-    <%= bootstrap_form_tag url: "/registrants/import", method: :post, multipart: true do |f| %>
-      <%= f.file_field :file %>
-      <%= hidden_field_tag :workshop_id, @workshop.id%>
-      <%= hidden_field_tag :local_school_id, current_user.local_school_id %>
-      <%= f.submit "Import" %>
-=======
 <div class="modal-body row">
   <div class="container col-md-6">
     <p>Title: <%= @workshop.name%></p>
     <p>Description: <%= @workshop.description%></p>
-    <p>Date: <%= @workshop.time%></p>
+    <p>Date: <%= pretty_date(@workshop.time)%></p>
     <p>Price: <%= number_to_currency(@workshop.price) %></p>
-    <h1>To register for this class please fill out this form.</h1>
-    <%= form_tag '/registrants', method: :post do %>
-      <div>
-        <%= label_tag :first_name %>
-        <%= text_field_tag :first_name, @registrant.first_name, value: @user.first_name %>
-      </div>
-      <div>
-        <%= label_tag :last_name %>
-        <%= text_field_tag :last_name, @registrant.last_name, value: @user.last_name %>
-      </div>
-      <div>
-        <%= label_tag :affiliation %>
-        <% if @user.local_school %>
-          <%= text_field_tag :affiliation, @registrant.affiliation, value: @user.local_school.name %>
-        <% else %>
-          <%= text_field_tag :affiliation, @registrant.affiliation %>
-        <% end %>
-      </div>
-      <div>
-        <%= label_tag :occupation %>
-        <%= text_field_tag :occupation, @registrant.occupation, value: @user.occupation %>
-      </div>
-      <div>
-        <%= label_tag :email %>
-        <%= text_field_tag :email, @registrant.email, value: @user.email %>
-      </div>
-      <div>
-        <%= label_tag :phone %>
-        <%= text_field_tag :phone, @registrant.phone, value: @user.phone_number%>
-      </div>
-        <%= hidden_field_tag :workshop_id, @workshop.id%>
-        <%= submit_tag 'Register' %>
-    <% end %>
     <br>
     <% if current_user && current_user.admin? %>
       <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
       <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %>
-        <%= submit_tag 'Remove this workshop' %>
+      <%= submit_tag 'Remove this workshop' %>
       <% end %>
-      <br>
->>>>>>> pages successfully merged in content
+
     <% end %>
+    <br>
+    <h1>To register for this class please fill out this form.</h1>
+    <div>
+      <%= form_tag '/registrants', method: :post do %>
+        <div>
+          <%= label_tag :first_name %>
+          <%= text_field_tag :first_name, @registrant.first_name, value: @user.first_name %>
+        </div>
+        <div>
+          <%= label_tag :last_name %>
+          <%= text_field_tag :last_name, @registrant.last_name, value: @user.last_name %>
+        </div>
+        <div>
+          <%= label_tag :affiliation %>
+          <% if @user.local_school %>
+            <%= text_field_tag :affiliation, @registrant.affiliation, value: @user.local_school.name %>
+          <% else %>
+            <%= text_field_tag :affiliation, @registrant.affiliation %>
+          <% end %>
+        </div>
+        <div>
+          <%= label_tag :occupation %>
+          <%= text_field_tag :occupation, @registrant.occupation, value: @user.occupation %>
+        </div>
+        <div>
+          <%= label_tag :email %>
+          <%= text_field_tag :email, @registrant.email, value: @user.email %>
+        </div>
+        <div>
+          <%= label_tag :phone %>
+          <%= text_field_tag :phone, @registrant.phone, value: @user.phone_number%>
+        </div>
+          <%= hidden_field_tag :workshop_id, @workshop.id%>
+          <%= submit_tag 'Register' %>
+      <% end %>
+    </div>
+    <br>
     <% if current_user && current_user.local_school_admin? %>
       <h1>Bulk Import</h1>
       <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
@@ -105,9 +64,6 @@
     <div class="container col-md-6">
       <h3><%= @user.first_name %>, the following people are registered for <%= @workshop.name %>!</h3>
       <h4>To complete your registration, please submit your payment below for any unpaid registrants</h4>
-
-      <%# if @resource.is_a?(User) %>
-        <%# each through registrants in a table to show them %>
         <table class="table-condensed">
           <thead>
             <tr>
@@ -121,7 +77,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @registrant_local_school.each do |registrant| %>
+            <% @registrants.each do |registrant| %>
               <tr>
                 <td><%= registrant.first_name %></td>
                 <td><%= registrant.last_name %></td>
