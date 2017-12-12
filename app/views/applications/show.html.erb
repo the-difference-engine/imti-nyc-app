@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'stripe' %>
+
 <div class="application">
   <% if current_user.role == "admin" %>
     <h1> APPLICATION FOR <%= @application.user.first_name.upcase %> </h1>
@@ -19,13 +21,13 @@
   <p>Middle Initial: <%= @application.user.middle_initial %></p>
   <p>Email: <%= @application.user.email %></p>
   <p>Phone Number: <%= @application.user.phone_number %></p>
-  <p>Street: <%= @application.user.street %></p>  
-  <p>City: <%= @application.user.city %></p>   
+  <p>Street: <%= @application.user.street %></p>
+  <p>City: <%= @application.user.city %></p>
   <% if @user.role == "domestic_applicant" %>
       <p>State: <%= @application.user.state %> </p>
   <% end %>
-  <p>Zip Code: <%= @application.user.zip_code %></p>  
-  <p>Country: <%= @application.user.country %></p> 
+  <p>Zip Code: <%= @application.user.zip_code %></p>
+  <p>Country: <%= @application.user.country %></p>
   <p>Birth Place: <%= @application.user.birth_place %></p>
   <p>Birth Date: <%= pretty_date(@application.user.birth_date) %></p>
   <p>Country of Citzenship: <%= @application.user.country_of_citizenship %></p>
@@ -38,53 +40,57 @@
     <%= render partial: '/shared/other_application_section' %>
   <hr>
 <% unless current_user.role == "admin" %>
+  <% if @application.application_status != 'finished' || @application.application_status != 'accepted' %>
+    <h3>Pay Application Fee and Submit Application</h3>
+    <p>I certify that the information I have given on the application is complete and correct. I
+  understand my failure to provide complete, accurate and truthful information on the application
+  will be grounds to deny or withdraw my admission or dismiss me after enrollment.</p>
 
-  <h3>Pay Application Fee and Submit Application</h3>
-  <p>I certify that the information I have given on the application is complete and correct. I
-understand my failure to provide complete, accurate and truthful information on the application
-will be grounds to deny or withdraw my admission or dismiss me after enrollment.</p>
-  
-  
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payModal">
-    Pay Application Fee
-  </button>
 
-  <!-- Modal -->
-  <div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Credit card information</h4>
-        </div>
-        <div class="modal-body">
-          <%= form_tag application_payment_path(params[:id]), method: :put, id: "payment-form" do %>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payModal">
+      Pay Application Fee
+    </button>
 
-          <div class="form-row">
-            <label for="card-element">
-              Please enter your Credit or Debit card information:
-            </label>
-            <p>Application Fee: $<%= @amount %></p>
-            <div id="card-element">
-              <!-- a Stripe Element will be inserted here. -->
-            </div>
-
-            <!-- Used to display Element errors -->
-            <div id="card-errors" role="alert"></div>
+    <!-- Modal -->
+    <div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Credit card information</h4>
           </div>
-          <input type="hidden" name="application_id" value="<%= params[:id] %>">
+          <div class="modal-body">
+            <%= form_tag application_payment_path(params[:id]), method: :put, id: "payment-form" do %>
 
-          <button class="btn btn-primary">Submit Payment</button>
-          <!-- </form> -->
-          <% end %>
-        </div>
-        <div class="modal-footer">
+            <div class="form-row">
+              <label for="card-element">
+                Please enter your Credit or Debit card information:
+              </label>
+              <p>Application Fee: $<%= @amount %></p>
+              <div id="card-element">
+                <!-- a Stripe Element will be inserted here. -->
+              </div>
+
+              <!-- Used to display Element errors -->
+              <div id="card-errors" role="alert"></div>
+            </div>
+            <input type="hidden" name="application_id" value="<%= params[:id] %>">
+
+            <button class="btn btn-primary">Submit Payment</button>
+            <!-- </form> -->
+            <% end %>
+          </div>
+          <div class="modal-footer">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
   <% end %>
+
+<% end %>
 </div>
 
-
+<script type="text/javascript">
+  stripeForm.setStripe()
+  stripeForm.createForm()
+</script>
