@@ -15,6 +15,14 @@ class Ability
     return unless @user.current_teacher?
 
     can :read, Course
+    can :read, Application, user_id: @user.id
+    if @user.application.present?
+      can :read, Education, application_id: @user.application.id
+      can :read, MontessoriTraining, application_id: @user.application.id
+      can :read, WorkExperience, application_id: @user.application.id
+      can :read, Reference, application_id: @user.application.id
+      can :read, Document, application_id: @user.application.id
+    end
   end
 
   def applicant_abilities

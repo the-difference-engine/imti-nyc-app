@@ -8,8 +8,9 @@
         <option value="approved">Approve</option>
         <option value="rejected">Reject</option>
       </select>
-      <input type="submit" value="Save">
+      <input type="submit" value="Save" class="btn btn-primary">
     <% end %>
+    <br>
   <% else %>
     <h1>MY APPLICATION</h1>
   <% end %>
@@ -35,7 +36,9 @@
   <p>Name of Spouse: <%= @application.user.name_of_spouse %></p>
   <p>Ages of Children: <%= @application.user.ages_of_children %></p>
 
-  <p><%= link_to 'Edit Personal Data', "/applications/#{@application.id}/edit"%></p>
+  <% if current_user.role != 'current_teacher' %>
+    <p><%= link_to 'Edit Personal Data', "/applications/#{@application.id}/edit"%></p>
+  <% end %>
   <hr>
     <%= render partial: '/shared/other_application_section' %>
   <hr>

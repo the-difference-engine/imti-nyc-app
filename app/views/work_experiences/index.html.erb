@@ -1,7 +1,9 @@
 <div class="application">
   <h1>SECTION D: WORK EXPERIENCE </h1>
   <p>Please see your work experience below.</p>
-  <p><a href="/applications/<%= @application.id %>/work_experiences/new">Add new work experience</a></p>
+  <% if current_user.role != 'current_teacher' %>
+    <p><a href="/applications/<%= @application.id %>/work_experiences/new">Add new work experience</a></p>
+  <% end %>
   <hr>
 
   <% @work_experiences.each do |work| %>
@@ -13,7 +15,9 @@
     <% else %>
       <p>Currently working there</p>
     <% end %>
-    <p><%= link_to 'Edit work experience', "/applications/#{@application.id}/work_experiences/#{work.id}/edit"%>
+    <% if current_user.role != 'current_teacher' %>
+      <p><%= link_to 'Edit work experience', "/applications/#{@application.id}/work_experiences/#{work.id}/edit"%>
+    <% end %>
     <hr>
   <% end %>
 

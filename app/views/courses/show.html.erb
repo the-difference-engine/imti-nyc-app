@@ -1,5 +1,5 @@
 <div class="container courseShowContainer">
 <h1><%= @course.name %></h1>
-<p>Start date: </p>
-<p>End date: </p>
+<p>Start date: <%= pretty_date(@course.start_date) %></p>
+<p>End date: <%= pretty_date(@course.end_date) %></p>
 <p>Price: <%= number_to_currency(@course.price) %></p>

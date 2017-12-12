@@ -11,7 +11,7 @@
   <%= button_to "Download Contact Info", "/download_applicants", :method => :get, :class => 'btn btn-primary'%>
 
    <% @applications_finished.each do |application| %>
-      <tr> 
+      <tr>
          <td> <%= application.user.first_name.capitalize %> </td>
          <td> <%= application.user.last_name.capitalize %></td>
          <td> <%= application.application_status.capitalize %></td>
@@ -22,7 +22,7 @@
                 <option value="approved">Approve</option>
                 <option value="rejected">Reject</option>
               </select>
-              <input type="submit" value="Save">
+              <input type="submit" value="Save" class="btn-primary" id="save-application-decision">
             <% end %>
           </td>
 

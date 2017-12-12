@@ -23,11 +23,13 @@
             </td>
             <td><%= f.file_field d[1] %></td>
           </tr>
-        <% end %> 
+        <% end %>
       </tbody>
     </table>
     <br>
-    <%= f.submit :Save, :class => 'btn btn-sm btn-primary' %>
+    <% if current_user.role != 'current_teacher' %>
+      <%= f.submit :Save, :class => 'btn btn-sm btn-primary' %>
+    <% end %>
   <% end %>
 
   <hr>

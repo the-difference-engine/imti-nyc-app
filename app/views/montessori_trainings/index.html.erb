@@ -1,7 +1,9 @@
 <div class="application">
   <h1>SECTION C: MONTESSORI TRAINING</h1>
   <p>Please see your previous montessori training experience(s) below.</p>
-  <p><a href="/applications/<%= @application.id %>/montessori_trainings/new">Add new montessori training</a></p>
+  <% if current_user.role != 'current_teacher' %>
+    <p><a href="/applications/<%= @application.id %>/montessori_trainings/new">Add new montessori training</a></p>
+  <% end %>
   <hr>
 
   <% @montessori_trainings.each do |montessori_training| %>
@@ -10,10 +12,12 @@
     <p>Diploma: <%= montessori_training.diploma %></p>
     <p>Degree: <%= montessori_training.degree %></p>
     <p>Degree date: <%= pretty_date(montessori_training.degree_date) %></p>
-    <p><%= link_to 'Edit montessori training', "/applications/#{@application.id}/montessori_trainings/#{montessori_training.id}/edit"%>
+    <% if current_user.role != 'current_teacher' %>
+      <p><%= link_to 'Edit montessori training', "/applications/#{@application.id}/montessori_trainings/#{montessori_training.id}/edit"%>
+    <% end %>
     <hr>
   <% end %>
-  
+
   <%= render partial: '/shared/other_application_section' %>
-  
+
 </div>
