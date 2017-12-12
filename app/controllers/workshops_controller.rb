@@ -20,7 +20,7 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.find_by(id: params[:id])
     @user = current_user.presence || User.new
     @registrant = Registrant.new
-    @registrant_local_school = RegistrantWorkshop.joins(:registrant).where(workshop_id: params[:id]).where('registrants.local_school_id = ?', @user.local_school_id)
+    @registrant_local_school = Registrant.where(workshop_id: params[:id]).where('registrants.local_school_id = ?', @user.local_school_id)
     # @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id) if @user.local_school_admin?
     render 'show.html.erb'
   end
@@ -51,7 +51,7 @@ class WorkshopsController < ApplicationController
       @registrants.each do |registrant|
         registrant_ids << registrant.id.to_s
       end
-      @registrant_paid = RegistrantWorkshop.where('registrant_id = ? AND workshop_id = ? AND payment_status = ?', registrant_ids, @workshop.id, false)
+      @registrant_paid = Registrant.where('local_school_id = ? AND workshop_id = ? AND paid = ?', @resource.local_school_id, @workshop.id, false)
       @amount = @workshop.price * @registrant_paid.count
     else
       @resource = Registrant.find_by(id: params[:resource])

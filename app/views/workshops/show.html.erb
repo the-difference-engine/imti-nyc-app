@@ -123,14 +123,14 @@
           <tbody>
             <% @registrant_local_school.each do |registrant| %>
               <tr>
-                <td><%= registrant.registrant.first_name %></td>
-                <td><%= registrant.registrant.last_name %></td>
-                <td><%= registrant.registrant.email %></td>
-                <td><%= registrant.registrant.affiliation %></td>
-                <td><%= registrant.registrant.occupation %></td>
-                <td><%= registrant.registrant.phone %></td>
+                <td><%= registrant.first_name %></td>
+                <td><%= registrant.last_name %></td>
+                <td><%= registrant.email %></td>
+                <td><%= registrant.affiliation %></td>
+                <td><%= registrant.occupation %></td>
+                <td><%= registrant.phone %></td>
                 <td>
-                  <% if registrant.payment_status == false %>
+                  <% if registrant.paid == false %>
                     Not Paid
                   <% else %>
                     Paid
@@ -140,10 +140,7 @@
             <% end %>
           </tbody>
         </table>
-        <button><a href=""> Pay for unpaid registrants</button>
-
-
-      
+        <button><a href="./<%= @workshop.id %>/payment"> Pay for unpaid registrants</button>
     </div>
   <% end %>
 </div>

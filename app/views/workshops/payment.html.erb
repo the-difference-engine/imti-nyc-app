@@ -16,6 +16,7 @@
           <th>Affiliation</th>
           <th>Occupation</th>
           <th>Phone Number</th>
+          <th>Payment Status</th>
         </tr>
       </thead>
       <tbody>
@@ -27,6 +28,12 @@
             <td><%= registrant.affiliation %></td>
             <td><%= registrant.occupation %></td>
             <td><%= registrant.phone %></td>
+            <td><% if registrant.paid == false %>
+                  Not Paid
+                <% else %>
+                  Paid
+                <% end %>   
+            </td>            
           </tr>
         <% end %>
       </tbody>
