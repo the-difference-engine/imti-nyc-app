@@ -1,14 +1,18 @@
 <div class="application">
   <h1>SECTION E: REFERENCES </h1>
   <p>Please see the information for your references below.</p>
-  <p><a href="/applications/<%= @application.id %>/references/new">Add new reference</a></p>
+  <% if current_user.role != 'current_teacher' %>
+    <p><a href="/applications/<%= @application.id %>/references/new">Add new reference</a></p>
+  <% end %>
   <hr>
-  
+
     <% @references.each do |reference| %>
       <p>Name: <%= reference.name %></p>
       <p>Address: <%= reference.address %></p>
       <p>Position: <%= reference.position %></p>
-      <p><%= link_to 'Edit reference', "/applications/#{@application.id}/references/#{reference.id}/edit"%>
+      <% if current_user.role != 'current_teacher' %>
+        <p><%= link_to 'Edit reference', "/applications/#{@application.id}/references/#{reference.id}/edit"%>
+      <% end %>
       <hr>
     <% end %>
 

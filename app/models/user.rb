@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :charges
   # if role are changed (order or names), must update any code dealing with roles
 
-  ROLES = [:admin, :local_school_admin, :local_school_applicant, :domestic_applicant,
+  ROLES = [:admin, :local_school_admin, :domestic_applicant,
     :international_applicant, :current_teacher, :alumni, :member]
   enum role: ROLES
 
@@ -27,6 +27,10 @@ class User < ApplicationRecord
       alumni: ['/sign_up', '/'],
       member: ['/sign_up', '/']
     }.with_indifferent_access
+  end
+
+  def self.registration_roles
+    [['Domestic Applicant', 'domestic_applicant'],['International Applicant', 'international_applicant'],['Alumni', 'alumni']]
   end
 
   def self.open_spreadsheet(file)

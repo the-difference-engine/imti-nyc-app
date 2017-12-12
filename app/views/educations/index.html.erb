@@ -1,7 +1,9 @@
 <div class="application">
   <h1>SECTION B: EDUCATION</h1>
   <p>Please see your education below.</p>
-  <p><a href="/applications/<%= @application.id %>/educations/new">Add new education</a></p>
+  <% if current_user.role != 'current_teacher' %>
+    <p><a href="/applications/<%= @application.id %>/educations/new">Add new education</a></p>
+  <% end %>
   <hr>
   <% @educations.each do |education| %>
     <p>School: <%= education.school %></p>
@@ -10,7 +12,9 @@
     <p>End Date: <%= pretty_date(education.end_date) %></p>
     <p>Degree: <%= education.degree %></p>
     <p>Degree date: <%= pretty_date(education.degree_date) %></p>
-    <p><%= link_to 'Edit education', "/applications/#{@application.id}/educations/#{education.id}/edit"%>
+    <% if current_user.role != 'current_teacher' %>
+      <p><%= link_to 'Edit education', "/applications/#{@application.id}/educations/#{education.id}/edit"%>
+    <% end %>
     <hr>
   <% end %>
 
