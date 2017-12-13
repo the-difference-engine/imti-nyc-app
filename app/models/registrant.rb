@@ -1,7 +1,7 @@
 require 'roo'
 class Registrant < ApplicationRecord
   has_many :registrant_workshops
-  has_many :workshops, through: :registrant_workshops
+  belongs_to :workshops
   has_many :charges
   belongs_to :local_school, optional: true
   validates :email, :first_name, :last_name, presence: true
