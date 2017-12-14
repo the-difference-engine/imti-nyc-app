@@ -28,7 +28,6 @@
                     </div>
                     <div class="modal-footer">
                       <%= button_to "Remove", "/users/#{user.id}", method: :patch, class: "btn btn-danger" %>
-                      <!-- <button class="btn btn-danger">Remove</button> -->
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                   </div>
@@ -45,5 +44,7 @@
       <% @courses.each do |course| %>
         <p><%= link_to( course.name, course_path(course.id)) %></p>
       <% end %>
+    <br>
+    <%= button_to "Register for a course here", "/course_registrations/new", method: :get, class: "btn btn-success" %>
   <% end %>
 </div>
