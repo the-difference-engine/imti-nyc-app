@@ -117,7 +117,6 @@
                                     <ul id="nav">
                                         <li><%= link_to "Home", "/" %></li>
                                         <% if user_signed_in? %>
-                                            <li><%= current_user.role %></li>
                                             <% if can? :read, Application and !current_user.admin? %>
                                                 <% if current_user.application %>
                                                     <li><%= link_to "My Application", "/applications/#{current_user.application.id}" %></li>
