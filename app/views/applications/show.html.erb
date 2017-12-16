@@ -41,7 +41,7 @@
   <% end %>
   <hr>
     <%= render partial: '/shared/other_application_section' %>
-  <% if current_user.role == 'domestic_applicant' || current_user.role == 'international_applicant' %>
+  <% if can? :manage, @application %>
     <hr>
     <% if @application.application_status != 'finished' || @application.application_status != 'accepted' %>
       <h3>Pay Application Fee and Submit Application</h3>
