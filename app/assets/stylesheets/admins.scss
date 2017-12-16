@@ -2,10 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.adminsIndexContainer {
+  text-align: center;
+  margin: 50px auto;
+
+  h3 {
+    color: steelblue;
+  }
+
+}
+
 .users-table table {
+  margin: 50px auto;
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 80%;
   margin-bottom: 50px;
   margin-top: 50px;
 }
