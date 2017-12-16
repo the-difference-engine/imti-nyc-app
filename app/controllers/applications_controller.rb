@@ -1,10 +1,6 @@
 class ApplicationsController < ApplicationController
   load_and_authorize_resource
 
-  def index
-    @application = current_user.application
-  end
-
   def new
     @user = current_user
   end
