@@ -16,11 +16,9 @@
         <% @application_documents.each do |d| %>
           <tr>
             <td><%= d[0] %></td>
-            <td>
-              <% if @application.documents.find_by(category: d[1]) %>
-                <p><%= @application.documents.find_by(category: d[1]).attachment_file_name %></p>
-              <% end %>
-            </td>
+            <% if document = @application.documents.find_by(category: d[1]) %>
+              <td> <%= link_to(document.attachment_file_name, document.attachment.url) %> </td>
+            <% end %>
             <td><%= f.file_field d[1] %></td>
           </tr>
         <% end %>
@@ -47,4 +45,3 @@
   <hr>
   <%= render partial: '/shared/other_application_section' %>
 </div>
-
