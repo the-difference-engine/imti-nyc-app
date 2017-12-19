@@ -147,6 +147,9 @@
                                         <% else %>
                                             <li><%= link_to "Workshops", '/workshops' %></li>
                                         <% end %>
+                                        <% if can? :read, LocalSchool %>
+                                          <li><%= link_to('School Profile', edit_local_school_path) %></li>
+                                        <% end %>
                                         <% if can? :create, Event  %>
                                             <li><a href="#">Calendar<i class="fa fa-caret-down" aria-hidden="true"></i></a>
                                                 <ul class="sub-menu">
