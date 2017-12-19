@@ -49,6 +49,7 @@ class Ability
     return unless @user.admin?
 
     can :manage, :all
+    cannot :alumni, User
   end
 
   def alumni_abilities
