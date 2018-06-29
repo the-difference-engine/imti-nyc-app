@@ -1,47 +1,90 @@
-<div class="container">
-  <p>Date: <%= @workshop.time%></p>
-  <p>Price: <%= number_to_currency(@workshop.price) %></p>
-  <p>Date: <%= pretty_date(@workshop.time)%></p>
-  <p>Price: $<%= @workshop.price%></p>
-
-  <% if current_user && current_user.admin? %>
-    <%= button_to 'Edit Workshop', "/workshops/#{@workshop.id}/edit", method: :get, class: "btn btn-default" %>
+<div class="modal-body row">
+  <div class="container col-md-6">
+    <p>Title: <%= @workshop.name%></p>
+    <p>Description: <%= @workshop.description%></p>
+    <p>Date: <%= pretty_date(@workshop.time)%></p>
+    <p>Price: <%= number_to_currency(@workshop.price) %></p>
     <br>
-    <%= button_to "Remove Workshop", "/workshops/#{@workshop.id}", method: :delete, class: "btn btn-danger" %>
-  <% end %>
-  <br>
+    <% if current_user && current_user.admin? %>
+      <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
+      <%= form_tag "/workshops/#{@workshop.id}", method: :delete do %>
+      <%= submit_tag 'Remove this workshop' %>
+      <% end %>
 
-  <h1>To register for this class please fill out this form.</h1>
-  <div class="col-md-6">
-    <%= bootstrap_form_tag url: '/registrants' do |f| %>
-      <%= f.text_field :first_name %>
-      <%= f.text_field :last_name %>
-      <%= f.text_field :affiliation %>
-      <%= f.text_field :occupation %>
-      <%= f.email_field :email %>
-      <%= f.text_field :phone %>
-      <%= hidden_field_tag :workshop_id, @workshop.id%>
-      <%= f.submit 'Register' %>
+    <% end %>
+    <br>
+    <h1>To register for this class please fill out this form.</h1>
+    <div>
+      <%= bootstrap_form_tag url: '/registrants' do |f| %>
+        <%= f.text_field :first_name %>
+        <%= f.text_field :last_name %>
+        <% if @user.local_school %>
+          <%= hidden_field_tag :affiliation, @user.local_school_id%>
+        <% else %>
+          <%= f.text_field :affiliation %>
+        <% end %>
+        <%= f.text_field :occupation %>
+        <%= f.email_field :email %>
+        <%= f.text_field :phone %>
+        <%= hidden_field_tag :workshop_id, @workshop.id%>
+        <%= f.submit 'Register' %>
+      <% end %>
+
+    </div>
+    <br>
+    <% if current_user && current_user.local_school_admin? %>
+      <h1>Bulk Import</h1>
+      <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
+      <%= form_tag "/registrants/import", method: :post, multipart: true do %>
+          <%= file_field_tag :file %>
+          <%= hidden_field_tag :workshop_id, @workshop.id%>
+          <%= hidden_field_tag :local_school_id, current_user.local_school.name %>
+          <%= submit_tag "Import" %>
+      <% end %>
     <% end %>
   </div>
-  <br>
-  <% if current_user && current_user.admin? %>
-    <%= link_to('Edit Workshop', "/workshops/#{@workshop.id}/edit") %>
-    <%= bootstrap_form_tag url: "/workshops/#{@workshop.id}", method: :delete do |f| %>
-      <%= f.submit 'Remove this workshop' %>
-    <% end %>
-    <br>
-  <% end %>
-  <% if current_user && current_user.local_school_admin? %>
-    <h1>Bulk Import</h1>
-    <p><b>Use this function to register multiple users by importing a spreadsheet</b></p>
-    <%= bootstrap_form_tag url: "/registrants/import", method: :post, multipart: true do |f| %>
-      <%= f.file_field :file %>
-      <%= hidden_field_tag :workshop_id, @workshop.id%>
-      <%= hidden_field_tag :local_school_id, current_user.local_school_id %>
-      <%= f.submit "Import" %>
-    <% end %>
+  <% if @user.role == "local_school_admin" %>
+    <div class="container col-md-6">
+      <h3><%= @user.first_name %>, the following people are registered for <%= @workshop.name %>!</h3>
+      <h4>To complete your registration, please submit your payment below for any unpaid registrants</h4>
+        <table class="table-condensed">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Affiliation</th>
+              <th>Occupation</th>
+              <th>Phone Number</th>
+              <th>Payment Status</th>              
+            </tr>
+          </thead>
+          <tbody>
+            <% @registrants.each do |registrant| %>
+              <tr>
+                <td><%= registrant.first_name %></td>
+                <td><%= registrant.last_name %></td>
+                <td><%= registrant.email %></td>
+                <td><%= registrant.affiliation %></td>
+                <td><%= registrant.occupation %></td>
+                <td><%= registrant.phone %></td>
+                <td>
+                  <% if registrant.paid == false %>
+                    Not Paid
+                  <% else %>
+                    Paid
+                  <% end %>                
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <button><a href="./<%= @workshop.id %>/payment"> Pay for unpaid registrants</button>
+    </div>
   <% end %>
 </div>
 
-<br>
+
+
+
+

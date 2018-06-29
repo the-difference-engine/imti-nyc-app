@@ -20,7 +20,7 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.find_by(id: params[:id])
     @user = current_user.presence || User.new
     @registrant = Registrant.new
-    @registrants = find_registrants(@workshop.id)
+    @registrants = Registrant.where(workshop_id: params[:id]).where('registrants.local_school_id = ?', @user.local_school_id)
     render 'show.html.erb'
   end
 
@@ -46,7 +46,12 @@ class WorkshopsController < ApplicationController
     if user_signed_in? && current_user.local_school_admin?
       @resource = current_user
       @registrants = @workshop.registrants.where(local_school_id: current_user.local_school_id)
-      @amount = @workshop.price * @registrants.count
+      registrant_ids = []
+      @registrants.each do |registrant|
+        registrant_ids << registrant.id.to_s
+      end
+      @registrant_paid = Registrant.where('local_school_id = ? AND workshop_id = ? AND paid = ?', @resource.local_school_id, @workshop.id, false)
+      @amount = @workshop.price * @registrant_paid.count
     else
       @resource = Registrant.find_by(id: params[:resource])
       @amount = @workshop.price
@@ -95,13 +100,24 @@ class WorkshopsController < ApplicationController
     redirect_to workshop_path(workshop.id)
   end
 
-  private
-
-  def find_registrants(workshop_id)
-    return unless user_signed_in? && current_user.local_school_admin?
-
-    current_user.local_school.registrants.where(workshop_id: workshop_id)
+  def calc_count_in_show(registrant_workshop)
+    count = 0
+        # checks if current user is local school admin
+    if current_user.local_school_id
+      registrant_workshop.each do |registrant_workshop|
+        # where the local school id matches
+        registrant = Registrant.find_by(id: registrant_workshop.registrant_id)
+# counts number of registrants from current user's local school that have a payment status of false
+        if registrant.local_school_id == current_user.local_school_id && !registrant_workshop.payment_status
+          count += 1
+        end
+      end
+    else
+      count += 1
+    end
+    count
   end
+  private
 
   def workshops_params
     params.require(:workshop).permit(:name, :description, :price, :time)
