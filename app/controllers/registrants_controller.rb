@@ -10,7 +10,6 @@ class RegistrantsController < ApplicationController
     @registrant = Registrant.new(registrants_params)
     @registrant.local_school_id = current_user.local_school_id if current_user && current_user.local_school_admin?
     if @registrant.save
-      RegistrantWorkshop.create(registrant_id: @registrant.id, workshop_id: params[:workshop_id])
       flash[:success] = "Registrant has been created"
       redirect_to controller: 'workshops', action: 'payment', id: params[:workshop_id], resource: @registrant.id
     else
@@ -43,6 +42,6 @@ class RegistrantsController < ApplicationController
   private
 
   def registrants_params
-    params.permit(:first_name, :last_name, :affiliation, :occupation, :email, :phone)
+    params.permit(:first_name, :last_name, :affiliation, :occupation, :email, :phone, :workshop_id)
   end
 end
